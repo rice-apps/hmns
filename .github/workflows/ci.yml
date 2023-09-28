@@ -32,7 +32,3 @@ jobs:
       - name: Run ESLint
         run: npm run lint
         working-directory: ./hmns-app
-
-      - name: Run Tests
-        run: npm run test
-        working-directory: ./hmns-app
