@@ -11,12 +11,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
         with:
           node-version: 14
-      - run: npm install
+
+      - name: Install Dependencies
+        run: npm install
         working-directory: ./hmns-app
-      - run: npm run lint
+
+      - name: Debug Node.js Version
+        run: node --version
         working-directory: ./hmns-app
-      - run: npm test
+
+      - name: List Files
+        run: ls -R
+        working-directory: ./hmns-app
+
+      - name: Run ESLint
+        run: npm run lint
+        working-directory: ./hmns-app
+
+      - name: Run Tests
+        run: npm test
         working-directory: ./hmns-app
