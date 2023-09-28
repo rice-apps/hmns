@@ -15,7 +15,7 @@ git clone `https://github.com/rice-apps/hmns.git`
 
 To make sure you have all the necessary packages, perform the following commands after every pull:
 ```
-cd api
+cd hmns-app
 npm install
 npx expo start
 ```
