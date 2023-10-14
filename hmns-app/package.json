@@ -1,6 +1,6 @@
 {
   "name": "hmns-app",
-  "main": "expo-router/entry",
+  "main": "client/expo-router/entry",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",

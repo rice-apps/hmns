@@ -18,17 +18,9 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
-        run: npm install
-        working-directory: ./hmns-app
-
-      - name: Debug Node.js Version
-        run: node --version
-        working-directory: ./hmns-app
-
-      - name: List Files
-        run: ls -R
+        run: cd client && npm install && cd ../server && npm install
         working-directory: ./hmns-app
 
       - name: Run ESLint
         run: npm run lint
-        working-directory: ./hmns-app
+        working-directory: ./hmns-app/client/app
