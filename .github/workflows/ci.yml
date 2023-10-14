@@ -18,7 +18,7 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
-        run: cd client && npm install && cd ../server && npm install
+        run: npm install && cd client && npm install && cd ../server && npm install
         working-directory: ./hmns-app
 
       - name: Run ESLint
