@@ -5,7 +5,7 @@ export const ButterflyTypeDefs = gql`
     id: ID!
     commonName: String!
     scientificName: String!
-    photoUrl: [String]
+    photoUrl: [String]!
     location: String
     family: [String]
     funFact: String
