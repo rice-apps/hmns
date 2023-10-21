@@ -1,4 +1,4 @@
 import { gql } from 'apollo-server-express';
-import { userTypeDefs } from './userTypeDefs';
+import { ButterflyTypeDefs } from './ButterflyTypeDefs';
 
-export const typeDefs = [userTypeDefs];
+export const typeDefs = [ButterflyTypeDefs];

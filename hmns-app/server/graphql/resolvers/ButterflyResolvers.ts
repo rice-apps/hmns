@@ -11,12 +11,12 @@ export const ButterflyResolvers = {
         ]);
         return randomButterflies[0];
   },
-  Mutation: {
-    createButterfly: async (_: any, { name }: { name: string }) => {
-        const newButterfly = new Butterfly({ name });
-        await newButterfly.save();
-        return newButterfly;
-      },
-  },
+//   Mutation: {
+//     createButterfly: async (_: any, { name }: { name: string }) => {
+//         const newButterfly = new Butterfly({ name });
+//         await newButterfly.save();
+//         return newButterfly;
+//       },
+//   },
 },
 };
