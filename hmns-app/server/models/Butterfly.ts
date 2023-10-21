@@ -1,11 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-export interface IButterfly extends Document {
-  commonName: string,
-  scientificName:string,
-  photoUrl:
-}
-
 const ButterflySchema = new Schema({
   commonName: { type:String, required:true},
   scientificName: {type:String,required:true},
@@ -16,4 +10,4 @@ const ButterflySchema = new Schema({
   priority:{type:String,required:false}
 });
 
-export const Butterfly = mongoose.model<IButterfly>('Butterfly', ButterflySchema);
+export const Butterfly = mongoose.model('Butterfly', ButterflySchema);
