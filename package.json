@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "^3.12.1"
+    "apollo-server-express": "^3.12.1",
+    "mongoose": "^7.6.3"
   }
 }
