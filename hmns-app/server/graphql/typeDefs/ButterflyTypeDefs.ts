@@ -14,6 +14,7 @@ export const ButterflyTypeDefs = gql`
 
   type Query {
     getButterfly(id: ID!): Butterfly
+    randomButterfly: Butterfly
   }
 
 `;
