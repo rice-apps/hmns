@@ -2,7 +2,8 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IButterfly extends Document {
   commonName: string,
-  
+  scientificName:string,
+  photoUrl:
 }
 
 const ButterflySchema = new Schema({
