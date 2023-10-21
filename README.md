@@ -16,8 +16,16 @@ git clone `https://github.com/rice-apps/hmns.git`
 To make sure you have all the necessary packages, perform the following commands after every pull:
 ```
 cd hmns-app
+cd client
 npm install
-npx expo start
+cd ../server
+npm install
+```
+
+To run the app and server respectively perform the following commands in your terminal (in separate windows)
+```
+npm start
+npm start
 ```
 
 # Contributing
