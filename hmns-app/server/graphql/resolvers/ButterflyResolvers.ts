@@ -17,5 +17,6 @@ export const ButterflyResolvers = {
         await newButterfly.save();
         return newButterfly;
       },
-  }
+  },
+},
 };
