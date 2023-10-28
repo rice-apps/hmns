@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Camera } from 'expo-camera';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function CameraComponent() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -40,22 +41,21 @@ export default function CameraComponent() {
   return (
     <View style={styles.container}>
     <Camera style={styles.camera} type={type} ref={cameraRef}>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={takePhoto}>
-          <Text style={styles.text}>Take Photo</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setType(
-              type === Camera.Constants.Type.back
-                ? Camera.Constants.Type.front
-                : Camera.Constants.Type.back
-            );
-          }}>
-          <Text style={styles.text}>Flip</Text>
-        </TouchableOpacity>
-      </View>
+    <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.captureButton} onPress={takePhoto} />
+          <TouchableOpacity
+            style={styles.flipButton}
+            onPress={() => {
+              setType(
+                type === Camera.Constants.Type.back
+                  ? Camera.Constants.Type.front
+                  : Camera.Constants.Type.back
+              );
+            }}
+          >
+            <Ionicons name="camera-reverse-outline" size={30} color="white" />
+          </TouchableOpacity>
+        </View>
     </Camera>
     {photo && (
       <Image 
@@ -77,19 +77,29 @@ const styles = StyleSheet.create({
       flex: 1,
       width: '100%', // Ensure camera takes the full width of the screen
     },
-    buttonContainer: {
-      flexDirection: 'row',
-      backgroundColor: 'transparent',
-      margin: 20,
-    },
-    button: {
-      flex: 0.1,
-      alignSelf: 'flex-end',
-      alignItems: 'center',
-    },
     text: {
       fontSize: 18,
       color: 'white',
     },
+    buttonContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'absolute',   // <-- Set position to absolute
+      bottom: 20,             // <-- Define how far from the bottom it should be
+      width: '100%',          // <-- Make it span the entire width of the parent
+      paddingHorizontal: 20   // <-- Add some horizontal padding
+    },
+    captureButton: {
+      width: 70,
+      height: 70,
+      borderRadius: 35,
+      backgroundColor: 'white',
+      margin: 10,
+      borderWidth: 6,
+      borderColor: '#AAAAAA'
+    },
+    flipButton: {
+      margin: 10
+    },
   });
-  
