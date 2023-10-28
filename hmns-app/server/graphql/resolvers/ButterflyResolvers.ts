@@ -1,19 +1,26 @@
-import { User } from '../../models/User';
+import { Butterfly } from '../../models/Butterfly';
 
-export const userResolvers = {
+export const ButterflyResolvers = {
   Query: {
-    getUser: async (_: any, { id }: { id: string }) => {
-      return await User.findById(id);
+    getButterfly: async (_: any, { id }: { id: string }) => {
+      return await Butterfly.findById(id);
     },
-    users: async () => {
-        return await User.find();
-      }
+    randomButterfly: async () => {
+        const randomButterflies = await Butterfly.aggregate([
+          { $sample: { size: 1 } }
+        ]);
+        return randomButterflies[0];
   },
-  Mutation: {
-    createUser: async (_: any, { name }: { name: string }) => {
-        const user = new User({ name });
-        await user.save();
-        return user;
-      },
-  }
+},
+Mutation: {
+  createButterfly: async (_: any, { input }: { input: any }) => {
+      const {commonName,scientificName, photoUrl, location, family, funFact, priority}=input;
+      const butterfly=new Butterfly({
+        commonName,scientificName, photoUrl, location, family, funFact, priority
+      });
+      await butterfly.save();
+      return butterfly;
+    },
+}
+
 };
