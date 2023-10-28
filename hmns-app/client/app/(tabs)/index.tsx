@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import EditScreenInfo from "../../components/EditScreenInfo";
+import CameraComponent from "../../components/CameraComponent";
 import { Text, View } from "../../components/Themed";
 
 export default function TabOneScreen () {
@@ -13,6 +14,7 @@ export default function TabOneScreen () {
 				darkColor='rgba(255,255,255,0.1)'
 			/>
 			<EditScreenInfo path='app/(tabs)/index.tsx' />
+			<CameraComponent path='app/(tabs)/index.tsx' />
 		</View>
 	);
 }
