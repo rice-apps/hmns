@@ -4,10 +4,14 @@ import { Camera } from 'expo-camera';
 
 export default function CameraComponent() {
   const [hasPermission, setHasPermission] = useState(null);
+  // State to manage the type of camera (front or back)
   const [type, setType] = useState(Camera.Constants.Type.back);
+  // State to store the captured photo
   const [photo, setPhoto] = useState(null);
+  // Reference to the camera component
   const cameraRef = useRef(null);
 
+  // Request camera permissions when the component mounts
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -15,6 +19,7 @@ export default function CameraComponent() {
     })();
   }, []);  
 
+  // Capture a photo
   const takePhoto = async () => {
     if (cameraRef.current) {
       const options = { quality: 0.5, base64: true, skipProcessing: true };
@@ -23,9 +28,11 @@ export default function CameraComponent() {
     }
   };
 
+  // If permissions are still being requested, return an empty view
   if (hasPermission === null) {
     return <View />;
   }
+  // If camera access is denied, inform the user
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
