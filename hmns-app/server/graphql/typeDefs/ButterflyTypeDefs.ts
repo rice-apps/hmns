@@ -11,6 +11,10 @@ export const ButterflyTypeDefs = gql`
     funFact: String
     priority: String
   }
+  type BOTD{
+    id: ID!
+    botdId: String!
+  }
 
   input ButterflyInput {
     commonName: String!
