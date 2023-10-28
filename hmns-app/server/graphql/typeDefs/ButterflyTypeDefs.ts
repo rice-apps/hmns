@@ -28,7 +28,7 @@ export const ButterflyTypeDefs = gql`
     randomButterfly: Butterfly
   }
 
-  type Mutatation{
+  type Mutation{
     createButterfly(input:ButterflyInput!):Butterfly!
   }
 
