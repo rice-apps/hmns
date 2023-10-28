@@ -14,7 +14,10 @@ export const ButterflyResolvers = {
 },
 Mutation: {
   createButterfly: async (_: any, { input }: { input: any }) => {
-      const butterfly = new Butterfly({ name });
+      const {commonName,scientificName, photoUrl, location, family, funFact, priority}=input;
+      const butterfly=new Butterfly({
+        commonName,scientificName, photoUrl, location, family, funFact, priority
+      });
       await butterfly.save();
       return butterfly;
     },
