@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Camera } from 'expo-camera';
 import { Ionicons } from '@expo/vector-icons';
+import * as MediaLibrary from 'expo-media-library';
 
 export default function CameraComponent() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -15,19 +16,30 @@ export default function CameraComponent() {
   // Request camera permissions when the component mounts
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);  
+        // Request camera permission
+        const cameraStatus = await Camera.requestCameraPermissionsAsync();
+        setHasPermission(cameraStatus.status === 'granted');
 
-  // Capture a photo
+        // Request media library permission
+        const mediaLibraryStatus = await MediaLibrary.requestPermissionsAsync();
+        if (mediaLibraryStatus.status !== 'granted') {
+            alert('Sorry, we need camera roll permissions to save the image!');
+        }
+    })();
+}, []);
+
+  // Capture a photo and save it to photo album
   const takePhoto = async () => {
     if (cameraRef.current) {
-      const options = { quality: 0.5, base64: true, skipProcessing: true };
-      let newPhoto = await cameraRef.current.takePictureAsync(options);
-      setPhoto(newPhoto);
+        const options = { quality: 0.5, base64: true, skipProcessing: true };
+        let newPhoto = await cameraRef.current.takePictureAsync(options);
+        setPhoto(newPhoto);
+
+        // Save the photo to the gallery
+        const asset = await MediaLibrary.createAssetAsync(newPhoto.uri);
+        await MediaLibrary.createAlbumAsync('YourAppName', asset, false);  // Replace 'YourAppName' with your app's name or any other desired album name.
     }
-  };
+};
 
   // If permissions are still being requested, return an empty view
   if (hasPermission === null) {
