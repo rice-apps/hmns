@@ -13,7 +13,6 @@ export const ButterflyTypeDefs = gql`
   }
 
   input ButterflyInput {
-    id: ID!
     commonName: String!
     scientificName: String!
     photoUrl: [String]!
