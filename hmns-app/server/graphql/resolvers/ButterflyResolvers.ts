@@ -12,4 +12,12 @@ export const ButterflyResolvers = {
         return randomButterflies[0];
   },
 },
+Mutation: {
+  createButterfly: async (_: any, { input }: { input: any }) => {
+      const butterfly = new Butterfly({ name });
+      await butterfly.save();
+      return butterfly;
+    },
+}
+
 };
