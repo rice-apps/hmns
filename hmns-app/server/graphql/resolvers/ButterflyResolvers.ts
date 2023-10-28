@@ -35,7 +35,12 @@ Mutation: {
       });
       await butterfly.save();
       return butterfly;
-    },
+  },
+  createBOTD:async () => {
+    const botd=new BOTD(null);
+    await botd.save();
+    return botd;
+  },
   setBOTD:async (_: any, { botdId }: { botdId: string }) => {
     const botd=new BOTD({botdId});
     await botd.save();

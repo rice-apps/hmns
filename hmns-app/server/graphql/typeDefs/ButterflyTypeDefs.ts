@@ -29,6 +29,8 @@ export const ButterflyTypeDefs = gql`
 
   type Mutation{
     createButterfly(input:ButterflyInput!):Butterfly!
+    createBOTD: BOTD!
+    setBOTD(botdId:String!):BOTD!
   }
 
 `;
