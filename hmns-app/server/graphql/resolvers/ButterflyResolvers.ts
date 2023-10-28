@@ -1,6 +1,21 @@
+import { ObjectId } from 'mongoose';
 import { Butterfly } from '../../models/Butterfly';
 
+interface Butterfly {
+  _id: ObjectId;
+  commonName: string;
+  scientificName: string;
+  photoUrl: string[];
+  location: string;
+  family: string[];
+  funFact: string;
+  priority: string;
+}
+
 export const ButterflyResolvers = {
+  Butterfly: {
+    id: (parent: Butterfly) => parent._id.toString(),
+  },
   Query: {
     getButterfly: async (_: any, { id }: { id: string }) => {
       return await Butterfly.findById(id);
