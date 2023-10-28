@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongoose';
-import { Butterfly } from '../../models/Butterfly';
+import { Butterfly,BOTD } from '../../models/Butterfly';
 
 interface Butterfly {
   _id: ObjectId;
@@ -36,6 +36,11 @@ Mutation: {
       await butterfly.save();
       return butterfly;
     },
+  setBOTD:async (_: any, { botdId }: { botdId: string }) => {
+    const botd=new BOTD({botdId});
+    await botd.save();
+    return botd;
+  },
 }
 
 };
