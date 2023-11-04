@@ -26,6 +26,9 @@ export const ButterflyResolvers = {
         ]);
         return randomButterflies[0];
   },
+  getBOTD:async ()=>{
+    return await BOTD.findOne({isBotd:true});
+  }
 },
 Mutation: {
   createButterfly: async (_: any, { input }: { input: any }) => {
