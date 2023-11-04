@@ -11,7 +11,9 @@ const ButterflySchema = new Schema({
 });
 
 const BOTDSchema = new Schema({
-  botdId:{type:String,required:true}
+  botdId:{type:String,required:true},
+  isBotd:{type:Boolean,required:true}
+
 });
 
 export const Butterfly = mongoose.model('Butterfly', ButterflySchema);

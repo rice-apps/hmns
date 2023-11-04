@@ -14,6 +14,7 @@ export const ButterflyTypeDefs = gql`
   type BOTD{
     id: ID!
     botdId: String!
+    isBotd: Boolean!
   }
 
   input ButterflyInput {

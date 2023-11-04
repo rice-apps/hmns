@@ -37,13 +37,14 @@ Mutation: {
       return butterfly;
   },
   createBOTD:async () => {
-    const botd=new BOTD(null);
+    const botd=new BOTD({botdId:"dummy",isBotd:true});
     await botd.save();
     return botd;
   },
   setBOTD:async (_: any, { botdId }: { botdId: string }) => {
-    const botd=new BOTD({botdId});
-    await botd.save();
+    const filter={isBotd:true};
+    await BOTD.replaceOne(filter,{botdId,isBotd:true});
+    const botd=new BOTD({botdId,isBotd:true});
     return botd;
   },
 }
