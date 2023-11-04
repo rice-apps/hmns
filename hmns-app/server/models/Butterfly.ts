@@ -10,4 +10,10 @@ const ButterflySchema = new Schema({
   priority:{type:String,required:false}
 });
 
+const BOTDSchema = new Schema({
+  botdId:{type:String,required:true},
+  isBotd:{type:Boolean,required:true}
+});
+
 export const Butterfly = mongoose.model('Butterfly', ButterflySchema);
+export const BOTD=mongoose.model('BOTD',BOTDSchema);
