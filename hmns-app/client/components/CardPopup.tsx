@@ -1,4 +1,6 @@
 // CardPopup.tsx
+// helpful link
+// https://chat.openai.com/share/1587c98f-b8b1-43a2-ac4e-1a49015a8909
 import React from 'react';
 import { Modal, StyleSheet, View, Text, TouchableOpacity, ModalProps } from 'react-native';
 
