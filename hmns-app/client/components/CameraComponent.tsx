@@ -17,6 +17,7 @@ export default function CameraComponent() {
   const showPhotoTips = () => {
     alert("Photo-taking Tips:\n1. Keep your hands steady.\n2. Make sure there's enough light.\n3. Focus on the butterfly you want to search up before taking the photo.");
   };
+  const [confirmVisible, setConfirmVisible] = useState(false);
 
   // Request camera permissions when the component mounts
   useEffect(() => {
@@ -33,18 +34,70 @@ export default function CameraComponent() {
     })();
 }, []);
 
-  // Capture a photo and save it to photo album
-  const takePhoto = async () => {
-    if (cameraRef.current) {
-        const options = { quality: 0.5, base64: true, skipProcessing: true };
-        let newPhoto = await cameraRef.current.takePictureAsync(options);
-        setPhoto(newPhoto);
+//   // Capture a photo and save it to photo album
+//   const takePhoto = async () => {
+//     if (cameraRef.current) {
+//         const options = { quality: 0.5, base64: true, skipProcessing: true };
+//         let newPhoto = await cameraRef.current.takePictureAsync(options);
+//         setPhoto(newPhoto);
 
-        // Save the photo to the gallery
-        const asset = await MediaLibrary.createAssetAsync(newPhoto.uri);
-        await MediaLibrary.createAlbumAsync('HMNS', asset, false);  // Replace 'YourAppName' with your app's name or any other desired album name.
-    }
+//         // Save the photo to the gallery
+//         const asset = await MediaLibrary.createAssetAsync(newPhoto.uri);
+//         await MediaLibrary.createAlbumAsync('HMNS', asset, false);  // Replace 'YourAppName' with your app's name or any other desired album name.
+//     }
+// };
+const takePhoto = async () => {
+  if (cameraRef.current) {
+    const options = { quality: 0.5, base64: true, skipProcessing: true };
+    let newPhoto = await cameraRef.current.takePictureAsync(options);
+    setPhoto(newPhoto);
+    setConfirmVisible(true); // Show the confirmation screen
+  }
 };
+
+  // Retake the photo
+const retakePhoto = () => {
+  setPhoto(null);
+  setConfirmVisible(false); // Hide the confirmation screen
+};
+
+// Accept the photo and save it
+const acceptPhoto = async () => {
+  if (photo) {
+    try {
+      // Save the photo to the gallery here
+      const asset = await MediaLibrary.createAssetAsync(photo.uri);
+      await MediaLibrary.createAlbumAsync('YourAppName', asset, false);
+      
+      // Handle any operation after saving the photo, such as navigation or state reset
+      setConfirmVisible(false); // Hide confirmation screen
+      setPhoto(null); // Reset photo state
+    } catch (error) {
+      // Handle any errors here
+      console.error("Error saving photo", error);
+      alert("Error saving photo");
+    }
+  }
+};
+
+  // If confirmation screen should be visible, show the taken photo and options
+  if (confirmVisible && photo) {
+    return (
+      <View style={styles.confirmContainer}>
+        <Image source={{ uri: photo.uri }} style={styles.preview} />
+        <View style={styles.confirmButtons}>
+          <TouchableOpacity onPress={retakePhoto} style={styles.confirmButton}>
+            <Text style={styles.confirmButtonText}>Retake</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={acceptPhoto} style={styles.confirmButton}>
+            <Text style={styles.confirmButtonText}>Accept</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
+
 
   // If permissions are still being requested, return an empty view
   if (hasPermission === null) {
@@ -78,9 +131,7 @@ export default function CameraComponent() {
                 </TouchableOpacity>
               )}
             <TouchableOpacity style={styles.captureButton} onPress={takePhoto} />
-            
-            
-            
+
             <TouchableOpacity style={styles.tipsButton} onPress={showPhotoTips}>
               <Text style={styles.tipsButtonText}>Tips</Text>
             </TouchableOpacity>
@@ -154,6 +205,37 @@ const styles = StyleSheet.create({
   tipsButtonText: {
     color: 'white',
     fontSize: 18,
+  },
+  confirmContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  confirmButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    padding: 20,
+  },
+  confirmButton: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 10,
+    paddingVertical: 10,
+    borderRadius: 5,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  preview: {
+    width: '100%', // You may need to adjust this
+    height: '80%', // You may need to adjust this
+    borderRadius: 4,
+  },
+  confirmButtonText: {
+    // Style for the text inside your confirm buttons
+    color: 'white',
+    fontSize: 18,
+    textAlign: 'center',
   },
 });
 
