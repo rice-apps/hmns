@@ -3,15 +3,20 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Camera } from 'expo-camera';
 import { Ionicons } from '@expo/vector-icons';
 import * as MediaLibrary from 'expo-media-library';
+import { StatusBar } from 'react-native';
 
 export default function CameraComponent() {
   const [hasPermission, setHasPermission] = useState(null);
-  // State to manage the type of camera (front or back)
-  const [type, setType] = useState(Camera.Constants.Type.back);
+  // // State to manage the type of camera (front or back)
+  // const [type, setType] = useState(Camera.Constants.Type.back);
   // State to store the captured photo
   const [photo, setPhoto] = useState(null);
   // Reference to the camera component
   const cameraRef = useRef(null);
+  // Function to show photo-taking tips
+  const showPhotoTips = () => {
+    alert("Photo-taking Tips:\n1. Keep your hands steady.\n2. Make sure there's enough light.\n3. Focus on the butterfly you want to search up before taking the photo.");
+  };
 
   // Request camera permissions when the component mounts
   useEffect(() => {
@@ -37,7 +42,7 @@ export default function CameraComponent() {
 
         // Save the photo to the gallery
         const asset = await MediaLibrary.createAssetAsync(newPhoto.uri);
-        await MediaLibrary.createAlbumAsync('YourAppName', asset, false);  // Replace 'YourAppName' with your app's name or any other desired album name.
+        await MediaLibrary.createAlbumAsync('HMNS', asset, false);  // Replace 'YourAppName' with your app's name or any other desired album name.
     }
 };
 
@@ -50,68 +55,105 @@ export default function CameraComponent() {
     return <Text>No access to camera</Text>;
   }
 
+  // Make sure to hide the status bar to provide a full-screen experience
+  StatusBar.setHidden(true);
+
   return (
     <View style={styles.container}>
-    <Camera style={styles.camera} type={type} ref={cameraRef}>
-    <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.captureButton} onPress={takePhoto} />
-          <TouchableOpacity
-            style={styles.flipButton}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
-              );
-            }}
-          >
-            <Ionicons name="camera-reverse-outline" size={30} color="white" />
-          </TouchableOpacity>
+      <Camera style={styles.camera}  ref={cameraRef}>
+        {/* Overlay the UI components on the camera preview */}
+        <View style={styles.uiContainer}>
+          <View style={styles.topToolbar}>
+            {/* You can add additional icons or information at the top */}
+          </View>
+          
+          <View style={styles.bottomToolbar}>
+            {/* Placeholder for gallery button/icon */}
+            {photo && (
+                <TouchableOpacity style={styles.galleryButton}>
+                  <Image
+                    source={{ uri: photo.uri }}
+                    style={styles.thumbnail}
+                  />
+                </TouchableOpacity>
+              )}
+            <TouchableOpacity style={styles.captureButton} onPress={takePhoto} />
+            
+            
+            
+            <TouchableOpacity style={styles.tipsButton} onPress={showPhotoTips}>
+              <Text style={styles.tipsButtonText}>Tips</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-    </Camera>
-    {photo && (
-      <Image 
-        source={{ uri: photo.uri }}
-        style={{ width: 100, height: 100, position: 'absolute', top: 20, right: 20 }} // Adjust as needed
-      />
-    )}
-  </View>
+      </Camera>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-    },
-    camera: {
-      flex: 1,
-      width: '100%', // Ensure camera takes the full width of the screen
-    },
-    text: {
-      fontSize: 18,
-      color: 'white',
-    },
-    buttonContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      position: 'absolute',   // <-- Set position to absolute
-      bottom: 20,             // <-- Define how far from the bottom it should be
-      width: '100%',          // <-- Make it span the entire width of the parent
-      paddingHorizontal: 20   // <-- Add some horizontal padding
-    },
-    captureButton: {
-      width: 70,
-      height: 70,
-      borderRadius: 35,
-      backgroundColor: 'white',
-      margin: 10,
-      borderWidth: 6,
-      borderColor: '#AAAAAA'
-    },
-    flipButton: {
-      margin: 10
-    },
-  });
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+  camera: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  uiContainer: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  topToolbar: {
+    flex: 0.1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    paddingTop: 20,
+    paddingHorizontal: 20,
+  },
+  bottomToolbar: {
+    padding: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  captureButton: {
+    width: 70,
+    height: 70,
+    borderWidth: 4,
+    borderColor: 'white',
+    borderRadius: 35,
+    backgroundColor: 'white',
+    alignSelf: 'center',
+  },
+  flipButton: {
+    alignSelf: 'center',
+    flex: 0.1,
+    alignItems: 'center',
+  },
+  galleryButton: {
+    width: 50,
+    height: 50,
+    borderRadius: 10,
+    alignSelf: 'center',
+    overflow: 'hidden',
+  },
+  thumbnail: {
+    width: 50,
+    height: 50,
+  },
+  tipsButton: {
+    // Style your button as needed
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    borderRadius: 10,
+    padding: 10,
+  },
+  tipsButtonText: {
+    color: 'white',
+    fontSize: 18,
+  },
+});
+
