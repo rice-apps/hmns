@@ -1,33 +1,29 @@
 import { Pressable, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import { useState } from "react";
+import { colors } from "../../constants/appColors";
 
-const colors = {
-	oceanBlue: "#066fab",
-	observatoryNightSky: "#1d4965",
-	fossilRim: "#5f5541",
-	mossyOak: "#9d9b64",
-	serengeti: "#d9ae4b",
-	monarch: "#c57e2b",
-	background: "#D6D5B9",
-	countBadges: "#FFF5D6"
-};
 
-interface Challenge{
+interface Challenge {
 	title: string,
 	status: boolean,
+	content: string,
 }
+
 
 const mockChallenges:Challenge[] = [
 	{
-		title: "Identify two North American butterflies",
+		title: "Challenge 1",
 		status: false,
+		content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod"
 	},
 	{
-		title: "Identify three new butterflies in three days",
+		title: "Challenge 2",
 		status: false,
+		content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod"
 	},
 ];
+
 
 export default function TabOneScreen () {
 	const [challenges, ] = useState<Challenge[]>(mockChallenges);
@@ -36,28 +32,8 @@ export default function TabOneScreen () {
 			<View style={styles.container}>
 
 				<View style={styles.topView}>
-					{/*Add Image*/}
 					{/*Top Greeting*/}
-					<Text style={styles.botdTitle}>Good Afternoon!</Text>
-
-					{/* Row container for Count and Basges */}
-					<View style={styles.rowContainer}>
-						{/* Count Box */}
-						<View style={styles.countContainer}>
-							<Text style={styles.topText}> Count </Text>
-							<View style={styles.topCountBox}>
-								<Text>1</Text>
-							</View>
-						</View>
-						{/* Badges Box */}
-						<View style={styles.badgesContainer}>
-							<Text style={styles.topText}> Badges </Text>
-							<View style={styles.topBadgesBox}>
-								<Text>2</Text>
-							</View>
-						</View>
-					</View>
-					
+					<Text style={styles.botdTitle}>Good Afternoon!</Text>					
 				</View>
 			
 				<View style={styles.botdView}>
@@ -66,20 +42,19 @@ export default function TabOneScreen () {
 					<View style={styles.botdContentBox}>
 						{/* Left Side */}
 						<View style={styles.botdLeftContainer}>
-							<View>
-								<Text style={styles.botdText}>MM/DD</Text>
-								<Text style={styles.botdText}>Butterfly Name</Text>
-							</View>
-							<Text style={styles.botdText}>Fun Fact</Text>
-							
+							<Text style={{color: "black", fontWeight: "600", fontSize: 22}}>Red Peacock</Text>
+							<Text style={{color: "black", fontSize: 13,}}>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod adipiscing elit, sed do eiusmod
+							</Text>
+							<Pressable style={styles.botdButton}>
+								<Text style={styles.botdButtonText}>Learn more!</Text>
+							</Pressable>
 						</View>
 						{/* Right Side */}
 						<View style={styles.botdRightContainer}>
 							<View style={styles.botdImage}>
 								<Text style={styles.topText}>Photo</Text>
-								<Pressable style={styles.primaryButton}>
-									<Text style={[styles.botdText, {paddingVertical: 3, fontSize: 12}]}>Tell me more!</Text>
-								</Pressable>
+								
 							</View>
 						</View>
 					</View>
@@ -101,11 +76,17 @@ export default function TabOneScreen () {
 const ChallengeItem = ({challenge}: {challenge: Challenge}) => {
 	return (
 		<View style={styles.challengeItemView}>
-			<Text style={{fontSize: 15, flex: 1, flexWrap: "wrap"}}>{challenge.title}</Text>
-			<View style={{backgroundColor: "white", borderRadius: 9999, width: 30, height: 30}} />
+			<View style={{backgroundColor: "transparent", borderRadius: 9999, width: 30, height: 30, borderColor: "black", borderWidth: 2}} />
+			<View style={{flex: 1, backgroundColor: "transparent"}}>
+				<Text style={{fontSize: 15, flexWrap: "wrap", fontWeight: "bold", color: "black"}}>{challenge.title}</Text>
+				<Text style={{fontSize: 12, flexWrap: "wrap", marginTop: 4, color: "black"}}>{challenge.content}</Text>
+			</View>
+			
+			
 		</View>
 	);
 };
+
 
 const styles = StyleSheet.create({
 	mainContainer: {
@@ -113,7 +94,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: colors.background,
+		backgroundColor: "white",
 	},
 	container: {
 		alignItems: "center",
@@ -125,7 +106,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "transparent",
 	},
 	topView: {
-		flex: 0.20,
+		flex: 0.06,
 		backgroundColor: "transparent",
 		width: "100%",
 		color: "black",
@@ -149,34 +130,8 @@ const styles = StyleSheet.create({
 		gap: 75,
 		backgroundColor: "transparent",
 	},
-	countContainer: {
-		flexDirection: "column",
-		alignItems: "flex-start",
-		backgroundColor: "transparent",
-	},
-	badgesContainer: {
-		flexDirection: "column",
-		alignItems: "flex-start",
-		backgroundColor: "transparent",
-	},
-	topCountBox: {
-		backgroundColor: colors.countBadges,
-		padding: 10,
-		borderRadius: 10,
-		alignItems: "center",
-		justifyContent: "center",
-		width: "100%",
-	},
-	topBadgesBox: {
-		backgroundColor: colors.countBadges,
-		padding: 10,
-		borderRadius: 10,
-		alignItems: "center",
-		justifyContent: "center",
-		width: "300%",
-	},
 	botdView: {
-		flex: 0.4,
+		flex: 0.48,
 		width: "100%",
 		backgroundColor: "transparent",
 		color: "black",
@@ -184,7 +139,8 @@ const styles = StyleSheet.create({
 		gap: 2,
 	},
 	botdTitle: {
-		color: colors.fossilRim, 
+		color: "black", 
+		fontWeight: "600",
 		padding: 10, 
 		fontSize: 20,
 	},
@@ -193,29 +149,31 @@ const styles = StyleSheet.create({
 		padding: 10,
 		paddingVertical: 20,
 		flex: 1,
-		backgroundColor: colors.oceanBlue,
+		backgroundColor: colors.botd,
 		borderRadius: 18,
 	},
 	botdLeftContainer: {
-		flex: 1,
+		flex: 0.55,
 		display: "flex",
 		justifyContent: "space-around",
-		backgroundColor: colors.oceanBlue,
+		backgroundColor: "transparent",
 	},
 	botdRightContainer: {
-		flex: 1,
+		flex: 0.45,
 		display: "flex",
 		justifyContent: "space-around",
 		alignItems: "center",
-		backgroundColor: colors.oceanBlue,
+		backgroundColor: "transparent",
 	},
-	primaryButton: {
-		backgroundColor: colors.oceanBlue,
+	botdButton: {
+		backgroundColor: colors.learnmore,
 		color: "black",
-		padding: "5%",
-		borderRadius: 11,
-		position: "absolute",
-		bottom: -5,
+		padding: 10,
+		borderRadius: 15,
+		alignSelf: "flex-start"
+	},
+	botdButtonText: {
+		fontSize: 12
 	},
 	botdImage: {
 		backgroundColor: "white",
@@ -228,7 +186,7 @@ const styles = StyleSheet.create({
 		borderRadius: 11
 	},
 	challengesView: {
-		flex: 0.4,
+		flex: 0.46,
 		backgroundColor: "transparent",
 		width: "100%",
 		display: "flex",
@@ -241,11 +199,7 @@ const styles = StyleSheet.create({
 		gap: 7,
 		padding: 15,
 		borderRadius: 20,
-		backgroundColor: colors.mossyOak,
-	},
-	botdText: {
-		backgroundColor: colors.oceanBlue,
-		color: "white"
+		backgroundColor: colors.challenges,
 	},
 	topText: {
 		backgroundColor: "transparent",
