@@ -4,7 +4,9 @@ import mongoose from 'mongoose';
 import { MONGO_URI } from "./config"
 import { typeDefs } from './graphql/typeDefs/indexTypeDefs';
 import { resolvers } from './graphql/resolvers/indexResolvers';
+import { ButterflyResolvers } from './graphql/resolvers/ButterflyResolvers';
 
+const cron=require('node-cron')
 const startServer = async () => {
   const app = express();
   const server = new ApolloServer({ typeDefs, resolvers });
@@ -29,3 +31,14 @@ const startServer = async () => {
 };
 
 startServer().catch((error) => console.log(error));
+
+let randomButterflyId:string="653d56ec705f7a57e560d711"; //some random butterfly
+//set new BOTD every midnight
+cron.schedule('0 0 * * *', function() {
+ const randomButterfly=ButterflyResolvers.Query.randomButterfly();
+ randomButterfly.then(function(result){
+    randomButterflyId=result._id.toString();
+ })
+ console.log(randomButterflyId);
+ ButterflyResolvers.Mutation.setBOTD(null,{botdId:randomButterflyId});
+});
