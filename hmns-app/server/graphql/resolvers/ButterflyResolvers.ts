@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongoose';
 import { Butterfly,BOTD } from '../../models/Butterfly';
+const cron=require('node-cron');
 
 interface Butterfly {
   _id: ObjectId;
@@ -51,5 +52,15 @@ Mutation: {
     return botd;
   },
 }
-
 };
+
+let randomButterflyId:string="653d56ec705f7a57e560d711"; //default BOTD
+//set new BOTD every midnight
+cron.schedule('0 0 * * *', function() {
+ const randomButterfly=ButterflyResolvers.Query.randomButterfly();
+ randomButterfly.then(function(result){
+    randomButterflyId=result._id.toString();
+ })
+ console.log(randomButterflyId);
+ ButterflyResolvers.Mutation.setBOTD(null,{botdId:randomButterflyId});
+});
