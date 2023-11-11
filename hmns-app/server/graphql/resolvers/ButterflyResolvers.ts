@@ -1,6 +1,5 @@
 import { ObjectId } from 'mongoose';
 import { Butterfly,BOTD } from '../../models/Butterfly';
-const cron=require('node-cron');
 
 interface Butterfly {
   _id: ObjectId;
