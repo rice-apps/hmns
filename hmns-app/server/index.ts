@@ -32,7 +32,7 @@ const startServer = async () => {
 
 startServer().catch((error) => console.log(error));
 
-let randomButterflyId:string="653d56ec705f7a57e560d711"; //some random butterfly
+let randomButterflyId:string="653d56ec705f7a57e560d711"; //current BOTD
 //set new BOTD every midnight
 cron.schedule('0 0 * * *', function() {
  const randomButterfly=ButterflyResolvers.Query.randomButterfly();
