@@ -7,7 +7,6 @@ import { View, Text } from '../../components/Themed';
 import CardPopup from '../../components/CardPopup'; // Adjust the import path as needed
 
 export default function TabOneScreen() {
-<<<<<<< HEAD
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
@@ -28,7 +27,6 @@ export default function TabOneScreen() {
       <CardPopup visible={isModalVisible} onClose={toggleModal} />
     </View>
   );
-=======
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
@@ -42,11 +40,9 @@ export default function TabOneScreen() {
 			</View>
 		</View>
 	);
->>>>>>> develop
 }
   
 const styles = StyleSheet.create({
-<<<<<<< HEAD
   container: {
     alignItems: 'center',
     flex: 1,
@@ -61,28 +57,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-=======
-	container: {
-		flex: 1,
-	},
 	header: {
 		alignItems: "center",
 		justifyContent: "center",
-		// Adjust the flex value or height as needed
 		flex: 0.45,
 	},
-	separator: {
-		height: 1,
-		marginVertical: 30,
-		width: "80%",
-	},
-	title: {
-		fontSize: 20,
-		fontWeight: "bold",
-	},
 	camera: {
-		flex: 1, // Take up all available space
+		flex: 1, 
 	},
->>>>>>> develop
 });
   
