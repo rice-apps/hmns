@@ -4,7 +4,7 @@ import { StyleSheet, Button } from 'react-native';
 
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { View, Text } from '../../components/Themed';
-import CardPopup from '../../components/CardPopup'; // Adjust the import path as needed
+import CardPopup from '../../components/CardPopup'; 
 
 export default function TabOneScreen() {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -27,19 +27,6 @@ export default function TabOneScreen() {
       <CardPopup visible={isModalVisible} onClose={toggleModal} />
     </View>
   );
-	return (
-		<View style={styles.container}>
-			<View style={styles.header}>
-				<Text style={styles.title}>Tab One</Text>
-				<View
-					style={styles.separator}
-					lightColor='#eee'
-					darkColor='rgba(255,255,255,0.1)'
-				/>
-				<EditScreenInfo path='app/(tabs)/index.tsx' />
-			</View>
-		</View>
-	);
 }
   
 const styles = StyleSheet.create({
