@@ -12,7 +12,6 @@ const HomePage: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Button title="Show Popup" onPress={toggleModal} color="#1f78b4" />
       <CardPopup visible={isModalVisible} onClose={toggleModal} />
     </View>
   );
