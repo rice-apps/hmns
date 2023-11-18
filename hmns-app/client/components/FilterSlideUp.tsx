@@ -1,5 +1,5 @@
 import { useThemeColor } from "./Themed";
-import { Modal, StyleSheet, View, Text, Pressable, DimensionValue } from "react-native";
+import { Image, Modal, StyleSheet, View, Text, Pressable, DimensionValue } from "react-native";
 import { EvilIcons } from '@expo/vector-icons';
 import { useState } from "react";
 
@@ -28,6 +28,7 @@ type ButterflyDetectabilityDisplay = {
 const fontFamily = 'sans-serif';
 const filterCategoryFontSize = 16;
 const filterTitleFontSize = 24;
+const filterCategoryHeaderFontSize = 14;
 const filterTitleLeftMargin = '5%';
 const filterCategoryLeftMargin = '7%';
 const filterButtonColor = 'grey';
@@ -129,15 +130,17 @@ export const FilterSlideUp = (props: FilterProps) => {
                     <Text style={[styles.filterTitle, foregroundStyle]}>Filter</Text>
                     <View style={styles.sizes}>
                         <Text style={[styles.categoryText, foregroundStyle]}>Size</Text>
-                        {sizes.map(size =>
+                        {wingspans.map(size =>
                             <Pressable key={size.value}
-                                style={[
-                                    foregroundBgStyle,
-                                    {
+                                onPress={() => setSize(size.value)}
+                                style={styles.sizeContainer}>
+                                <Image source={require('../assets/images/butterfly_wingspan.png')}
+                                style={[{
                                         width: size.displaySize,
                                         height: size.displaySize
-                                    }]}
-                                onPress={() => setSize(size.value)}>
+                                    }]}/>
+                                <Text style={[styles.sizeTitle, foregroundStyle]}>{size.sizeTitle}</Text>
+                                <Text style={[styles.sizeSubtitle, foregroundStyle]}>{size.sizeSubtitle}</Text>
                             </Pressable>)}
                     </View>
                     <View style={styles.colors}>
@@ -188,6 +191,20 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'flex-end',
         gap: 50,
+    },
+    sizeContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    sizeTitle: {
+        fontFamily: fontFamily,
+        fontWeight: 'bold',
+        fontSize: filterCategoryHeaderFontSize,
+    },
+    sizeSubtitle: {
+        fontFamily: fontFamily,
     },
     categoryText: {
         marginLeft: filterCategoryLeftMargin,
