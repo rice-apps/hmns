@@ -27,11 +27,7 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-        <ScrollView 
-            style={styles.details}
-            showsVerticalScrollIndicator={false}
-          >
-            <View style={styles.header}>
+        <View style={styles.header}>
             <Text style={styles.species}>Mexican Sister</Text>
             
               <TouchableOpacity onPress={onClose}>
@@ -39,7 +35,12 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
               </TouchableOpacity>
               </View>
  
-          <Text style={styles.scientificName}>Adelpha fessonia</Text>
+        
+        <ScrollView 
+            style={styles.details}
+            showsVerticalScrollIndicator={false}
+          >
+            <Text style={styles.scientificName}>Adelpha fessonia</Text>
           <Image
             source={require('./butterfly.png')}
             style={styles.image}
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
   detailDescription: {
     fontSize: 16,
     color: '#000',
-    marginLeft: 4,
+    marginLeft: 2,
   },
   similarButterfliesTitle: {
     fontSize: 16,
