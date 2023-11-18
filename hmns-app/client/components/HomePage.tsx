@@ -1,7 +1,7 @@
 // HomePage.tsx
 import React, { useState } from 'react';
 import { View, Button, StyleSheet } from 'react-native';
-import CardPopup from './CardPopup'; 
+import CardPopup from './CardPopup/CardPopup'; 
 
 const HomePage: React.FC = () => {
   const [isModalVisible, setModalVisible] = useState(false);

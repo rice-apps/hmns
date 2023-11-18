@@ -11,9 +11,12 @@ import {
   ScrollView,
 } from 'react-native';
 
+
 interface CardPopupProps extends ModalProps {
   onClose: () => void;
 }
+
+
 const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => {
   return (
     <Modal
@@ -25,13 +28,14 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
+         
+          <ScrollView style={styles.details}>
           <Text style={styles.species}>Mexican Sister</Text>
           <Text style={styles.scientificName}>Adelpha fessonia</Text>
           <Image
             source={require('./butterfly.png')}
             style={styles.image}
           />
-          <ScrollView style={styles.details}>
             <DetailItem title="Origin" description="Neotropical" />
             <DetailItem title="Family" description="Nymphalidae (Brush-footed butterflies)" />
             <DetailItem title="Spotting likelihood" description="Low" />
@@ -39,8 +43,14 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
             <DetailItem title="Food source" description="Flowers" />
             <Text style={styles.funFactTitle}>Fun Fact</Text>
             <Text style={styles.funFactText}>
-              They are often known as sisters, due to the white markings on their wings, which resemble a nun’s habitat.
+              They are often known as sisters, due to the white markings on their wings, which resemble a nun's habitat.
             </Text>
+            <Text style={styles.similarButterfliesTitle}>Similar Butterflies</Text>
+            <View style={styles.similarButterfliesContainer}>
+              <Image source={require('./butterfly.png')} style={styles.similarButterflyImage} />
+              <Image source={require('./butterfly.png')} style={styles.similarButterflyImage} />
+              <Image source={require('./butterfly.png')} style={styles.similarButterflyImage} />
+            </View>
           </ScrollView>
           <TouchableOpacity style={styles.button} onPress={onClose}>
             <Text style={styles.buttonText}>Close</Text>
@@ -99,16 +109,17 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter',
   },
   funFactTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
-    marginTop: 12,
-    marginBottom: 4,
-    color: '#333',
+    marginTop: 25,
+    marginBottom: 8,
+    color: '#066FAB',
     fontFamily: 'Inter',
   },
   funFactText: {
     fontSize: 16,
-    color: '#555',
+    color: '#000',
+    lineHeight: 28
   },
   button: {
     marginTop: 20,
@@ -122,32 +133,52 @@ const styles = StyleSheet.create({
   },
   species: {
     alignSelf: 'flex-start',
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: 'bold',
-    color: '#007AFF', 
-    margin: 8,
+    color: '#066FAB', 
+
   },
   scientificName: {
     alignSelf: 'flex-start',
-    fontSize: 20,
-    color: '#50BFE6', 
-    margin: 8,
+    fontSize: 16,
+    color: '#000', 
+    marginBottom: 15,
+    marginTop: 10,
   },
   detailItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 4,
+    marginTop: 14,
   },
   detailTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'gray',
+    color: '#616161',
   },
   detailDescription: {
     fontSize: 16,
-    color: 'black',
+    color: '#000',
     marginLeft: 4,
   },
+  similarButterfliesTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 21,
+    marginBottom: 11,
+    color: '#066FAB',
+    fontFamily: 'Inter',
+  },
+  similarButterfliesContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  similarButterflyImage: {
+    width: "30%", 
+    height: 100,   
+    borderRadius: 8,
+  }
 });
 
 export default CardPopup;

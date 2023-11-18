@@ -4,7 +4,7 @@ import { StyleSheet, Button } from 'react-native';
 
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { View, Text } from '../../components/Themed';
-import CardPopup from '../../components/CardPopup'; 
+import CardPopup from '../../components/CardPopup/CardPopup'; 
 
 export default function TabOneScreen() {
   const [isModalVisible, setModalVisible] = useState(false);
