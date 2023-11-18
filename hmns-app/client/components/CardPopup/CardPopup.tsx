@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 4,
     color: '#333',
-    fontFamily: 'Inter',
   },
   funFactTitle: {
     fontSize: 16,
@@ -120,7 +119,6 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginBottom: 8,
     color: '#066FAB',
-    fontFamily: 'Inter',
   },
   funFactText: {
     fontSize: 16,
@@ -173,7 +171,7 @@ const styles = StyleSheet.create({
     marginTop: 21,
     marginBottom: 11,
     color: '#066FAB',
-    fontFamily: 'Inter',
+  
   },
   similarButterfliesContainer: {
     flexDirection: 'row',
