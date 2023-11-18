@@ -34,6 +34,8 @@ const filterCategoryLeftMargin = '7%';
 const filterButtonColor = 'grey';
 const filterButtonFontSize = 20;
 const filterColorDiameter = 15;
+const filterDetectabilityButtonHeight = 30;
+const filterDetectabilityButtonWidth = '25%';
 
 const wingspans: ButterflyWingspanDisplay[] = [{
     displaySize: 25,
@@ -160,6 +162,14 @@ export const FilterSlideUp = (props: FilterProps) => {
                             numColumns={4}
                         />
                     </View>
+                    <View style={styles.detectability}>
+                        {detectabilities.map(detect => (
+                            <Pressable key={detect.value}
+                                style={styles.detectabilityButton}>
+                                <Text style={[styles.detectabilityText, foregroundStyle]}>{detect.detectabilityName}</Text>
+                            </Pressable>
+                        ))}
+                    </View>
                     <Pressable
                         onPress={() => props.onFilter(size, color)}
                         style={styles.filterButton}
@@ -248,5 +258,25 @@ const styles = StyleSheet.create({
         fontFamily: fontFamily,
         fontWeight: 'bold',
         fontSize: filterCategoryHeaderFontSize,
+    },
+    detectability: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+    },
+    detectabilityText: {
+        fontFamily: fontFamily,
+        fontWeight: 'bold',
+        fontSize: filterCategoryHeaderFontSize,
+    },
+    detectabilityButton: {
+        borderWidth: 1,
+        borderColor: '#9D9B64',
+        height: filterDetectabilityButtonHeight,
+        width: filterDetectabilityButtonWidth,
+        borderRadius: filterDetectabilityButtonHeight / 2,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 });
