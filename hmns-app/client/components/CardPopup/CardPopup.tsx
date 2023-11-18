@@ -27,12 +27,15 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <ScrollView style={styles.details}>
+        <ScrollView 
+            style={styles.details}
+            showsVerticalScrollIndicator={false}
+          >
             <View style={styles.header}>
             <Text style={styles.species}>Mexican Sister</Text>
             
-              <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-                <Image source={require('./closeIcon.svg')} style={styles.closeIcon} />
+              <TouchableOpacity onPress={onClose}>
+                <Image source={require('./closeIcon.png')} style={styles.closeIcon} />
               </TouchableOpacity>
               </View>
  
@@ -57,9 +60,6 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
               <Image source={require('./butterfly.png')} style={styles.similarButterflyImage} />
             </View>
           </ScrollView>
-          <TouchableOpacity style={styles.button} onPress={onClose}>
-            <Text style={styles.buttonText}>Close</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -191,13 +191,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
-  closeButton: {
-    padding: 10,
-  },
   closeIcon: {
-    width: 14,
-    height: 14,
-    backgroundColor: "red"
+    width: 30,
+    height: 30,
   },
 });
 
