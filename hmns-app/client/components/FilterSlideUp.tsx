@@ -105,12 +105,13 @@ type FilterProps = {
     darkColorBackground?: string;
     filterVisible: boolean;
     onClose: () => void;
-    onFilter: (size: string | null, color: string | null) => void;
+    onFilter: (size: ButterflyWingspan | null, color: ButterflyColor | null, detectability: ButterflyDetectability | null) => void;
 };
 
 export const FilterSlideUp = (props: FilterProps) => {
-    const [size, setSize] = useState<string | null>(null);
-    const [color, setColor] = useState<string | null>(null);
+    const [size, setSize] = useState<ButterflyWingspan | null>(null);
+    const [color, setColor] = useState<ButterflyColor | null>(null);
+    const [detectability, setDetectability] = useState<ButterflyDetectability | null>(null);
     const filterBackground = useThemeColor({ light: props.lightColorBackground, dark: props.darkColorBackground }, 'background');
     const filterForeground = useThemeColor({ light: props.lightColorForeground, dark: props.darkColorForeground }, 'text');
     const backgroundStyle = { backgroundColor: filterBackground };
@@ -165,13 +166,14 @@ export const FilterSlideUp = (props: FilterProps) => {
                     <View style={styles.detectability}>
                         {detectabilities.map(detect => (
                             <Pressable key={detect.value}
+                                onPress={() => setDetectability(detect.value)}
                                 style={styles.detectabilityButton}>
                                 <Text style={[styles.detectabilityText, foregroundStyle]}>{detect.detectabilityName}</Text>
                             </Pressable>
                         ))}
                     </View>
                     <Pressable
-                        onPress={() => props.onFilter(size, color)}
+                        onPress={() => props.onFilter(size, color, detectability)}
                         style={styles.filterButton}
                     >
                         <Text style={[styles.filterButtonLabel, foregroundStyle]}>Apply Filter</Text>
