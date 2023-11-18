@@ -3,14 +3,26 @@ import { Modal, StyleSheet, View, Text, Pressable, DimensionValue } from "react-
 import { EvilIcons } from '@expo/vector-icons';
 import { useState } from "react";
 
-type ButterflySize = {
-    displaySize: DimensionValue;
-    value: string,
+type ButterflyWingspan = 'small' | 'medium' | 'large';
+type ButterflyColor = 'white' | 'yellow' | 'grey' | 'green' | 'blue' | 'black' | 'pink' | 'brown';
+type ButterflyDetectability = 'low' | 'medium' | 'high';
+
+type ButterflyWingspanDisplay = {
+    displaySize: DimensionValue,
+    sizeTitle: string,
+    sizeSubtitle: string,
+    value: ButterflyWingspan,
 }
 
-type ButterflyColor = {
+type ButterflyColorDisplay = {
     displayColor: string,
-    value: string,
+    colorName: string,
+    value: ButterflyColor,
+}
+
+type ButterflyDetectabilityDisplay = {
+    detectabilityName: string,
+    value: ButterflyDetectability,
 }
 
 const fontFamily = 'sans-serif';
