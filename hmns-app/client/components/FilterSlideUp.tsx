@@ -1,5 +1,5 @@
 import { useThemeColor } from "./Themed";
-import { Image, Modal, StyleSheet, View, Text, Pressable, DimensionValue } from "react-native";
+import { Image, Modal, StyleSheet, View, Text, Pressable, DimensionValue, FlatList } from "react-native";
 import { EvilIcons } from '@expo/vector-icons';
 import { useState } from "react";
 
@@ -33,6 +33,7 @@ const filterTitleLeftMargin = '5%';
 const filterCategoryLeftMargin = '7%';
 const filterButtonColor = 'grey';
 const filterButtonFontSize = 20;
+const filterColorDiameter = 15;
 
 const wingspans: ButterflyWingspanDisplay[] = [{
     displaySize: 25,
@@ -135,25 +136,29 @@ export const FilterSlideUp = (props: FilterProps) => {
                                 onPress={() => setSize(size.value)}
                                 style={styles.sizeContainer}>
                                 <Image source={require('../assets/images/butterfly_wingspan.png')}
-                                style={[{
+                                    style={[{
                                         width: size.displaySize,
                                         height: size.displaySize
-                                    }]}/>
+                                    }]} />
                                 <Text style={[styles.sizeTitle, foregroundStyle]}>{size.sizeTitle}</Text>
                                 <Text style={[styles.sizeSubtitle, foregroundStyle]}>{size.sizeSubtitle}</Text>
                             </Pressable>)}
                     </View>
                     <View style={styles.colors}>
                         <Text style={[styles.categoryText, foregroundStyle]}>Color</Text>
-                        {colors.map(color =>
-                            <Pressable key={color.value}
-                                style={[
-                                    styles.colorCircle,
-                                    { backgroundColor: color.displayColor }
-                                ]}
-                                onPress={() => setColor(color.value)}>
-                            </Pressable>
-                        )}
+                        <FlatList
+                            data={colors}
+                            keyExtractor={color => color.value}
+                            renderItem={color => (
+                                <Pressable key={color.item.value}
+                                    style={styles.colorRow}
+                                    onPress={() => setColor(color.item.value)}>
+                                    <View style={[styles.colorCircle, { backgroundColor: color.item.displayColor }]} />
+                                    <Text style={[styles.colorTitle, foregroundStyle]}>{color.item.colorName}</Text>
+                                </Pressable>
+                            )}
+                            numColumns={4}
+                        />
                     </View>
                     <Pressable
                         onPress={() => props.onFilter(size, color)}
@@ -227,9 +232,21 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         gap: 30,
     },
+    colorRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: filterColorDiameter / 2,
+        width: '24%',
+    },
     colorCircle: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: filterColorDiameter,
+        height: filterColorDiameter,
+        borderRadius: filterColorDiameter / 2,
+    },
+    colorTitle: {
+        fontFamily: fontFamily,
+        fontWeight: 'bold',
+        fontSize: filterCategoryHeaderFontSize,
     }
 });
