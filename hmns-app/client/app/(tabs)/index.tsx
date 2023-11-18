@@ -18,7 +18,7 @@ export default function TabOneScreen () {
 			/>
                         <FilterSlideUp
                             filterVisible={filterVisible}
-                            onFilter={(size, color) => setText(`filtered: ${size} ${color}`)}
+                            onFilter={(size, color, detect) => setText(`filtered: ${size} ${color} ${detect}`)}
                             onClose={() => setFilterVisible(false)}
                             />
                         <Button title="Show filter" onPress={() => setFilterVisible(true)} />
