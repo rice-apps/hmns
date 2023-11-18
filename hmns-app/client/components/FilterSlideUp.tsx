@@ -82,6 +82,17 @@ const colors: ButterflyColorDisplay[] = [{
     colorName: 'Brown',
     value: 'brown'
 }];
+const detectabilities: ButterflyDetectabilityDisplay[] = [{
+    detectabilityName: 'Low',
+    value: 'low',
+}, {
+    detectabilityName: 'Medium',
+    value: 'medium',
+}, {
+    detectabilityName: 'High',
+    value: 'high',
+
+}];
 
 type FilterProps = {
     lightColorForeground?: string;
