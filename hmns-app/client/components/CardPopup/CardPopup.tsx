@@ -16,11 +16,6 @@ interface CardPopupProps extends ModalProps {
   onClose: () => void;
 }
 
-const CloseButton = () => (
-  <Image source={require('./closeIcon.svg')} style={styles.closeIcon} />
-);
-
-
 const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => {
   return (
     <Modal
@@ -34,12 +29,13 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
         <View style={styles.modalView}>
           <ScrollView style={styles.details}>
             <View style={styles.header}>
-              <Text style={styles.species}>Mexican Sister</Text>
+            <Text style={styles.species}>Mexican Sister</Text>
+            
               <TouchableOpacity onPress={onClose} style={styles.closeButton}>
                 <Image source={require('./closeIcon.svg')} style={styles.closeIcon} />
               </TouchableOpacity>
               </View>
-
+ 
           <Text style={styles.scientificName}>Adelpha fessonia</Text>
           <Image
             source={require('./butterfly.png')}
@@ -146,6 +142,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#066FAB', 
 
+
   },
   scientificName: {
     alignSelf: 'flex-start',
@@ -193,16 +190,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    paddingHorizontal: 20,
-    paddingTop: 20,
   },
   closeButton: {
-    // Adjust padding for easier touch
     padding: 10,
   },
   closeIcon: {
     width: 14,
     height: 14,
+    backgroundColor: "red"
   },
 });
 
