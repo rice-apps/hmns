@@ -33,15 +33,21 @@ const filterCategoryLeftMargin = '7%';
 const filterButtonColor = 'grey';
 const filterButtonFontSize = 20;
 
-const sizes: ButterflyWingspanDisplay[] = [{
+const wingspans: ButterflyWingspanDisplay[] = [{
     displaySize: 25,
     value: 'small',
+    sizeTitle: 'Small',
+    sizeSubtitle: '2-4cm',
 }, {
     displaySize: 40,
     value: 'medium',
+    sizeTitle: 'Medium',
+    sizeSubtitle: '4-6cm',
 }, {
     displaySize: 55,
     value: 'large',
+    sizeTitle: 'Large',
+    sizeSubtitle: '6-8cm',
 }];
 const colors: ButterflyColorDisplay[] = [{
     displayColor: '#FFFFFF',
