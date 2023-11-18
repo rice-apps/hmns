@@ -33,7 +33,7 @@ const filterCategoryLeftMargin = '7%';
 const filterButtonColor = 'grey';
 const filterButtonFontSize = 20;
 
-const sizes: ButterflySize[] = [{
+const sizes: ButterflyWingspanDisplay[] = [{
     displaySize: 25,
     value: 'small',
 }, {
@@ -43,18 +43,38 @@ const sizes: ButterflySize[] = [{
     displaySize: 55,
     value: 'large',
 }];
-const colors: ButterflyColor[] = [{
-    displayColor: 'blue',
-    value: 'blue'
+const colors: ButterflyColorDisplay[] = [{
+    displayColor: '#FFFFFF',
+    colorName: 'White',
+    value: 'white',
 }, {
-    displayColor: 'red',
-    value: 'red'
+    displayColor: '#D9AE4B',
+    colorName: 'Yellow',
+    value: 'yellow',
 }, {
-    displayColor: 'green',
+    displayColor: '#6A6763',
+    colorName: 'Grey',
+    value: 'grey'
+}, {
+    displayColor: '#9D9B64',
+    colorName: 'Green',
     value: 'green'
 }, {
-    displayColor: 'purple',
-    value: 'purple'
+    displayColor: '#BCD3E0',
+    colorName: 'Blue',
+    value: 'blue'
+}, {
+    displayColor: '#000000',
+    colorName: 'Black',
+    value: 'black'
+}, {
+    displayColor: '#C07474',
+    colorName: 'Pink',
+    value: 'pink'
+}, {
+    displayColor: '#C57E2B',
+    colorName: 'Brown',
+    value: 'brown'
 }];
 
 type FilterProps = {
