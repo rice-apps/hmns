@@ -119,23 +119,24 @@ export default function CameraComponent() {
 					<View style={styles.topToolbar}>
 						{/* You can add additional icons or information at the top */}
 					</View>
-          
+        					
 					<View style={styles.bottomToolbar}>
 						{/* Placeholder for gallery button/icon */}
-						{photo && (
-							<TouchableOpacity style={styles.galleryButton}>
-								<Image
-									source={{ uri: photo.uri }}
-									style={styles.thumbnail}
-								/>
-							</TouchableOpacity>
-						)}
+
+						<TouchableOpacity style={styles.galleryButton}>
+							<Image
+								source={{ uri: 'https://icons.iconarchive.com/icons/praveen/minimal-outline/256/gallery-icon.png' }}
+								style={styles.thumbnail}
+							/>
+						</TouchableOpacity>
+
 						<TouchableOpacity style={styles.captureButton} onPress={takePhoto} />
 
 						<TouchableOpacity style={styles.tipsButton} onPress={showPhotoTips}>
 							<Text style={styles.tipsButtonText}>Tips</Text>
 						</TouchableOpacity>
-					</View>
+					</View> 
+
 				</View>
 			</Camera>
 		</View>
@@ -168,8 +169,9 @@ const styles = StyleSheet.create({
 	bottomToolbar: {
 		padding: 20,
 		flexDirection: "row",
-		justifyContent: "space-between",
+		justifyContent: "center",
 		alignItems: "center",
+		backgroundColor: "black"
 	},
 	captureButton: {
 		width: 70,
@@ -179,6 +181,9 @@ const styles = StyleSheet.create({
 		borderRadius: 35,
 		backgroundColor: "white",
 		alignSelf: "center",
+		marginHorizontal: 20, // Add horizontal margin for spacing
+		marginLeft: 30,
+		
 	},
 	flipButton: {
 		alignSelf: "center",
@@ -191,6 +196,7 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		alignSelf: "center",
 		overflow: "hidden",
+		backgroundColor: "white",
 	},
 	thumbnail: {
 		width: 50,
@@ -201,6 +207,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "rgba(255, 255, 255, 0.5)",
 		borderRadius: 10,
 		padding: 10,
+		marginLeft: 20,
 	},
 	tipsButtonText: {
 		color: "white",
@@ -213,7 +220,7 @@ const styles = StyleSheet.create({
 	},
 	confirmButtons: {
 		flexDirection: "row",
-		justifyContent: "space-around",
+		//justifyContent: "space-around",
 		width: "100%",
 		padding: 20,
 	},
