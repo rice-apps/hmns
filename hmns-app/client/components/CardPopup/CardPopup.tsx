@@ -17,10 +17,10 @@ interface CardPopupProps extends ModalProps {
 }
 
 const infoData = [
-  { icon: require('./butterfly.png'), title: 'Detectability', value: 'Low' },
-  { icon: require('./butterfly.png'), title: 'Origin', value: 'Neotropical' },
-  { icon: require('./butterfly.png'), title: 'Wingspan', value: '5-7cm' },
-  { icon: require('./butterfly.png'), title: 'Food', value: 'Flowers' },
+  { icon: require('./detectability_icon.png'), title: 'Detectability', value: 'Low' },
+  { icon: require('./origin_icon.png'), title: 'Origin', value: 'Neotropical' },
+  { icon: require('./wingspan_icon.png'), title: 'Wingspan', value: '5-7cm' },
+  { icon: require('./food_icon.png'), title: 'Food', value: 'Flowers' },
 ];
 
 const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => {
@@ -72,12 +72,7 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
     </Modal>
   );
 };
-const DetailItem = ({ title, description }) => (
-  <View style={styles.detailItem}>
-    <Text style={styles.detailTitle}>{title}:</Text>
-    <Text style={styles.detailDescription}>{description}</Text>
-  </View>
-);
+  
 
 const InfoItem = ({ iconName, title, value }) => {
   return (
@@ -221,45 +216,35 @@ const styles = StyleSheet.create({
     flexDirection: 'column', // Layout the icon, title, and value on top of each other
     alignItems: 'center', // Center-align the items horizontally
     justifyContent: 'center', // Center-align the items vertically
-    padding: 8,
+    padding: 2,
     marginHorizontal: 4,
     backgroundColor: '#EFEFEF',
     borderRadius: 16,
     borderWidth: 1,
     borderColor: '#DDD',
   },
-  
-    infoContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginTop: 16,
-      paddingHorizontal: 16, // Add padding if needed
-    
+  infoTextContainer: {
+    flexDirection: 'column',
   },
   infoIcon: {
     width: 24,
     height: 24,
-    marginRight: 8,
-  },
-  infoTextContainer: {
-    flexDirection: 'column',
+    margin  : 8,
+  
   },
   infoTitle: {
-    fontSize: 12,
-    color: '#555',
+    fontSize: 7,
+    color: '#7F7F7F',
+    alignContent:"center"
   },
   infoValue: {
-    fontSize: 14,
-    fontWeight: 'bold',
+    fontSize: 8,
+    fontWeight: '500',
     color: '#333',
-  },
-
-   infoList: {
-    flexDirection: 'row',
-    marginTop: 16,
+    
   },
   container: {
-    height: 80, // Assign a fixed height
+    height: 100, // Assign a fixed height
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%', // Make sure it takes the full width
