@@ -1,4 +1,4 @@
-import { Platform, Pressable, SafeAreaView, ScrollView, StatusBar, StyleSheet } from "react-native";
+import { Image, Platform, Pressable, SafeAreaView, ScrollView, StatusBar, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import { useState } from "react";
 import { colors } from "../../constants/appColors";
@@ -31,11 +31,13 @@ export default function TabOneScreen () {
 		<SafeAreaView style={styles.mainContainer}>
 			<StatusBar barStyle="dark-content"/>
 			<ScrollView style={styles.container} contentContainerStyle={{gap: 2, backgroundColor: "yellow",}}>
-
-				<View style={styles.topView}>
-					<Text style={styles.botdTitle}>Good Afternoon!</Text>
+				{/*Header */}
+				<View className="flex flex-row bg-transparent justify-between items-center">
+					<Text className="text-black font-bold text-2xl">Good Afternoon!</Text>
+					<Image source={require("../../assets/images/hmns-logo.png")} className="w-16 h-16"/>
 				</View>
 
+				{/* BOTD */}
 				<View style={styles.botdView}>
 					{/* Left Side */}
 					<View style={styles.botdLeftContainer}>
@@ -69,7 +71,7 @@ export default function TabOneScreen () {
 				</View>
 
 				<Text style={{color: "black", fontSize: 200}}>Hello</Text>
-				<Text style={{color: "black"}}>Hello</Text>
+				<Text className="font-bold text-4xl text-orange-600">Hello</Text>
 				<Text style={{color: "black"}}>Hello</Text>
 
 			</ScrollView>
@@ -101,12 +103,6 @@ const styles = StyleSheet.create({
 	container: {
 		paddingHorizontal: "7.5%",
 		backgroundColor: "transparent",
-	},
-	topView: {
-		height: 60,
-		backgroundColor: "transparent",
-		width: "100%",
-		color: "black",
 	},
 	topTitle: {
 		color: colors.fossilRim,
