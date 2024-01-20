@@ -26,12 +26,12 @@ type ButterflyDetectabilityDisplay = {
 }
 
 const fontFamily = 'sans-serif';
-const filterCategoryFontSize = 16;
-const filterTitleFontSize = 24;
+const filterCategoryFontSize = 18;
+const filterTitleFontSize = filterCategoryFontSize * 1.2;
 const filterCategoryHeaderFontSize = 14;
 const filterCategoryLeftMargin = '7%';
 const filterButtonColor = '#9D9B64';
-const filterButtonFontSize = 20;
+const filterButtonFontSize = filterCategoryFontSize;
 const filterColorDiameter = 15;
 const filterDetectabilityButtonHeight = 30;
 const filterDetectabilityButtonWidth = '25%';
