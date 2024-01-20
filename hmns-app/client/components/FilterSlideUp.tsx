@@ -1,5 +1,5 @@
 import { useThemeColor } from "./Themed";
-import { Image, Modal, StyleSheet, View, Text, Pressable, DimensionValue, FlatList } from "react-native";
+import { Image, Modal, StyleSheet, View, Text, Platform, Pressable, DimensionValue, FlatList } from "react-native";
 import { EvilIcons } from '@expo/vector-icons';
 import { useState } from "react";
 
@@ -25,7 +25,7 @@ type ButterflyDetectabilityDisplay = {
     value: ButterflyDetectability,
 }
 
-const fontFamily = 'sans-serif';
+const fontFamily = (Platform.OS === 'ios' ? 'Helvetica Neue' : 'sans-serif');
 const filterTopRadius = 15;
 const filterCategoryFontSize = 18;
 const filterTitleFontSize = filterCategoryFontSize * 1.2;
