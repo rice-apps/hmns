@@ -3,7 +3,6 @@ import { Link, Tabs } from "expo-router";
 import { Pressable, View, useColorScheme } from "react-native";
 
 import Colors from "../../constants/Colors";
-import { colors } from "../../constants/appColors";
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -25,8 +24,8 @@ export default function TabLayout () {
 	return (
 		<Tabs
 			screenOptions={{
-				tabBarActiveTintColor: colors.mossyOak,
-				tabBarStyle: {backgroundColor: colors.botd,},
+				tabBarActiveTintColor:"grey",
+				tabBarStyle: {backgroundColor: "white",},
 				headerShown: false
 			}}>
 			<Tabs.Screen
