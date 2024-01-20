@@ -6,6 +6,6 @@ export const colors = {
 	serengeti: "#d9ae4b",
 	monarch: "#c57e2b",
 	challenges: "#BCD3E0",
-	botd: "#cecdb5",
+	botd: "#CECDB5",
 	learnmore: "#5D5544",
 };
