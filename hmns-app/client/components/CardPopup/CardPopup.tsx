@@ -41,12 +41,13 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
             showsVerticalScrollIndicator={false}
           >
             <Text style={styles.scientificName}>Adelpha fessonia</Text>
+            <Text style = {styles.familyName}>Family: Papilionidae Swallowtail </Text>  
           <Image
             source={require('./butterfly.png')}
             style={styles.image}
           />
             <DetailItem title="Origin" description="Neotropical" />
-            <DetailItem title="Family" description="Nymphalidae (Brush-footed butterflies)" />
+          
             <DetailItem title="Spotting likelihood" description="Low" />
             <DetailItem title="Wingspan" description="5-7 cm (2-2.5 in)" />
             <DetailItem title="Food source" description="Flowers" />
@@ -103,6 +104,7 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 8,
     marginBottom: 8,
+    marginTop: 8,
   },
   details: {
     alignSelf: 'stretch',
@@ -135,20 +137,21 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
   },
+
   species: {
-    alignSelf: 'flex-start',
     fontSize: 26,
-    fontWeight: 'bold',
-    color: '#066FAB', 
-
-
+    marginBottom: 4,
+    color: '#5D5544', 
   },
+  familyName: {
+    color: '#5D5544',
+    marginTop: 3,
+  },
+
   scientificName: {
-    alignSelf: 'flex-start',
+    fontStyle: 'italic',
     fontSize: 16,
-    color: '#000', 
-    marginBottom: 15,
-    marginTop: 10,
+    color: '#5D5544', 
   },
   detailItem: {
     flexDirection: 'row',
