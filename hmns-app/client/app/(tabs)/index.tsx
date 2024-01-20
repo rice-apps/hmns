@@ -49,7 +49,7 @@ export default function TabOneScreen() {
 				style={styles.container}
 				contentContainerStyle={{
 					gap: 30,
-					backgroundColor: "white",
+					backgroundColor: "#FAF9F6",
 					minHeight: "100%",
 					maxWidth: "100%",
 					paddingVertical: 15,
@@ -64,7 +64,7 @@ export default function TabOneScreen() {
 
 				{/* BOTD */}
 				<View
-					className={`flex flex-row rounded-md bg-[${colors.botd}] px-10 py-6`}
+					className={`flex flex-row rounded-xl bg-[${colors.botd}] px-10 py-6 border-2 border-[#CECDB4]/50`}
 					style={{height: windowHeight * 0.3}}
 				>
 					{/* Left Side */}
@@ -89,7 +89,7 @@ export default function TabOneScreen() {
 				<View className="flex bg-transparent" style={{gap: 20}}>
 					{/* Challenges Header */}
 					<View className="flex flex-row justify-between bg-transparent">
-						<Text className="text-black text-xl font-bold">Challenges</Text>
+						<Text className="text-xl font-bold" style={{color: colors.fossilRim}}>Challenges</Text>
 						<Pressable className="flex justify-around items-center">
 							<Text className="text-black">View all</Text>
 						</Pressable>
@@ -104,7 +104,7 @@ export default function TabOneScreen() {
 				<View className="flex bg-transparent" style={{gap: 20}}>
 					{/* Resources Header */}
 					<View className="flex flex-row justify-between bg-transparent">
-						<Text className="text-black text-xl font-bold">Resources</Text>
+						<Text className="text-xl font-bold" style={{color: colors.fossilRim}}>Resources</Text>
 						<Pressable className="flex justify-around items-center">
 							<Text className="text-black">View all</Text>
 						</Pressable>
@@ -121,7 +121,7 @@ export default function TabOneScreen() {
 
 const ChallengeItem = ({challenge}: {challenge: Challenge}) => {
 	return (
-		<View className="flex flex-row rounded-3xl p-4 border items-center justify-between bg-transparent">
+		<View className="flex flex-row rounded-2xl p-4 border items-center justify-between bg-transparent">
 			<View
 				style={{
 					backgroundColor: "transparent",
@@ -141,7 +141,7 @@ const ChallengeItem = ({challenge}: {challenge: Challenge}) => {
 };
 const ResourceItem = ({resource}: {resource: Resource}) => {
 	return (
-		<View className="flex flex-row rounded-3xl p-4 border items-start justify-between bg-transparent">
+		<View className="flex flex-row rounded-2xl p-4 border items-start justify-between bg-transparent">
 			<View className="bg-black w-1/3 h-28 rounded-lg flex justify-around items-center">
 				<Text className="text-white">Photo</Text>
 			</View>
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
 	mainContainer: {
 		display: "flex",
 		alignItems: "center",
-		backgroundColor: "white",
+		backgroundColor: "#FAF9F6",
 		paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
 	},
 	container: {
