@@ -5,6 +5,7 @@ import { MONGO_URI } from "./config"
 import { typeDefs } from './graphql/typeDefs/indexTypeDefs';
 import { resolvers } from './graphql/resolvers/indexResolvers';
 import { ButterflyResolvers } from './graphql/resolvers/ButterflyResolvers';
+import { BOTD } from './models/Butterfly';
 
 const cron=require('node-cron')
 const startServer = async () => {
@@ -32,13 +33,34 @@ const startServer = async () => {
 
 startServer().catch((error) => console.log(error));
 
-let randomButterflyId:string="653d56ec705f7a57e560d711"; //current BOTD
+//Create one BOTD document with a random butterfly if BOTD collection is empty
+async function initializeBOTD() {
+  try {
+    let count = await BOTD.countDocuments({});
+    if (count==0){
+      ButterflyResolvers.Mutation.createBOTD();
+    }
+  } catch (error) {
+    console.error(`Error initializing BOTD: ${error}`);
+  }
+}
+initializeBOTD();
+
 //set new BOTD every midnight
-cron.schedule('0 0 * * *', function() {
- const randomButterfly=ButterflyResolvers.Query.randomButterfly();
- randomButterfly.then(function(result){
-    randomButterflyId=result._id.toString();
+const MAX_TRIES:number=3;
+cron.schedule('0 0 * * *',function(){
+    try{
+      for(let attempt=0;attempt<MAX_TRIES;attempt++){
+        const randomButterfly=ButterflyResolvers.Query.randomButterfly();
+        randomButterfly.then(function(result){
+          let randomButterflyId:string=result._id.toString();
+          console.log(randomButterflyId);
+          ButterflyResolvers.Mutation.setBOTD(null,{botdId:randomButterflyId});
+        });
+        return;
+      }
+    }
+    catch(error){
+      console.error(`Error setting new BOTD: ${error}`);
+    }
  })
- console.log(randomButterflyId);
- ButterflyResolvers.Mutation.setBOTD(null,{botdId:randomButterflyId});
-});
