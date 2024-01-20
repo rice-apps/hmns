@@ -27,19 +27,23 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-        <View style={styles.header}>
-            <Text style={styles.species}>Mexican Sister</Text>
-            
-              <TouchableOpacity onPress={onClose}>
-                <Image source={require('./closeIcon.png')} style={styles.closeIcon} />
-              </TouchableOpacity>
-              </View>
+   
+          
+          
  
         
         <ScrollView 
             style={styles.details}
             showsVerticalScrollIndicator={false}
           >
+                 <View style={styles.header}>
+              <Text style={styles.species}>Mexican Sister</Text>
+            
+            <TouchableOpacity onPress={onClose}>
+              <Image source={require('./closeIcon.png')} style={styles.closeIcon} />
+            </TouchableOpacity>
+
+            </View>
             <Text style={styles.scientificName}>Adelpha fessonia</Text>
             <Text style = {styles.familyName}>Family: Papilionidae Swallowtail </Text>  
           <Image
@@ -74,6 +78,19 @@ const DetailItem = ({ title, description }) => (
     <Text style={styles.detailDescription}>{description}</Text>
   </View>
 );
+
+const InfoItem = ({ iconName, title, value }) => {
+  return (
+    <View style={styles.infoItemContainer}>
+      <Image source={iconName} style={styles.infoIcon} />
+      <View style={styles.infoTextContainer}>
+        <Text style={styles.infoTitle}>{title}</Text>
+        <Text style={styles.infoValue}>{value}</Text>
+      </View>
+    </View>
+  );
+};
+
 
 const styles = StyleSheet.create({
   centeredView: {
@@ -197,6 +214,39 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
+  infoItemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 8,
+    marginHorizontal: 4,
+    backgroundColor: '#EFEFEF', // Set background color similar to the image provided
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#DDD', // Optional border color
+  },
+  infoIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 8,
+  },
+  infoTextContainer: {
+    flexDirection: 'column',
+  },
+  infoTitle: {
+    fontSize: 12,
+    color: '#555',
+  },
+  infoValue: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+
+   infoList: {
+    flexDirection: 'row',
+    marginTop: 16,
+  },
+
 });
 
 export default CardPopup;
