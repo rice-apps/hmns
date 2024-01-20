@@ -132,8 +132,9 @@ export const FilterSlideUp = (props: FilterProps) => {
                     ]}>
                     <EvilIcons name="close" size={34} color={filterForeground} onPress={props.onClose} style={styles.closeButton} />
                     <Text style={[styles.filterTitle, foregroundStyle]}>Filter</Text>
+
+                    <Text style={[styles.categoryText, foregroundStyle]}>Size</Text>
                     <View style={styles.sizes}>
-                        <Text style={[styles.categoryText, foregroundStyle]}>Size</Text>
                         {wingspans.map(size =>
                             <Pressable key={size.value}
                                 onPress={() => setSize(size.value)}
@@ -147,8 +148,9 @@ export const FilterSlideUp = (props: FilterProps) => {
                                 <Text style={[styles.sizeSubtitle, foregroundStyle]}>{size.sizeSubtitle}</Text>
                             </Pressable>)}
                     </View>
+
+                    <Text style={[styles.categoryText, foregroundStyle]}>Color</Text>
                     <View style={styles.colors}>
-                        <Text style={[styles.categoryText, foregroundStyle]}>Color</Text>
                         <FlatList
                             data={colors}
                             keyExtractor={color => color.value}
@@ -163,6 +165,8 @@ export const FilterSlideUp = (props: FilterProps) => {
                             numColumns={4}
                         />
                     </View>
+
+                    <Text style={[styles.categoryText, foregroundStyle]}>Detectability</Text>
                     <View style={styles.detectability}>
                         {detectabilities.map(detect => (
                             <Pressable key={detect.value}
@@ -207,6 +211,7 @@ const styles = StyleSheet.create({
     sizes: {
         flexDirection: 'row',
         alignItems: 'flex-end',
+        alignSelf: 'center',
         gap: 50,
     },
     sizeContainer: {
@@ -241,6 +246,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     colors: {
+        marginLeft: filterCategoryLeftMargin,
         flexDirection: 'row',
         alignItems: 'flex-start',
         gap: 30,
