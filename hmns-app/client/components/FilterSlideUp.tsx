@@ -206,9 +206,11 @@ const styles = StyleSheet.create({
     },
     filterContainer: {
         flexDirection: 'column',
+        paddingTop: 10,
         paddingBottom: 10,
         borderTopLeftRadius: filterTopRadius,
         borderTopRightRadius: filterTopRadius,
+        gap: 15,
     },
     closeButton: {
         alignSelf: 'flex-end',
