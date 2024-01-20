@@ -14,7 +14,7 @@ function TabBarIcon (props: {
 }) {
 	return (
 		<View style={{}}>
-			<FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />
+			<FontAwesome size={28} style={{ marginBottom: -16 }} {...props} />
 		</View>
 	);
 }
@@ -26,7 +26,8 @@ export default function TabLayout () {
 		<Tabs
 			screenOptions={{
 				tabBarActiveTintColor: colors.mossyOak,
-				tabBarStyle: {backgroundColor: colors.botd, borderTopLeftRadius: 20, borderTopRightRadius: 20,},
+				tabBarStyle: {backgroundColor: colors.botd,},
+				headerShown: false
 			}}>
 			<Tabs.Screen
 				name='index'

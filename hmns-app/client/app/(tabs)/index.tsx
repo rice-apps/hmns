@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet } from "react-native";
+import { Platform, Pressable, SafeAreaView, ScrollView, StatusBar, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import { useState } from "react";
 import { colors } from "../../constants/appColors";
@@ -28,47 +28,52 @@ const mockChallenges:Challenge[] = [
 export default function TabOneScreen () {
 	const [challenges, ] = useState<Challenge[]>(mockChallenges);
 	return (
-		<View style={styles.mainContainer}>
-			<View style={styles.container}>
+		<SafeAreaView style={styles.mainContainer}>
+			<StatusBar barStyle="dark-content"/>
+			<ScrollView style={styles.container} contentContainerStyle={{gap: 2, backgroundColor: "yellow",}}>
 
 				<View style={styles.topView}>
-					{/*Top Greeting*/}
-					<Text style={styles.botdTitle}>Good Afternoon!</Text>					
+					<Text style={styles.botdTitle}>Good Afternoon!</Text>
 				</View>
-			
+
 				<View style={styles.botdView}>
-					<Text style={styles.botdTitle}>Butterfly of the Day</Text>
-					{/* Box Content */}
-					<View style={styles.botdContentBox}>
-						{/* Left Side */}
-						<View style={styles.botdLeftContainer}>
-							<Text style={{color: "black", fontWeight: "600", fontSize: 22}}>Red Peacock</Text>
-							<Text style={{color: "black", fontSize: 13,}}>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod adipiscing elit, sed do eiusmod
-							</Text>
-							<Pressable style={styles.botdButton}>
-								<Text style={styles.botdButtonText}>Learn more!</Text>
-							</Pressable>
-						</View>
-						{/* Right Side */}
-						<View style={styles.botdRightContainer}>
-							<View style={styles.botdImage}>
-								<Text style={styles.topText}>Photo</Text>
-								
-							</View>
+					{/* Left Side */}
+					<View style={styles.botdLeftContainer}>
+						<Text style={{color: "black", fontWeight: "600", fontSize: 22}}>Red Peacock</Text>
+						<Text style={{color: "black", fontSize: 13,}}>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod adipiscing elit, sed do eiusmod
+						</Text>
+						<Pressable style={styles.botdButton}>
+							<Text style={styles.botdButtonText}>Learn more!</Text>
+						</Pressable>
+					</View>
+					{/* Right Side */}
+					<View style={styles.botdRightContainer}>
+						<View style={styles.botdImage}>
+							<Text style={styles.topText}>Photo</Text>
 						</View>
 					</View>
 				</View>
 
 				<View style={styles.challengesView}>
-					<Text style={styles.botdTitle}>Challenges</Text>
+					<View style={{backgroundColor: "transparent", flexDirection: "row", justifyContent: "space-between"}}>
+						<Text style={styles.botdTitle}>Challenges</Text>
+						<Pressable style={{justifyContent: "center"}}>
+							<Text style={{color: "black"}}>View all</Text>
+						</Pressable>
+					</View>
+					
 					{challenges.map(challenge => (
 						<ChallengeItem key={challenge.title} challenge={challenge} />
 					))}
 				</View>
-				
-			</View>
-		</View>
+
+				<Text style={{color: "black", fontSize: 200}}>Hello</Text>
+				<Text style={{color: "black"}}>Hello</Text>
+				<Text style={{color: "black"}}>Hello</Text>
+
+			</ScrollView>
+		</SafeAreaView>
 		
 	);
 }
@@ -80,9 +85,7 @@ const ChallengeItem = ({challenge}: {challenge: Challenge}) => {
 			<View style={{flex: 1, backgroundColor: "transparent"}}>
 				<Text style={{fontSize: 15, flexWrap: "wrap", fontWeight: "bold", color: "black"}}>{challenge.title}</Text>
 				<Text style={{fontSize: 12, flexWrap: "wrap", marginTop: 4, color: "black"}}>{challenge.content}</Text>
-			</View>
-			
-			
+			</View>			
 		</View>
 	);
 };
@@ -91,22 +94,16 @@ const ChallengeItem = ({challenge}: {challenge: Challenge}) => {
 const styles = StyleSheet.create({
 	mainContainer: {
 		display: "flex",
-		flex: 1,
-		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: "white",
+		backgroundColor: "green",
+		paddingTop: Platform.OS=="android"? StatusBar.currentHeight: 0
 	},
 	container: {
-		alignItems: "center",
-		flex: 0.9,
-		justifyContent: "center",
-		gap: 40,
-		margin: "auto",
-		width: "85%",
+		paddingHorizontal: "7.5%",
 		backgroundColor: "transparent",
 	},
 	topView: {
-		flex: 0.06,
+		height: 60,
 		backgroundColor: "transparent",
 		width: "100%",
 		color: "black",
@@ -131,26 +128,26 @@ const styles = StyleSheet.create({
 		backgroundColor: "transparent",
 	},
 	botdView: {
-		flex: 0.48,
-		width: "100%",
-		backgroundColor: "transparent",
-		color: "black",
-		display: "flex",
-		gap: 2,
+		height: 480,
+		flexDirection: "row",
+		padding: 10,
+		paddingVertical: 25,
+		backgroundColor: colors.botd,
+		borderRadius: 18,
+	},
+	imageContainer: {
+		width: 100,
+		height: 100,
+		backgroundColor: "grey",
+		borderRadius: 10,
+		justifyContent: "center",
+		alignItems: "center",
 	},
 	botdTitle: {
 		color: "black", 
 		fontWeight: "600",
-		padding: 10, 
+		padding: 20, 
 		fontSize: 20,
-	},
-	botdContentBox: {
-		flexDirection: "row",
-		padding: 10,
-		paddingVertical: 20,
-		flex: 1,
-		backgroundColor: colors.botd,
-		borderRadius: 18,
 	},
 	botdLeftContainer: {
 		flex: 0.55,
@@ -186,11 +183,11 @@ const styles = StyleSheet.create({
 		borderRadius: 11
 	},
 	challengesView: {
-		flex: 0.46,
-		backgroundColor: "transparent",
+		height: 400,
+		backgroundColor: "red",
 		width: "100%",
 		display: "flex",
-		justifyContent: "space-around"
+		justifyContent: "space-between"
 	},
 	challengeItemView: {
 		display: "flex",
@@ -204,5 +201,8 @@ const styles = StyleSheet.create({
 	topText: {
 		backgroundColor: "transparent",
 		color: "black"
-	}
+	},
+	imagePlaceholderText: {
+		color: "white"
+	},
 });
