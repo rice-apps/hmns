@@ -78,10 +78,8 @@ const InfoItem = ({ iconName, title, value }) => {
   return (
     <View style={styles.infoItemContainer}>
       <Image source={iconName} style={styles.infoIcon} />
-      <View style={styles.infoTextContainer}>
         <Text style={styles.infoTitle}>{title}</Text>
         <Text style={styles.infoValue}>{value}</Text>
-      </View>
     </View>
   );
 };
@@ -222,9 +220,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     borderColor: '#DDD',
-  },
-  infoTextContainer: {
-    flexDirection: 'column',
   },
   infoIcon: {
     width: 24,
