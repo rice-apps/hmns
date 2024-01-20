@@ -106,12 +106,15 @@ type FilterProps = {
     filterVisible: boolean;
     onClose: () => void;
     onFilter: (size: ButterflyWingspan | null, color: ButterflyColor | null, detectability: ButterflyDetectability | null) => void;
+    initialSize?: ButterflyWingspan,
+    initialColor?: ButterflyColor,
+    initialDetectability?: ButterflyDetectability,
 };
 
 export const FilterSlideUp = (props: FilterProps) => {
-    const [currSize, setSize] = useState<ButterflyWingspan | null>(null);
-    const [currColor, setColor] = useState<ButterflyColor | null>(null);
-    const [currDetectability, setDetectability] = useState<ButterflyDetectability | null>(null);
+    const [currSize, setSize] = useState<ButterflyWingspan | null>(props.initialSize ?? null);
+    const [currColor, setColor] = useState<ButterflyColor | null>(props.initialColor ?? null);
+    const [currDetectability, setDetectability] = useState<ButterflyDetectability | null>(props.initialDetectability ?? null);
     const filterBackground = useThemeColor({ light: props.lightColorBackground, dark: props.darkColorBackground }, 'background');
     const filterForeground = useThemeColor({ light: props.lightColorForeground, dark: props.darkColorForeground }, 'text');
     const backgroundStyle = { backgroundColor: filterBackground };
@@ -140,7 +143,7 @@ export const FilterSlideUp = (props: FilterProps) => {
                         {wingspans.map(size =>
                             <Pressable key={size.value}
                                 onPress={() => setSize(size.value)}
-                                style={styles.sizeContainer}>
+                                style={[styles.sizeContainer, (currSize === size.value && styles.selectedBorder)]}>
                                 <Image source={require('../assets/images/butterfly_wingspan.png')}
                                     style={[{
                                         width: size.displaySize,
@@ -158,7 +161,7 @@ export const FilterSlideUp = (props: FilterProps) => {
                             keyExtractor={color => color.value}
                             renderItem={color => (
                                 <Pressable key={color.item.value}
-                                    style={styles.colorRow}
+                                    style={[styles.colorRow, (currColor === color.item.value && styles.selectedBorder)]}
                                     onPress={() => setColor(color.item.value)}>
                                     <View style={[styles.colorCircle, { backgroundColor: color.item.displayColor }]} />
                                     <Text style={[styles.colorTitle, foregroundStyle]}>{color.item.colorName}</Text>
@@ -173,7 +176,7 @@ export const FilterSlideUp = (props: FilterProps) => {
                         {detectabilities.map(detect => (
                             <Pressable key={detect.value}
                                 onPress={() => setDetectability(detect.value)}
-                                style={styles.detectabilityButton}>
+                                style={[styles.detectabilityButton, (currDetectability === detect.value && styles.selectedFill)]}>
                                 <Text style={[styles.detectabilityText, foregroundStyle]}>{detect.detectabilityName}</Text>
                             </Pressable>
                         ))}
@@ -295,5 +298,12 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-    }
+    },
+    selectedBorder: {
+        borderWidth: 1,
+        borderColor: filterButtonColor,
+    },
+    selectedFill: {
+        backgroundColor: filterButtonColor,
+    },
 });
