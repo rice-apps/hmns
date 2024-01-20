@@ -29,7 +29,6 @@ const fontFamily = 'sans-serif';
 const filterCategoryFontSize = 16;
 const filterTitleFontSize = 24;
 const filterCategoryHeaderFontSize = 14;
-const filterTitleLeftMargin = '5%';
 const filterCategoryLeftMargin = '7%';
 const filterButtonColor = '#9D9B64';
 const filterButtonFontSize = 20;
@@ -130,8 +129,10 @@ export const FilterSlideUp = (props: FilterProps) => {
                         styles.filterContainer,
                         backgroundStyle,
                     ]}>
-                    <EvilIcons name="close" size={34} color={filterForeground} onPress={props.onClose} style={styles.closeButton} />
-                    <Text style={[styles.filterTitle, foregroundStyle]}>Filter</Text>
+                    <View style={styles.topRow}>
+                        <Text style={[styles.filterTitle, foregroundStyle]}>Filter</Text>
+                        <EvilIcons name="close" size={34} color={filterForeground} onPress={props.onClose} style={styles.closeButton} />
+                    </View>
 
                     <Text style={[styles.categoryText, foregroundStyle]}>Size</Text>
                     <View style={styles.sizes}>
@@ -194,6 +195,11 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-end',
     },
+    topRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginLeft: filterCategoryLeftMargin,
+    },
     filterContainer: {
         flexDirection: 'column',
         paddingBottom: 10,
@@ -204,7 +210,6 @@ const styles = StyleSheet.create({
         marginRight: 5,
     },
     filterTitle: {
-        marginLeft: filterTitleLeftMargin,
         fontSize: filterTitleFontSize,
         fontFamily: fontFamily,
     },
