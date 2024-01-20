@@ -60,6 +60,13 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
             <Text style={styles.funFactText}>
               They are often known as sisters, due to the white markings on their wings, which resemble a nun's habit.
             </Text>
+
+            <View
+  style={{
+    borderBottomColor: 'black',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  }}
+/>
             <Text style={styles.similarButterfliesTitle}>Similar Butterflies</Text>
             <View style={styles.similarButterfliesContainer}>
               <Image source={require('./butterfly.png')} style={styles.similarButterflyImage} />
@@ -96,13 +103,15 @@ const styles = StyleSheet.create({
     width: '90%',
     height: '80%',
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#FFF',
     borderRadius: 20,
     paddingTop: 18,
     paddingLeft: 22,
     paddingRight: 22,
     alignItems: 'center',
     elevation: 5,
+    borderColor: "#9D9B64",
+    borderWidth: 1
   },
   title: {
     fontSize: 24,
@@ -115,7 +124,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 200,
     borderRadius: 15,
-    marginBottom: 8,
+    marginBottom: 12,
     marginTop: 18,
   },
   details: {
@@ -132,12 +141,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 25,
     marginBottom: 8,
-    color: '#066FAB',
+    color: '#000',
   },
   funFactText: {
     fontSize: 16,
     color: '#000',
-    lineHeight: 28
+    lineHeight: 25,
+    fontWeight: "400"
   },
   button: {
     marginTop: 20,
@@ -216,38 +226,37 @@ const styles = StyleSheet.create({
     justifyContent: 'center', // Center-align the items vertically
     padding: 2,
     marginHorizontal: 4,
-    backgroundColor: '#EFEFEF',
     borderRadius: 16,
-    borderWidth: 1,
-    borderColor: '#DDD',
+    borderColor: "black"
   },
   infoIcon: {
     width: 24,
     height: 24,
-    margin  : 8,
+    marginBottom: 2
   
   },
   infoTitle: {
-    fontSize: 7,
+    fontSize: 8,
     color: '#7F7F7F',
     alignContent:"center"
   },
   infoValue: {
-    fontSize: 8,
+    fontSize: 10,
     fontWeight: '500',
     color: '#333',
+    marginTop: 4
     
   },
   container: {
-    height: 100, // Assign a fixed height
+    height: 80, // Assign a fixed height
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%', // Make sure it takes the full width
     flexDirection: 'row', // This is now redundant, can be removed
     borderRadius: 20,
-    borderColor: '#9D9B64', // Debugging: border color
+    borderColor: '#D6D5B9', // Debugging: border color
     borderWidth: 2,   
-    padding: 10
+    padding: 1
   },
 
 });
