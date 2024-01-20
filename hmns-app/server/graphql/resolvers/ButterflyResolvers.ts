@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongoose';
-import { Butterfly } from '../../models/Butterfly';
+import { Butterfly,BOTD } from '../../models/Butterfly';
 
 interface Butterfly {
   _id: ObjectId;
@@ -25,7 +25,10 @@ export const ButterflyResolvers = {
           { $sample: { size: 1 } }
         ]);
         return randomButterflies[0];
-  },
+    },
+    getBOTD:async ()=>{
+      return await BOTD.findOne({isBotd:true});
+    }
 },
 Mutation: {
   createButterfly: async (_: any, { input }: { input: any }) => {
@@ -35,7 +38,21 @@ Mutation: {
       });
       await butterfly.save();
       return butterfly;
-    },
+  },
+  createBOTD:async () => {
+    const randomButterflies = await Butterfly.aggregate([
+      { $sample: { size: 1 } }
+    ]);
+    const randomButterfly=randomButterflies[0];
+    const botd=new BOTD({botdId:randomButterfly._id,isBotd:true});
+    await botd.save();
+    return botd;
+  },
+  setBOTD:async (_: any, { botdId }: { botdId: string }) => {
+    const filter={isBotd:true};
+    await BOTD.replaceOne(filter,{botdId,isBotd:true});
+    const botd=new BOTD({botdId,isBotd:true});
+    return botd;
+  },
 }
-
 };

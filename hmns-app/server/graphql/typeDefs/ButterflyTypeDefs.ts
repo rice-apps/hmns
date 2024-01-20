@@ -11,6 +11,11 @@ export const ButterflyTypeDefs = gql`
     funFact: String
     priority: String
   }
+  type BOTD{
+    id: ID!
+    botdId: String!
+    isBotd: Boolean!
+  }
 
   input ButterflyInput {
     commonName: String!
@@ -25,10 +30,13 @@ export const ButterflyTypeDefs = gql`
   type Query {
     getButterfly(id: ID!): Butterfly
     randomButterfly: Butterfly
+    getBOTD: BOTD
   }
 
   type Mutation{
     createButterfly(input:ButterflyInput!):Butterfly!
+    createBOTD: BOTD!
+    setBOTD(botdId:String!):BOTD!
   }
 
 `;
