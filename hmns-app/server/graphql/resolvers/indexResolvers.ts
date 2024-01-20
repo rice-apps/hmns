@@ -1,3 +1,3 @@
-import { userResolvers } from './userResolvers';
+import { ButterflyResolvers } from './ButterflyResolvers';
 
-export const resolvers = [userResolvers];
+export const resolvers = [ButterflyResolvers];

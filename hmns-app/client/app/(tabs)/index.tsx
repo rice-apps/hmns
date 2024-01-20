@@ -1,6 +1,8 @@
-import {Dimensions, Image, Platform, Pressable, SafeAreaView, ScrollView, StatusBar, StyleSheet} from "react-native";
-import {Text, View} from "../../components/Themed";
-import {useState} from "react";
+import {Dimensions, Image, Platform, Pressable, SafeAreaView, ScrollView, StatusBar, StyleSheet, Button} from "react-native";
+import EditScreenInfo from '../../components/EditScreenInfo';
+import { View, Text } from '../../components/Themed';
+import CardPopup from '../../components/CardPopup/CardPopup'; 
+import React, { useState } from 'react';
 import {colors} from "../../constants/appColors";
 
 interface Challenge {
@@ -42,11 +44,17 @@ export default function TabOneScreen() {
 	const [challenges] = useState<Challenge[]>(mockChallenges);
 	const [resources] = useState<Resource[]>(mockResources);
 	const windowHeight = Dimensions.get("window").height;
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+    
 	return (
 		<SafeAreaView style={styles.mainContainer}>
 			<StatusBar barStyle="dark-content" />
 			<ScrollView
-				style={styles.container}
+				style={styles.scrollContainer}
 				contentContainerStyle={{
 					gap: 30,
 					backgroundColor: "#FAF9F6",
@@ -153,6 +161,22 @@ const ResourceItem = ({resource}: {resource: Resource}) => {
 	);
 };
 
+  /*return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Tab One</Text>
+      <Button title="Show Popup" onPress={toggleModal} />
+      <View
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
+      <EditScreenInfo path="app/(tabs)/index.tsx" />
+
+      <CardPopup visible={isModalVisible} onClose={toggleModal} />
+    </View>
+  );
+}*/
+  
 const styles = StyleSheet.create({
 	mainContainer: {
 		display: "flex",
@@ -160,8 +184,31 @@ const styles = StyleSheet.create({
 		backgroundColor: "#FAF9F6",
 		paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
 	},
-	container: {
+	scrollContainer: {
 		paddingHorizontal: "7.5%",
 		backgroundColor: "transparent",
+  },
+  container: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  separator: {
+    height: 1,
+    marginVertical: 30,
+    width: '80%',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+	header: {
+		alignItems: "center",
+		justifyContent: "center",
+		flex: 0.45,
+	},
+	camera: {
+		flex: 1, 
 	},
 });
+  
