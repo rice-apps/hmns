@@ -16,6 +16,13 @@ interface CardPopupProps extends ModalProps {
   onClose: () => void;
 }
 
+const infoData = [
+  { icon: require('./butterfly.png'), title: 'Detectability', value: 'Low' },
+  { icon: require('./butterfly.png'), title: 'Origin', value: 'Neotropical' },
+  { icon: require('./butterfly.png'), title: 'Wingspan', value: '5-7cm' },
+  { icon: require('./butterfly.png'), title: 'Food', value: 'Flowers' },
+];
+
 const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => {
   return (
     <Modal
@@ -27,37 +34,31 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-   
-          
-          
- 
-        
-        <ScrollView 
-            style={styles.details}
-            showsVerticalScrollIndicator={false}
-          >
-                 <View style={styles.header}>
+          <ScrollView style={styles.details} showsVerticalScrollIndicator={false}>
+            <View style={styles.header}>
               <Text style={styles.species}>Mexican Sister</Text>
-            
-            <TouchableOpacity onPress={onClose}>
-              <Image source={require('./closeIcon.png')} style={styles.closeIcon} />
-            </TouchableOpacity>
-
+              <TouchableOpacity onPress={onClose}>
+                <Image source={require('./closeIcon.png')} style={styles.closeIcon} />
+              </TouchableOpacity>
             </View>
             <Text style={styles.scientificName}>Adelpha fessonia</Text>
-            <Text style = {styles.familyName}>Family: Papilionidae Swallowtail </Text>  
-          <Image
-            source={require('./butterfly.png')}
-            style={styles.image}
-          />
-            <DetailItem title="Origin" description="Neotropical" />
-          
-            <DetailItem title="Spotting likelihood" description="Low" />
-            <DetailItem title="Wingspan" description="5-7 cm (2-2.5 in)" />
-            <DetailItem title="Food source" description="Flowers" />
+            <Text style={styles.familyName}>Family: Papilionidae Swallowtail</Text>  
+            <Image source={require('./butterfly.png')} style={styles.image} />
+
+<View style={styles.container}>
+{infoData.map((item, index) => (
+  <InfoItem
+    key={index}
+    iconName={item.icon}
+    title={item.title}
+    value={item.value}
+  />
+))}
+</View>
+
             <Text style={styles.funFactTitle}>Fun Fact</Text>
             <Text style={styles.funFactText}>
-              They are often known as sisters, due to the white markings on their wings, which resemble a nun's habitat.
+              They are often known as sisters, due to the white markings on their wings, which resemble a nun's habit.
             </Text>
             <Text style={styles.similarButterfliesTitle}>Similar Butterflies</Text>
             <View style={styles.similarButterfliesContainer}>
@@ -71,7 +72,6 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
     </Modal>
   );
 };
-
 const DetailItem = ({ title, description }) => (
   <View style={styles.detailItem}>
     <Text style={styles.detailTitle}>{title}:</Text>
@@ -105,7 +105,9 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
+    paddingTop: 18,
+    paddingLeft: 22,
+    paddingRight: 22,
     alignItems: 'center',
     elevation: 5,
   },
@@ -119,9 +121,9 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 200,
-    borderRadius: 8,
+    borderRadius: 15,
     marginBottom: 8,
-    marginTop: 8,
+    marginTop: 18,
   },
   details: {
     alignSelf: 'stretch',
@@ -215,14 +217,24 @@ const styles = StyleSheet.create({
     height: 30,
   },
   infoItemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flex: 1, // Ensures the item takes up an equal portion of the container
+    flexDirection: 'column', // Layout the icon, title, and value on top of each other
+    alignItems: 'center', // Center-align the items horizontally
+    justifyContent: 'center', // Center-align the items vertically
     padding: 8,
     marginHorizontal: 4,
-    backgroundColor: '#EFEFEF', // Set background color similar to the image provided
+    backgroundColor: '#EFEFEF',
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: '#DDD', // Optional border color
+    borderColor: '#DDD',
+  },
+  
+    infoContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginTop: 16,
+      paddingHorizontal: 16, // Add padding if needed
+    
   },
   infoIcon: {
     width: 24,
@@ -245,6 +257,17 @@ const styles = StyleSheet.create({
    infoList: {
     flexDirection: 'row',
     marginTop: 16,
+  },
+  container: {
+    height: 80, // Assign a fixed height
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%', // Make sure it takes the full width
+    flexDirection: 'row', // This is now redundant, can be removed
+    borderRadius: 20,
+    borderColor: '#9D9B64', // Debugging: border color
+    borderWidth: 2,   
+    padding: 10
   },
 
 });
