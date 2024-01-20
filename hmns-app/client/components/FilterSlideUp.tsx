@@ -31,7 +31,7 @@ const filterTitleFontSize = 24;
 const filterCategoryHeaderFontSize = 14;
 const filterTitleLeftMargin = '5%';
 const filterCategoryLeftMargin = '7%';
-const filterButtonColor = 'grey';
+const filterButtonColor = '#9D9B64';
 const filterButtonFontSize = 20;
 const filterColorDiameter = 15;
 const filterDetectabilityButtonHeight = 30;
@@ -176,7 +176,7 @@ export const FilterSlideUp = (props: FilterProps) => {
                         onPress={() => props.onFilter(size, color, detectability)}
                         style={styles.filterButton}
                     >
-                        <Text style={[styles.filterButtonLabel, foregroundStyle]}>Apply Filter</Text>
+                        <Text style={[styles.filterButtonLabel, foregroundStyle]}>Apply</Text>
                     </Pressable>
                 </View>
             </View>
@@ -229,8 +229,9 @@ const styles = StyleSheet.create({
         fontFamily: fontFamily,
     },
     filterButton: {
-        width: '50%',
-        paddingVertical: 5,
+        width: '30%',
+        borderRadius: 20,
+        paddingVertical: 10,
         backgroundColor: filterButtonColor,
         alignSelf: 'center',
     },
@@ -273,7 +274,7 @@ const styles = StyleSheet.create({
     },
     detectabilityButton: {
         borderWidth: 1,
-        borderColor: '#9D9B64',
+        borderColor: filterButtonColor,
         height: filterDetectabilityButtonHeight,
         width: filterDetectabilityButtonWidth,
         borderRadius: filterDetectabilityButtonHeight / 2,
