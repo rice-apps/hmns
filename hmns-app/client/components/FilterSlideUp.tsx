@@ -109,9 +109,9 @@ type FilterProps = {
 };
 
 export const FilterSlideUp = (props: FilterProps) => {
-    const [size, setSize] = useState<ButterflyWingspan | null>(null);
-    const [color, setColor] = useState<ButterflyColor | null>(null);
-    const [detectability, setDetectability] = useState<ButterflyDetectability | null>(null);
+    const [currSize, setSize] = useState<ButterflyWingspan | null>(null);
+    const [currColor, setColor] = useState<ButterflyColor | null>(null);
+    const [currDetectability, setDetectability] = useState<ButterflyDetectability | null>(null);
     const filterBackground = useThemeColor({ light: props.lightColorBackground, dark: props.darkColorBackground }, 'background');
     const filterForeground = useThemeColor({ light: props.lightColorForeground, dark: props.darkColorForeground }, 'text');
     const backgroundStyle = { backgroundColor: filterBackground };
@@ -179,7 +179,7 @@ export const FilterSlideUp = (props: FilterProps) => {
                         ))}
                     </View>
                     <Pressable
-                        onPress={() => props.onFilter(size, color, detectability)}
+                        onPress={() => props.onFilter(currSize, currColor, currDetectability)}
                         style={styles.filterButton}
                     >
                         <Text style={[styles.filterButtonLabel, foregroundStyle]}>Apply</Text>
