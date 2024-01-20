@@ -26,6 +26,7 @@ type ButterflyDetectabilityDisplay = {
 }
 
 const fontFamily = 'sans-serif';
+const filterTopRadius = 15;
 const filterCategoryFontSize = 18;
 const filterTitleFontSize = filterCategoryFontSize * 1.2;
 const filterCategoryHeaderFontSize = 14;
@@ -203,6 +204,8 @@ const styles = StyleSheet.create({
     filterContainer: {
         flexDirection: 'column',
         paddingBottom: 10,
+        borderTopLeftRadius: filterTopRadius,
+        borderTopRightRadius: filterTopRadius,
     },
     closeButton: {
         alignSelf: 'flex-end',
