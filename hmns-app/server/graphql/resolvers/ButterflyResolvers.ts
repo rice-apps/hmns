@@ -25,10 +25,10 @@ export const ButterflyResolvers = {
           { $sample: { size: 1 } }
         ]);
         return randomButterflies[0];
-  },
-  getBOTD:async ()=>{
-    return await BOTD.findOne({isBotd:true});
-  }
+    },
+    getBOTD:async ()=>{
+      return await BOTD.findOne({isBotd:true});
+    }
 },
 Mutation: {
   createButterfly: async (_: any, { input }: { input: any }) => {
@@ -40,7 +40,11 @@ Mutation: {
       return butterfly;
   },
   createBOTD:async () => {
-    const botd=new BOTD({botdId:"dummy",isBotd:true});
+    const randomButterflies = await Butterfly.aggregate([
+      { $sample: { size: 1 } }
+    ]);
+    const randomButterfly=randomButterflies[0];
+    const botd=new BOTD({botdId:randomButterfly._id,isBotd:true});
     await botd.save();
     return botd;
   },
@@ -51,5 +55,4 @@ Mutation: {
     return botd;
   },
 }
-
 };
