@@ -136,7 +136,9 @@ export const FilterSlideUp = (props: FilterProps) => {
                     ]}>
                     <View style={styles.topRow}>
                         <Text style={[styles.filterTitle, foregroundStyle]}>Filter</Text>
-                        <EvilIcons name="close" size={34} color={filterForeground} onPress={props.onClose} style={styles.closeButton} />
+                        <Pressable onPress={props.onClose} hitSlop={10}>
+                            <EvilIcons name="close" size={34} color={filterForeground} style={styles.closeButton} />
+                        </Pressable>
                     </View>
 
                     <Text style={[styles.categoryText, foregroundStyle]}>Size</Text>
