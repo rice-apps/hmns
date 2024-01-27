@@ -36,7 +36,7 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
         <View style={styles.modalView}>
           <ScrollView style={styles.details} showsVerticalScrollIndicator={false}>
             <View style={styles.header}>
-              <Text style={styles.species}>Mexican Sister</Text>
+              <Text style={styles.commonName}>Mexican Sister</Text>
               <TouchableOpacity onPress={onClose}>
                 <Image source={require('./closeIcon.png')} style={styles.closeIcon} />
               </TouchableOpacity>
@@ -45,16 +45,16 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
             <Text style={styles.familyName}>Family: Papilionidae Swallowtail</Text>  
             <Image source={require('./butterfly.png')} style={styles.image} />
 
-<View style={styles.container}>
-{infoData.map((item, index) => (
-  <InfoItem
-    key={index}
-    iconName={item.icon}
-    title={item.title}
-    value={item.value}
-  />
-))}
-</View>
+          <View style={styles.attributesContainer}>
+          {infoData.map((item, index) => (
+            <InfoItem
+              key={index}
+              iconName={item.icon}
+              title={item.title}
+              value={item.value}
+            />
+          ))}
+          </View>
 
             <Text style={styles.funFactTitle}>Fun Fact</Text>
             <Text style={styles.funFactText}>
@@ -62,11 +62,12 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
             </Text>
 
             <View
-  style={{
-    borderBottomColor: 'black',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  }}
-/>
+              style={{
+                borderBottomColor: 'black',
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                marginVertical: 19,
+              }}
+            />
             <Text style={styles.similarButterfliesTitle}>Similar Butterflies</Text>
             <View style={styles.similarButterfliesContainer}>
               <Image source={require('./butterfly.png')} style={styles.similarButterflyImage} />
@@ -83,7 +84,7 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
 
 const InfoItem = ({ iconName, title, value }) => {
   return (
-    <View style={styles.infoItemContainer}>
+    <View style={styles.attributeItem}>
       <Image source={iconName} style={styles.infoIcon} />
         <Text style={styles.infoTitle}>{title}</Text>
         <Text style={styles.infoValue}>{value}</Text>
@@ -106,8 +107,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderRadius: 20,
     paddingTop: 18,
-    paddingLeft: 22,
-    paddingRight: 22,
+    paddingHorizontal: 22,
     alignItems: 'center',
     elevation: 5,
     borderColor: "#9D9B64",
@@ -131,14 +131,9 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     
   },
-  detailText: {
-    fontSize: 16,
-    marginBottom: 4,
-    color: '#333',
-  },
   funFactTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontWeight: '600',
     marginTop: 25,
     marginBottom: 8,
     color: '#000',
@@ -149,18 +144,7 @@ const styles = StyleSheet.create({
     lineHeight: 25,
     fontWeight: "400"
   },
-  button: {
-    marginTop: 20,
-    backgroundColor: '#2196F3',
-    padding: 10,
-    borderRadius: 20,
-  },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center',
-  },
-
-  species: {
+  commonName: {
     fontSize: 26,
     marginBottom: 4,
     color: '#5D5544', 
@@ -169,40 +153,23 @@ const styles = StyleSheet.create({
     color: '#5D5544',
     marginTop: 3,
   },
-
   scientificName: {
     fontStyle: 'italic',
     fontSize: 16,
     color: '#5D5544', 
   },
-  detailItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 14,
-  },
-  detailTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#616161',
-  },
-  detailDescription: {
-    fontSize: 16,
-    color: '#000',
-    marginLeft: 2,
-  },
   similarButterfliesTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 21,
-    marginBottom: 11,
-    color: '#066FAB',
-  
+    fontSize: 14,
+    fontWeight: "600",
+    marginBottom: 19,
+    color: '#000',
   },
   similarButterfliesContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 20,
+    
   },
   similarButterflyImage: {
     width: "30%", 
@@ -219,11 +186,11 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  infoItemContainer: {
-    flex: 1, // Ensures the item takes up an equal portion of the container
-    flexDirection: 'column', // Layout the icon, title, and value on top of each other
-    alignItems: 'center', // Center-align the items horizontally
-    justifyContent: 'center', // Center-align the items vertically
+  attributeItem: {
+    flex: 1, 
+    flexDirection: 'column',
+    alignItems: 'center', 
+    justifyContent: 'center', 
     padding: 2,
     marginHorizontal: 4,
     borderRadius: 16,
@@ -247,14 +214,14 @@ const styles = StyleSheet.create({
     marginTop: 4
     
   },
-  container: {
-    height: 80, // Assign a fixed height
+  attributesContainer: {
+    height: 80, 
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%', // Make sure it takes the full width
-    flexDirection: 'row', // This is now redundant, can be removed
+    width: '100%', 
+    flexDirection: 'row', 
     borderRadius: 20,
-    borderColor: '#D6D5B9', // Debugging: border color
+    borderColor: '#D6D5B9', 
     borderWidth: 2,   
     padding: 1
   },
