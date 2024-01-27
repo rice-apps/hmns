@@ -1,6 +1,6 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
-import { Pressable, useColorScheme } from "react-native";
+import { Pressable, View, useColorScheme } from "react-native";
 
 import Colors from "../../constants/Colors";
 
@@ -11,7 +11,11 @@ function TabBarIcon (props: {
   name: React.ComponentProps<typeof FontAwesome>["name"]
   color: string
 }) {
-	return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+	return (
+		<View style={{}}>
+			<FontAwesome size={28} style={{ marginBottom: -16 }} {...props} />
+		</View>
+	);
 }
 
 export default function TabLayout () {
@@ -20,14 +24,16 @@ export default function TabLayout () {
 	return (
 		<Tabs
 			screenOptions={{
-				tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint
+				tabBarActiveTintColor:"grey",
+				tabBarStyle: {backgroundColor: "white",},
+				headerShown: false
 			}}>
 			<Tabs.Screen
 				name='index'
 				options={{
-					title: "Tab One",
+					title: "Home",
 					tabBarIcon: ({ color }) => (
-						<TabBarIcon name='code' color={color} />
+						<TabBarIcon name='home' color={color} />
 					),
 					headerRight: () => (
 						<Link href='/modal' asChild>
@@ -42,15 +48,33 @@ export default function TabLayout () {
 								)}
 							</Pressable>
 						</Link>
+					),
+				}}
+			/>
+			<Tabs.Screen
+				name='glossary'
+				options={{
+					title: "Glossary",
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon name='list' color={color} />
 					)
 				}}
 			/>
 			<Tabs.Screen
 				name='two'
 				options={{
-					title: "Tab Two",
+					title: "Camera",
 					tabBarIcon: ({ color }) => (
-						<TabBarIcon name='code' color={color} />
+						<TabBarIcon name='camera' color={color} />
+					)
+				}}
+			/>
+			<Tabs.Screen
+				name='info'
+				options={{
+					title: "Info",
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon name='info' color={color} />
 					)
 				}}
 			/>
