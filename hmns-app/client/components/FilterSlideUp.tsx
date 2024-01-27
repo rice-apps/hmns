@@ -26,6 +26,7 @@ type ButterflyDetectabilityDisplay = {
 }
 
 const fontFamily = (Platform.OS === 'ios' ? 'Helvetica Neue' : 'sans-serif');
+const nonModalBackgroundColor = '#D3D3D380';
 const filterTopRadius = 15;
 const filterCategoryFontSize = 18;
 const filterTitleFontSize = filterCategoryFontSize * 1.2;
@@ -198,6 +199,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-end',
+        backgroundColor: nonModalBackgroundColor,
     },
     topRow: {
         flexDirection: 'row',
