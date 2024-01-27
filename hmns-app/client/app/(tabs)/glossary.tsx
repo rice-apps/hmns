@@ -1,8 +1,12 @@
-import { Text } from "react-native";
+import {Text, View} from "react-native";
+import SafeView from "../../components/SafeView";
 
-
-export default function Glossary(){
+export default function Glossary() {
 	return (
-		<Text>Hello</Text>
+		<SafeView>
+			<View className="bg-[#FAF9F6]">
+				<Text>HEllo</Text>
+			</View>
+		</SafeView>
 	);
 }
