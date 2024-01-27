@@ -128,8 +128,8 @@ export const FilterSlideUp = (props: FilterProps) => {
             visible={props.filterVisible}
             onRequestClose={props.onClose}
         >
-            <View style={styles.slideUp}>
-                <View
+            <Pressable style={styles.slideUp} onPress={props.onClose}>
+                <Pressable
                     style={[
                         styles.filterContainer,
                         backgroundStyle,
@@ -188,8 +188,8 @@ export const FilterSlideUp = (props: FilterProps) => {
                     >
                         <Text style={[styles.filterButtonLabel, foregroundStyle]}>Apply</Text>
                     </Pressable>
-                </View>
-            </View>
+                </Pressable>
+            </Pressable>
         </Modal>
     );
 }
