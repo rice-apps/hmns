@@ -16,6 +16,13 @@ interface CardPopupProps extends ModalProps {
   onClose: () => void;
 }
 
+const infoData = [
+  { icon: require('./detectability_icon.png'), title: 'Detectability', value: 'Low' },
+  { icon: require('./origin_icon.png'), title: 'Origin', value: 'Neotropical' },
+  { icon: require('./wingspan_icon.png'), title: 'Wingspan', value: '5-7cm' },
+  { icon: require('./food_icon.png'), title: 'Food', value: 'Flowers' },
+];
+
 const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => {
   return (
     <Modal
@@ -27,33 +34,40 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-        <View style={styles.header}>
-            <Text style={styles.species}>Mexican Sister</Text>
-            
+          <ScrollView style={styles.details} showsVerticalScrollIndicator={false}>
+            <View style={styles.header}>
+              <Text style={styles.commonName}>Mexican Sister</Text>
               <TouchableOpacity onPress={onClose}>
                 <Image source={require('./closeIcon.png')} style={styles.closeIcon} />
               </TouchableOpacity>
-              </View>
- 
-        
-        <ScrollView 
-            style={styles.details}
-            showsVerticalScrollIndicator={false}
-          >
+            </View>
             <Text style={styles.scientificName}>Adelpha fessonia</Text>
-          <Image
-            source={require('./butterfly.png')}
-            style={styles.image}
-          />
-            <DetailItem title="Origin" description="Neotropical" />
-            <DetailItem title="Family" description="Nymphalidae (Brush-footed butterflies)" />
-            <DetailItem title="Spotting likelihood" description="Low" />
-            <DetailItem title="Wingspan" description="5-7 cm (2-2.5 in)" />
-            <DetailItem title="Food source" description="Flowers" />
+            <Text style={styles.familyName}>Family: Papilionidae Swallowtail</Text>  
+            <Image source={require('./butterfly.png')} style={styles.image} />
+
+          <View style={styles.attributesContainer}>
+          {infoData.map((item, index) => (
+            <InfoItem
+              key={index}
+              iconName={item.icon}
+              title={item.title}
+              value={item.value}
+            />
+          ))}
+          </View>
+
             <Text style={styles.funFactTitle}>Fun Fact</Text>
             <Text style={styles.funFactText}>
-              They are often known as sisters, due to the white markings on their wings, which resemble a nun's habitat.
+              They are often known as sisters, due to the white markings on their wings, which resemble a nun's habit.
             </Text>
+
+            <View
+              style={{
+                borderBottomColor: 'black',
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                marginVertical: 19,
+              }}
+            />
             <Text style={styles.similarButterfliesTitle}>Similar Butterflies</Text>
             <View style={styles.similarButterfliesContainer}>
               <Image source={require('./butterfly.png')} style={styles.similarButterflyImage} />
@@ -66,13 +80,18 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
     </Modal>
   );
 };
+  
 
-const DetailItem = ({ title, description }) => (
-  <View style={styles.detailItem}>
-    <Text style={styles.detailTitle}>{title}:</Text>
-    <Text style={styles.detailDescription}>{description}</Text>
-  </View>
-);
+const InfoItem = ({ iconName, title, value }) => {
+  return (
+    <View style={styles.attributeItem}>
+      <Image source={iconName} style={styles.infoIcon} />
+        <Text style={styles.infoTitle}>{title}</Text>
+        <Text style={styles.infoValue}>{value}</Text>
+    </View>
+  );
+};
+
 
 const styles = StyleSheet.create({
   centeredView: {
@@ -85,11 +104,14 @@ const styles = StyleSheet.create({
     width: '90%',
     height: '80%',
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#FFF',
     borderRadius: 20,
-    padding: 35,
+    paddingTop: 18,
+    paddingHorizontal: 22,
     alignItems: 'center',
     elevation: 5,
+    borderColor: "#9D9B64",
+    borderWidth: 1
   },
   title: {
     fontSize: 24,
@@ -101,83 +123,53 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 200,
-    borderRadius: 8,
-    marginBottom: 8,
+    borderRadius: 15,
+    marginBottom: 12,
+    marginTop: 18,
   },
   details: {
     alignSelf: 'stretch',
     
   },
-  detailText: {
-    fontSize: 16,
-    marginBottom: 4,
-    color: '#333',
-  },
   funFactTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontWeight: '600',
     marginTop: 25,
     marginBottom: 8,
-    color: '#066FAB',
+    color: '#000',
   },
   funFactText: {
     fontSize: 16,
     color: '#000',
-    lineHeight: 28
+    lineHeight: 25,
+    fontWeight: "400"
   },
-  button: {
-    marginTop: 20,
-    backgroundColor: '#2196F3',
-    padding: 10,
-    borderRadius: 20,
-  },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center',
-  },
-  species: {
-    alignSelf: 'flex-start',
+  commonName: {
     fontSize: 26,
-    fontWeight: 'bold',
-    color: '#066FAB', 
-
-
+    marginBottom: 4,
+    color: '#5D5544', 
+  },
+  familyName: {
+    color: '#5D5544',
+    marginTop: 3,
   },
   scientificName: {
-    alignSelf: 'flex-start',
+    fontStyle: 'italic',
     fontSize: 16,
-    color: '#000', 
-    marginBottom: 15,
-    marginTop: 10,
-  },
-  detailItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 14,
-  },
-  detailTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#616161',
-  },
-  detailDescription: {
-    fontSize: 16,
-    color: '#000',
-    marginLeft: 2,
+    color: '#5D5544', 
   },
   similarButterfliesTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 21,
-    marginBottom: 11,
-    color: '#066FAB',
-  
+    fontSize: 14,
+    fontWeight: "600",
+    marginBottom: 19,
+    color: '#000',
   },
   similarButterfliesContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 20,
+    
   },
   similarButterflyImage: {
     width: "30%", 
@@ -194,6 +186,46 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
+  attributeItem: {
+    flex: 1, 
+    flexDirection: 'column',
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    padding: 2,
+    marginHorizontal: 4,
+    borderRadius: 16,
+    borderColor: "black"
+  },
+  infoIcon: {
+    width: 24,
+    height: 24,
+    marginBottom: 2
+  
+  },
+  infoTitle: {
+    fontSize: 8,
+    color: '#7F7F7F',
+    alignContent:"center"
+  },
+  infoValue: {
+    fontSize: 10,
+    fontWeight: '500',
+    color: '#333',
+    marginTop: 4
+    
+  },
+  attributesContainer: {
+    height: 80, 
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%', 
+    flexDirection: 'row', 
+    borderRadius: 20,
+    borderColor: '#D6D5B9', 
+    borderWidth: 2,   
+    padding: 1
+  },
+
 });
 
 export default CardPopup;
