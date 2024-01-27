@@ -9,12 +9,21 @@ import {
   ModalProps,
   Image,
   ScrollView,
+  Dimensions,
 } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 
+const { width: screenWidth } = Dimensions.get('window');
 
 interface CardPopupProps extends ModalProps {
   onClose: () => void;
 }
+
+const images = [
+  require('./butterfly.png'),
+  require('./butterfly.png'), // Assuming you have more images
+  require('./butterfly.png'),
+];
 
 const infoData = [
   { icon: require('./detectability_icon.png'), title: 'Detectability', value: 'Low' },
@@ -24,6 +33,13 @@ const infoData = [
 ];
 
 const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => {
+  const renderItem = ({ item, index }) => {
+    return (
+      <View >
+      <Image source={item} style={styles.carouselImage} resizeMode="contain" />
+    </View>
+    );
+  };
   return (
     <Modal
       animationType="slide"
@@ -38,12 +54,26 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
             <View style={styles.header}>
               <Text style={styles.commonName}>Mexican Sister</Text>
               <TouchableOpacity onPress={onClose}>
-                <Image source={require('./closeIcon.png')} style={styles.closeIcon} />
+
+<Carousel layout={'default'} />
+
               </TouchableOpacity>
             </View>
             <Text style={styles.scientificName}>Adelpha fessonia</Text>
             <Text style={styles.familyName}>Family: Papilionidae Swallowtail</Text>  
-            <Image source={require('./butterfly.png')} style={styles.image} />
+    width: '100%',
+    height: 200,
+    borderRadius: 15,
+    marginBottom: 12,
+    marginTop: 18,
+            <Carousel
+              data={images}
+              renderItem={renderItem}
+              sliderWidth={screenWidth}
+              itemWidth={screenWidth}
+              loop={true}
+            />
+
 
           <View style={styles.attributesContainer}>
           {infoData.map((item, index) => (
@@ -225,7 +255,21 @@ const styles = StyleSheet.create({
     borderWidth: 2,   
     padding: 1
   },
+  carouselImage: {
+    width: '100%',
+    height: 200,
+    borderRadius: 15,
+    marginBottom: 12,
+    marginTop: 18,
 
+  },
+  carouselImageContainer: {
+    width: "100%",
+    height: 200, // or any other height you prefer
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
 });
 
 export default CardPopup;
