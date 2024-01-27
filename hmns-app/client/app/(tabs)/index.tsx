@@ -72,7 +72,7 @@ export default function TabOneScreen() {
 
 				{/* BOTD */}
 				<View
-					className={`flex flex-row rounded-xl bg-[${colors.botd}] px-10 py-6 border-2 border-[#CECDB4]/50`}
+					className={`flex flex-row rounded-xl bg-[#CECDB4] px-10 py-6 border-2 border-[#CECDB4]/50`}
 					style={{height: windowHeight * 0.3}}
 				>
 					{/* Left Side */}
