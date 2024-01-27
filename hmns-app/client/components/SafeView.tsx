@@ -4,7 +4,7 @@ import {SafeAreaView, StatusBar, Platform, StyleSheet} from "react-native";
 export default function SafeView({children}: {children: ReactNode}) {
 	return (
 		<SafeAreaView style={styles.mainContainer}>
-			<StatusBar barStyle="dark-content" />
+			<StatusBar barStyle="dark-content"/>
 			{children}
 		</SafeAreaView>
 	);
