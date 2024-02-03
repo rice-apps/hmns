@@ -236,6 +236,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        padding: 10,
     },
     sizeTitle: {
         fontFamily: fontFamily,
@@ -275,6 +276,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: filterColorDiameter / 2,
         width: '24%',
+        padding: 10,
     },
     colorCircle: {
         width: filterColorDiameter,
@@ -309,6 +311,7 @@ const styles = StyleSheet.create({
     selectedBorder: {
         borderWidth: 1,
         borderColor: filterButtonColor,
+        borderRadius: 10,
     },
     selectedFill: {
         backgroundColor: filterButtonColor,
