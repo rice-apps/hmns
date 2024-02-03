@@ -19,40 +19,48 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     backgroundColor: 'transparent',
     fontSize: 20,
+    fontWeight: '500',
+    color: '#5D5544',
+
   },
   intro: {
     marginTop: 5, // This will create a 45px gap from the bottom of the headerTitle
     padding: 10,
     paddingLeft: 20,
     backgroundColor: 'transparent',
-    fontSize: 16,
+    fontSize: 14,
     lineHeight: 20,
+    width: 380,
+    color: '#5D5544',
   },
   faqItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginLeft: 20,
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     borderBottomColor: '#5D5544',
     paddingVertical: 15,
     paddingBottom: 10,
-    width:340,
+    width:370,
   },
   faqQuestion: {
-    fontSize: 16,
+    fontSize: 14,
+    fontWeight: '500',
     lineHeight: 20,
-    width: 327,
+    width: 370,
     flex: 1,
+    color: '#5D5544',
     // paddingLeft: 20,
   },
   faqAnswer: {
-    width: 340,
+    width: 370,
     padding: 5,
     backgroundColor: '#f0f0f0',
     paddingLeft: 20,
-    fontSize: 15,
+    fontSize: 14,
     lineHeight: 20,
+    color: '#5D5544',
   },
   toggleButton: {
     marginLeft: 10, // Space between the question and the button
@@ -111,7 +119,7 @@ return (
     />
     <Text style={styles.headerTitle}>About HMNS</Text>
     <Text style={styles.intro}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
     </Text>
     
     <View style={styles.faqContainer}>
