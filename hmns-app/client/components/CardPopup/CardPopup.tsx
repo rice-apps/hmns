@@ -1,5 +1,5 @@
 // CardPopup.tsx
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Modal,
   StyleSheet,
@@ -11,7 +11,7 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -34,6 +34,8 @@ const infoData = [
 ];
 
 const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => {
+  const [activeSlide, setActiveSlide] = useState(0);
+
   const renderItem = ({ item, index }) => {
     return (
       <View >
@@ -49,6 +51,7 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
       transparent={true}
       visible={visible}
       onRequestClose={onClose}
+    
       {...props}
     >
       <View style={styles.centeredView}>
@@ -69,7 +72,18 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
               sliderWidth={300}
               itemWidth={300}
               loop={true}
+              onSnapToItem={(index) => setActiveSlide(index)}
               />
+
+<Pagination
+          dotsLength={images.length}
+          activeDotIndex={activeSlide}
+          containerStyle={styles.paginationContainer}
+          dotStyle={styles.paginationDot}
+          inactiveDotStyle={styles.paginationInactiveDot}
+          inactiveDotOpacity={0.4}
+          inactiveDotScale={0.6}
+        />
 
 
 
@@ -258,10 +272,22 @@ const styles = StyleSheet.create({
     height: 200,
     width: "100%",
     borderRadius: 15,
-    marginBottom: 12,
     marginTop: 18,
     backgroundColor: "blue",
   },
+  paginationContainer: {
+    
+  },
+  paginationDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#B8B691'
+  },
+  paginationInactiveDot: {
+    // Style for inactive dots
+  },
+  // ... other styles
 
 });
 
