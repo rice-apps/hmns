@@ -17,6 +17,7 @@ type ButterflyWingspanDisplay = {
 type ButterflyColorDisplay = {
     displayColor: string,
     colorName: string,
+    borderColor?: string,
     value: ButterflyColor,
 }
 
@@ -58,6 +59,7 @@ const colors: ButterflyColorDisplay[] = [{
     displayColor: '#FFFFFF',
     colorName: 'White',
     value: 'white',
+    borderColor: 'black',
 }, {
     displayColor: '#D9AE4B',
     colorName: 'Yellow',
@@ -77,7 +79,8 @@ const colors: ButterflyColorDisplay[] = [{
 }, {
     displayColor: '#000000',
     colorName: 'Black',
-    value: 'black'
+    value: 'black',
+    borderColor: 'white',
 }, {
     displayColor: '#C07474',
     colorName: 'Pink',
@@ -166,7 +169,11 @@ export const FilterSlideUp = (props: FilterProps) => {
                                 <Pressable key={color.item.value}
                                     style={[styles.colorRow, (currColor === color.item.value && styles.selectedBorder)]}
                                     onPress={() => setColor(color.item.value)}>
-                                    <View style={[styles.colorCircle, { backgroundColor: color.item.displayColor }]} />
+                                    <View style={[
+                                        styles.colorCircle,
+                                        { backgroundColor: color.item.displayColor },
+                                        (color.item.borderColor !== undefined && { borderWidth: 1, borderColor: color.item.borderColor })
+                                    ]} />
                                     <Text style={[styles.colorTitle, foregroundStyle]}>{color.item.colorName}</Text>
                                 </Pressable>
                             )}
