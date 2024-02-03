@@ -1,0 +1,26 @@
+name: CI
+on:
+  pull_request:
+    branches:
+      - main # change this to your default branch name
+  push:
+    branches:
+      - main # change this to your default branch name
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm install && cd client && npm install && cd ../server && npm install
+        working-directory: ./hmns-app
+
+      - name: Run ESLint
+        run: npm run lint
+        working-directory: ./hmns-app

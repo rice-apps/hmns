@@ -21,8 +21,9 @@ interface CardPopupProps extends ModalProps {
 
 const images = [
   require('./butterfly.png'),
-  require('./butterfly.png'), // Assuming you have more images
   require('./butterfly.png'),
+  require('./test.png'),
+  require('./closeIcon.png'),
 ];
 
 const infoData = [
@@ -36,8 +37,10 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
   const renderItem = ({ item, index }) => {
     return (
       <View >
-      <Image source={item} style={styles.carouselImage} resizeMode="contain" />
-    </View>
+      <Image source={item} style={styles.carouselImage} resizeMode="stretch" />
+      </View>
+
+
     );
   };
   return (
@@ -54,25 +57,20 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
             <View style={styles.header}>
               <Text style={styles.commonName}>Mexican Sister</Text>
               <TouchableOpacity onPress={onClose}>
-
-<Carousel layout={'default'} />
-
+              <Image source={require('./closeIcon.png')} style={styles.closeIcon} />
               </TouchableOpacity>
             </View>
             <Text style={styles.scientificName}>Adelpha fessonia</Text>
             <Text style={styles.familyName}>Family: Papilionidae Swallowtail</Text>  
-    width: '100%',
-    height: 200,
-    borderRadius: 15,
-    marginBottom: 12,
-    marginTop: 18,
+           
             <Carousel
               data={images}
               renderItem={renderItem}
-              sliderWidth={screenWidth}
-              itemWidth={screenWidth}
+              sliderWidth={300}
+              itemWidth={300}
               loop={true}
-            />
+              />
+
 
 
           <View style={styles.attributesContainer}>
@@ -141,7 +139,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     elevation: 5,
     borderColor: "#9D9B64",
-    borderWidth: 1
+    borderWidth: 1,
   },
   title: {
     fontSize: 24,
@@ -215,6 +213,7 @@ const styles = StyleSheet.create({
   closeIcon: {
     width: 30,
     height: 30,
+    padding:10 
   },
   attributeItem: {
     flex: 1, 
@@ -256,20 +255,14 @@ const styles = StyleSheet.create({
     padding: 1
   },
   carouselImage: {
-    width: '100%',
     height: 200,
+    width: "100%",
     borderRadius: 15,
     marginBottom: 12,
     marginTop: 18,
-
+    backgroundColor: "blue",
   },
-  carouselImageContainer: {
-    width: "100%",
-    height: 200, // or any other height you prefer
-    justifyContent: 'center',
-    alignItems: 'center',
 
-  },
 });
 
 export default CardPopup;
