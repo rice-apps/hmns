@@ -80,7 +80,6 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
           activeDotIndex={activeSlide}
           containerStyle={styles.paginationContainer}
           dotStyle={styles.paginationDot}
-          inactiveDotStyle={styles.paginationInactiveDot}
           inactiveDotOpacity={0.4}
           inactiveDotScale={0.6}
         />
