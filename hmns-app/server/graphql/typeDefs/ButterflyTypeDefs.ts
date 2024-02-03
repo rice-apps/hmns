@@ -38,5 +38,6 @@ export const ButterflyTypeDefs = gql`
     createBOTD: BOTD!
     setBOTD(botdId:String!):BOTD!
   }
-
 `;
+
+
