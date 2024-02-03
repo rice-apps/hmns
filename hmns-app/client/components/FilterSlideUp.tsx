@@ -254,6 +254,7 @@ const styles = StyleSheet.create({
         width: '30%',
         borderRadius: 20,
         paddingVertical: 10,
+        marginBottom: 25,
         backgroundColor: filterButtonColor,
         alignSelf: 'center',
     },
