@@ -237,6 +237,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         alignSelf: 'center',
         gap: 50,
+        height: 125,
     },
     sizeContainer: {
         display: 'flex',
