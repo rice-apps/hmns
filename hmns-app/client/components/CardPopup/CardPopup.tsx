@@ -36,37 +36,6 @@ const infoData = [
   { icon: require('./food_icon.png'), title: 'Food', value: 'Flowers' },
 ];
 
-const CustomPagination = ({ dotsLength, activeDotIndex }) => {
-  const maxVisibleDots = 4; // maximum number of dots to display
-  const fadeOutIndex = maxVisibleDots - 1; // index after which dots start to fade
-
-  const renderDots = () => {
-    return Array.from({ length: dotsLength }).map((_, index) => {
-      let opacity = 1;
-      if (index > activeDotIndex + fadeOutIndex || index < activeDotIndex - fadeOutIndex) {
-        opacity = 0; // fade out dots outside the visible range
-      }
-
-      return (
-        <View 
-          key={index} 
-          style={[
-            styles.paginationDot, 
-            { opacity }, 
-            index === activeDotIndex ? styles.activeDotStyle : null
-          ]}
-        />
-      );
-    });
-  };
-
-  return (
-    <View style={styles.paginationContainer}>
-      {renderDots()}
-    </View>
-  );
-};
-
 const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -75,8 +44,6 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
       <View >
       <Image source={item} style={styles.carouselImage} resizeMode="stretch" />
       </View>
-
-
     );
   };
   return (
@@ -103,13 +70,12 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
             <Carousel
               data={images}
               renderItem={renderItem}
-              sliderWidth={300}
-              itemWidth={300}
+              sliderWidth={320}
+              itemWidth={320}
               loop={true}
               onSnapToItem={(index) => setActiveSlide(index)}
               />
-
-{/* <Pagination
+      <Pagination
           dotsLength={images.length}
           activeDotIndex={activeSlide}
           containerStyle={styles.paginationContainer}
@@ -117,14 +83,7 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
           inactiveDotStyle={styles.paginationInactiveDot}
           inactiveDotOpacity={0.4}
           inactiveDotScale={0.6}
-        /> */}
-
-<CustomPagination 
-  dotsLength={images.length} 
-  activeDotIndex={activeSlide} 
-/>
-
-
+        />
 
           <View style={styles.attributesContainer}>
           {infoData.map((item, index) => (
@@ -188,7 +147,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderRadius: 20,
     paddingTop: 18,
-    paddingHorizontal: 22,
+    paddingHorizontal: 13,
     alignItems: 'center',
     elevation: 5,
     borderColor: "#9D9B64",
@@ -286,12 +245,12 @@ const styles = StyleSheet.create({
   
   },
   infoTitle: {
-    fontSize: 8,
+    fontSize: 10,
     color: '#7F7F7F',
     alignContent:"center"
   },
   infoValue: {
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: '500',
     color: '#333',
     marginTop: 4
@@ -319,7 +278,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // ... other styles ...
+
   },
   paginationDot: {
     width: 10,
@@ -329,9 +288,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
   },
   activeDotStyle: {
-    backgroundColor: '#5D5544', // or any other style for active dot
+    backgroundColor: '#5D5544',
   },
-  // ... other styles
 
 });
 
