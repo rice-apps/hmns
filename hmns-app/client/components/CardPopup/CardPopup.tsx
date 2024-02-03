@@ -24,6 +24,9 @@ const images = [
   require('./butterfly.png'),
   require('./test.png'),
   require('./closeIcon.png'),
+  require('./closeIcon.png'),
+  require('./closeIcon.png'),
+  require('./closeIcon.png'),
 ];
 
 const infoData = [
@@ -32,6 +35,37 @@ const infoData = [
   { icon: require('./wingspan_icon.png'), title: 'Wingspan', value: '5-7cm' },
   { icon: require('./food_icon.png'), title: 'Food', value: 'Flowers' },
 ];
+
+const CustomPagination = ({ dotsLength, activeDotIndex }) => {
+  const maxVisibleDots = 4; // maximum number of dots to display
+  const fadeOutIndex = maxVisibleDots - 1; // index after which dots start to fade
+
+  const renderDots = () => {
+    return Array.from({ length: dotsLength }).map((_, index) => {
+      let opacity = 1;
+      if (index > activeDotIndex + fadeOutIndex || index < activeDotIndex - fadeOutIndex) {
+        opacity = 0; // fade out dots outside the visible range
+      }
+
+      return (
+        <View 
+          key={index} 
+          style={[
+            styles.paginationDot, 
+            { opacity }, 
+            index === activeDotIndex ? styles.activeDotStyle : null
+          ]}
+        />
+      );
+    });
+  };
+
+  return (
+    <View style={styles.paginationContainer}>
+      {renderDots()}
+    </View>
+  );
+};
 
 const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -75,7 +109,7 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
               onSnapToItem={(index) => setActiveSlide(index)}
               />
 
-<Pagination
+{/* <Pagination
           dotsLength={images.length}
           activeDotIndex={activeSlide}
           containerStyle={styles.paginationContainer}
@@ -83,7 +117,12 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
           inactiveDotStyle={styles.paginationInactiveDot}
           inactiveDotOpacity={0.4}
           inactiveDotScale={0.6}
-        />
+        /> */}
+
+<CustomPagination 
+  dotsLength={images.length} 
+  activeDotIndex={activeSlide} 
+/>
 
 
 
@@ -217,6 +256,7 @@ const styles = StyleSheet.create({
     width: "30%", 
     height: 100,   
     borderRadius: 8,
+    resizeMode: "cover"
   },
   header: {
     flexDirection: 'row',
@@ -276,16 +316,20 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
   },
   paginationContainer: {
-    
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // ... other styles ...
   },
   paginationDot: {
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: '#B8B691'
+    backgroundColor: '#B8B691',
+    marginHorizontal: 2,
   },
-  paginationInactiveDot: {
-    // Style for inactive dots
+  activeDotStyle: {
+    backgroundColor: '#5D5544', // or any other style for active dot
   },
   // ... other styles
 
