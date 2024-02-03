@@ -16,117 +16,112 @@ const styles = StyleSheet.create({
   headerTitle: {
     marginTop: 20, // This will create a 45px gap from the bottom of the headerImage
     padding: 10,
+    paddingLeft: 20,
     backgroundColor: 'transparent',
     fontSize: 20,
   },
   intro: {
     marginTop: 5, // This will create a 45px gap from the bottom of the headerTitle
     padding: 10,
+    paddingLeft: 20,
     backgroundColor: 'transparent',
-    fontSize: 15,
+    fontSize: 16,
     lineHeight: 20,
   },
-  // container: {
-  //   paddingTop: 50,
-  //   padding: 10,
-  // },
-  // // Style of header image
-  // headerImage: {
-  //   width: '100%',
-  //   height: 194, // You should set a fixed height for images in React Native
-  //   borderRadius: 5,
-  // },
-  // // Style of the header "about HMNS"
-  // headerTitle: {
-  //   position: 'absolute', // This positions the header relative to its first positioned (not static) ancestor element.
-  //   width: 142,
-  //   height: 50,
-  //   top: 250,
-  //   left: 26,
-  //   padding: 10,
-  //   backgroundColor: 'transparent', 
-  //   fontSize: 20,
-  // },
-  // // Style of introduction to HMNS
-  // intro:{
-  //   position: 'absolute', // This positions the header relative to its first positioned (not static) ancestor element.
-  //   width: 316,
-  //   height: 100,
-  //   top: 295,
-  //   left: 26,
-  //   padding: 10,
-  //   backgroundColor: 'transparent', 
-  //   fontSize: 15,
-  //   lineHeight: 20,
-  // },
   faqItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    paddingVertical: 10,
-    paddingHorizontal: 5,
+    marginLeft: 20,
+    borderBottomWidth: 2,
+    borderBottomColor: '#5D5544',
+    paddingVertical: 15,
+    paddingBottom: 10,
+    width:340,
   },
   faqQuestion: {
-    flex: 1, // Take up as much space as possible
+    fontSize: 16,
+    lineHeight: 20,
+    width: 327,
+    flex: 1,
+    // paddingLeft: 20,
   },
   faqAnswer: {
-    padding: 10,
+    width: 340,
+    padding: 5,
     backgroundColor: '#f0f0f0',
+    paddingLeft: 20,
+    fontSize: 15,
+    lineHeight: 20,
   },
-  // Add style for the toggle button (the chevron)
   toggleButton: {
-    // Style your button here
+    marginLeft: 10, // Space between the question and the button
   },
-  // ... additional styles
 });
 
 // Simple FAQ item component
-const FaqItem = ({ question }) => {
+const FaqItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Define the toggle function within the FaqItem component
   const toggleOpen = () => setIsOpen(!isOpen);
 
   return (
-    <TouchableOpacity onPress={toggleOpen} style={styles.faqItem}>
-      <Text>{question}</Text>
-      {isOpen && (
-        <View style={styles.faqAnswer}>
-          <Text>Answer to the question</Text>
-        </View>
-      )}
-    </TouchableOpacity>
-  );
-};
-
-const InfoPage = () => {
-  return (
-    <View style={styles.container}>
-      <Image
-         source={require('./image8.png')} // Replace with your image path
-        style={styles.headerImage}
-      />
-      <Text style={styles.headerTitle}>About HMNS</Text>
-
-      <Text style={styles.intro}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Text>
-      
+    <View>
+      {/* <TouchableOpacity style={styles.faqItem}></TouchableOpacity> */}
       <TouchableOpacity style={styles.faqItem} onPress={toggleOpen}>
         <Text style={styles.faqQuestion}>{question}</Text>
         <Text style={styles.toggleButton}>{isOpen ? '▲' : '▼'}</Text>
       </TouchableOpacity>
-      {isOpen && <Text style={styles.faqAnswer}>{answer}</Text>}
-      {/* <Text>FAQ's</Text>
-      <FaqItem question="Lorem ipsum dolor sit amet" />
-      <FaqItem question="Lorem ipsum dolor sit amet" />
-      <FaqItem question="Lorem ipsum dolor sit amet" /> */}
-      {/* ... more FAQ items */}
-
-      
-      {/* Bottom Navigation */}
-      {/* ...your bottom navigation code */}
+      {isOpen && (
+        <View>
+          <Text style={styles.faqAnswer}>{answer}</Text>
+        </View>
+      )}
     </View>
   );
+};
+
+const InfoPage = () => {
+ // Example FAQ data
+ const faqs = [
+  {
+    question: "FAQ Question 1",
+    answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+  },
+  {
+    question: "FAQ Question 2",
+    answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+  },
+  {
+    question: "FAQ Question 3",
+    answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+  },
+  {
+    question: "FAQ Question 4",
+    answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+  },
+];
+
+return (
+  <View style={styles.container}>
+    <Image
+      source={require('./image8.png')}
+      style={styles.headerImage}
+    />
+    <Text style={styles.headerTitle}>About HMNS</Text>
+    <Text style={styles.intro}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </Text>
+    
+    <View style={styles.faqContainer}>
+        <Text style={styles.headerTitle}>FAQ's</Text>
+        {faqs.map((faq, index) => (
+          <FaqItem key={index} question={faq.question} answer={faq.answer} />
+        ))}
+      </View>
+  </View>
+);
 };
 
 export default InfoPage;
