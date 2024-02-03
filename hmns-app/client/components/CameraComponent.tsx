@@ -219,7 +219,6 @@ const styles = StyleSheet.create({
    backgroundColor: "transparent",
  },
  tipsButton: {
-   // Style your button as needed
    position: 'absolute',
    borderRadius: 10,
    padding: 10,
@@ -233,7 +232,6 @@ const styles = StyleSheet.create({
  },
  confirmButtons: {
    flexDirection: "row",
-   //justifyContent: "space-around",
    width: "100%",
    padding: 20,
  },
@@ -247,12 +245,11 @@ const styles = StyleSheet.create({
    backgroundColor: "rgba(0,0,0,0.5)",
  },
  preview: {
-   width: "100%", // You may need to adjust this
-   height: "80%", // You may need to adjust this
+   width: "100%",
+   height: "80%",
    borderRadius: 4,
  },
  confirmButtonText: {
-   // Style for the text inside your confirm buttons
    color: "white",
    fontSize: 18,
    textAlign: "center",
