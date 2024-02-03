@@ -4,7 +4,7 @@ export const ImageTypeDefs=gql`
 
   scalar Upload
 
-  type Mutation{
-    sendImagesToEmail(images: [Upload!]!): String
-  }  
+  type Mutation {
+    receiveImage(imageData: String!)
+  }
 `;
