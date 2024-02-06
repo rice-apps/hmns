@@ -271,7 +271,6 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 15,
     marginTop: 18,
-    backgroundColor: "blue",
   },
   paginationContainer: {
     flexDirection: 'row',
