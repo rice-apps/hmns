@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Button, View, Text, Platform, StatusBar } from 'react-native';
-import SafeView from "../../components/SafeView";
 import CardPopup from '../../components/CardPopup/CardPopup'; 
-import {colors} from "../../constants/appColors";
 import EditScreenInfo from '../../components/EditScreenInfo';
 
 
@@ -29,16 +27,6 @@ export default function Glossary() {
   );
 }
 const styles = StyleSheet.create({
-	mainContainer: {
-		display: "flex",
-		alignItems: "center",
-		backgroundColor: "#FAF9F6",
-		paddingTop: Platform.OS == "android" ? StatusBar.currentHeight : 0,
-	},
-	scrollContainer: {
-		paddingHorizontal: "7.5%",
-		backgroundColor: "transparent",
-  },
   container: {
     alignItems: 'center',
     flex: 1,
@@ -53,13 +41,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-	header: {
-		alignItems: "center",
-		justifyContent: "center",
-		flex: 0.45,
-	},
-	camera: {
-		flex: 1, 
-	},
 });
   
