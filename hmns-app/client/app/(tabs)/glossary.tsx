@@ -1,7 +1,7 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { FlatList, Image, Text, TextInput, View } from "react-native";
+import {FlatList, Image, Text, TextInput, View} from "react-native";
 import SafeView from "../../components/SafeView";
-import { colors } from "../../constants/appColors";
+import {colors} from "../../constants/appColors";
 
 interface butterflyGlossaryType {
   name: string;
@@ -28,7 +28,7 @@ export default function Glossary() {
 		<SafeView>
 			<View className="w-full p-5">
 				{/* Top Bar */}
-				<View className="h-10 flex flex-row mb-5" style={{gap: 8}}>
+				<View className="h-10 flex flex-row mb-3" style={{gap: 8}}>
 					<Image source={require("../../assets/images/filter-icon.png")} className="w-10 h-10" />
 					<View
 						className="grow border rounded-2xl flex flex-row items-center px-3 bg-white"
@@ -38,15 +38,16 @@ export default function Glossary() {
 						<FontAwesome name="search" />
 					</View>
 				</View>
+				<View className="w-screen h-[1] bg-[#DEDDCB] -ml-5" />
 
 				{/* Grid */}
 				<FlatList
 					numColumns={2}
 					data={mockButterflies}
 					renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} />}
-					contentContainerStyle={{gap: 20}}
+					contentContainerStyle={{gap: 20, paddingTop: 10, paddingBottom: 5}}
 					columnWrapperStyle={{justifyContent: "space-around"}}
-					style={{height: "93%"}}
+					style={{height: "95%"}}
 				/>
 			</View>
 		</SafeView>
@@ -55,9 +56,14 @@ export default function Glossary() {
 
 const ButterflyCard = ({name, img}: {name: string; img: string}) => {
 	return (
-		<View className="flex items-center border rounded-2xl w-[45%] h-40 px-3 bg-white" style={{borderColor: colors.mossyOak}}>
+		<View
+			className="flex items-center border rounded-2xl w-[45%] h-40 px-3 bg-white"
+			style={{borderColor: colors.mossyOak}}
+		>
 			<Image className="h-2/3 w-[90%] rounded-2xl mt-3" source={require("../../assets/images/hmns-logo.png")} />
-			<Text className="text-center font-medium pt-1" style={{color: colors.fossilRim}}>{name}</Text>
+			<Text className="text-center font-medium pt-1" style={{color: colors.fossilRim}}>
+				{name}
+			</Text>
 		</View>
 	);
 };
