@@ -173,7 +173,6 @@ const ResourceItem = ({resource}: {resource: Resource}) => {
       <EditScreenInfo path="app/(tabs)/index.tsx" />
 
       <CardPopup visible={isModalVisible} onClose={toggleModal} />
-      {/* //test */}
     </View>
   );
 }*/
