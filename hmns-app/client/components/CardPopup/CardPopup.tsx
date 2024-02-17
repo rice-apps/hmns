@@ -31,7 +31,7 @@ const images = [
 
 const infoData = [
   { icon: require('./detectability_icon.png'), title: 'Detectability', value: 'Low' },
-  { icon: require('./origin_icon.png'), title: 'Origin', value: 'Neotropical' },
+  { icon: require('./origin_icon.png'), title: 'Origin', value: 'Neotropicalsadfadsfds' },
   { icon: require('./wingspan_icon.png'), title: 'Wingspan', value: '5-7cm' },
   { icon: require('./food_icon.png'), title: 'Food', value: 'Flowers' },
 ];
@@ -124,12 +124,14 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
 const InfoItem = ({ iconName, title, value }) => {
   return (
     <View style={styles.attributeItem}>
-    <Image source={iconName} style={styles.infoIcon} />
-    <Text style={styles.infoTitle} numberOfLines={1} ellipsizeMode="clip">{title}</Text>
-    <Text style={styles.infoValue} numberOfLines={1} ellipsizeMode="clip">{value}</Text>
-  </View>
+      <Image source={iconName} style={styles.infoIcon} />
+      <Text style={styles.infoTitle}>{title}</Text>
+      <Text style={styles.infoValue}>{value}</Text>
+    </View>
   );
 };
+
+
 
 
 const styles = StyleSheet.create({
@@ -235,7 +237,9 @@ const styles = StyleSheet.create({
     padding: 2,
     marginHorizontal: 4,
     borderRadius: 16,
-    borderColor: "black"
+    borderColor: "black",
+    flexGrow: 1, 
+    margin: 4,
   },
   infoIcon: {
     width: 24,
@@ -252,11 +256,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '500',
     color: '#333',
-    marginTop: 4
-    
+    marginTop: 4,
   },
   attributesContainer: {
-    height: 80, 
+    height: 90,
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%', 
@@ -264,7 +267,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: '#D6D5B9', 
     borderWidth: 2,   
-    padding: 1
+    padding: 1,
   },
   carouselImage: {
     height: 200,
