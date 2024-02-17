@@ -17,8 +17,6 @@ export default function Glossary() {
 	    <Button title="Show Popup" onPress={toggleModal} />
 	    <View
 	      style={styles.separator}
-	    
-
 	    />
 	    <EditScreenInfo path="app/(tabs)/index.tsx" />
   
