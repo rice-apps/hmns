@@ -31,7 +31,7 @@ const images = [
 
 const infoData = [
   { icon: require('./detectability_icon.png'), title: 'Detectability', value: 'Low' },
-  { icon: require('./origin_icon.png'), title: 'Origin', value: 'Neotropicalsadfadsfds' },
+  { icon: require('./origin_icon.png'), title: 'Origin', value: 'Neotropicalsadfadsasdfadsfsadfdsfds' },
   { icon: require('./wingspan_icon.png'), title: 'Wingspan', value: '5-7cm' },
   { icon: require('./food_icon.png'), title: 'Food', value: 'Flowers' },
 ];
@@ -121,11 +121,22 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
 };
   
 
+// const InfoItem = ({ iconName, title, value }) => {
+//   return (
+//     <View style={styles.attributeItem}>
+//       <Image source={iconName} style={styles.infoIcon} />
+//       <Text style={styles.infoTitle}>{title}</Text>
+//       <Text style={styles.infoValue}>{value}</Text>
+//     </View>
+//   );
+// };
 const InfoItem = ({ iconName, title, value }) => {
   return (
     <View style={styles.attributeItem}>
-      <Image source={iconName} style={styles.infoIcon} />
-      <Text style={styles.infoTitle}>{title}</Text>
+      <View style={styles.iconTitleContainer}>
+        <Image source={iconName} style={styles.infoIcon} />
+        <Text style={styles.infoTitle}>{title}</Text>
+      </View>
       <Text style={styles.infoValue}>{value}</Text>
     </View>
   );
@@ -248,6 +259,7 @@ const styles = StyleSheet.create({
   
   },
   infoTitle: {
+    backgroundColor: "black", //need to fix this 
     fontSize: 10,
     color: '#7F7F7F',
     alignContent:"center"
@@ -259,7 +271,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   attributesContainer: {
-    height: 90,
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%', 
@@ -267,7 +278,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: '#D6D5B9', 
     borderWidth: 2,   
-    padding: 1,
+    padding: 1
   },
   carouselImage: {
     height: 200,
@@ -290,6 +301,12 @@ const styles = StyleSheet.create({
   },
   activeDotStyle: {
     backgroundColor: '#5D5544',
+  },
+
+  iconTitleContainer: {
+    flexDirection: 'column', // Layout icon and title horizontally
+    alignItems: 'center', // Align items in the middle vertically
+    marginBottom: 4, // Space between icon-title pair and value
   },
 
 });
