@@ -31,7 +31,7 @@ export default function Glossary() {
 				<View className="h-10 flex flex-row mb-5" style={{gap: 8}}>
 					<Image source={require("../../assets/images/filter-icon.png")} className="w-10 h-10" />
 					<View
-						className="grow border rounded-2xl flex flex-row items-center px-3"
+						className="grow border rounded-2xl flex flex-row items-center px-3 bg-white"
 						style={{borderColor: colors.mossyOak}}
 					>
 						<TextInput className="grow" />
@@ -55,9 +55,9 @@ export default function Glossary() {
 
 const ButterflyCard = ({name, img}: {name: string; img: string}) => {
 	return (
-		<View className="flex items-center border rounded-2xl w-[45%] h-32 px-3" style={{borderColor: colors.mossyOak}}>
-			<Image source={require("../../assets/images/hmns-logo.png")} />
-			<Text className="text-center font-medium" style={{color: colors.fossilRim}}>{name}</Text>
+		<View className="flex items-center border rounded-2xl w-[45%] h-40 px-3 bg-white" style={{borderColor: colors.mossyOak}}>
+			<Image className="h-2/3 w-[90%] rounded-2xl mt-3" source={require("../../assets/images/hmns-logo.png")} />
+			<Text className="text-center font-medium pt-1" style={{color: colors.fossilRim}}>{name}</Text>
 		</View>
 	);
 };
