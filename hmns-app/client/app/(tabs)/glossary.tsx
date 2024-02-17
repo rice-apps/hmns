@@ -2,6 +2,10 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {FlatList, Image, Text, TextInput, View} from "react-native";
 import SafeView from "../../components/SafeView";
 import {colors} from "../../constants/appColors";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import {FlatList, Image, Text, TextInput, View} from "react-native";
+import SafeView from "../../components/SafeView";
+import {colors} from "../../constants/appColors";
 
 interface butterflyGlossaryType {
   name: string;
