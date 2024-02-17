@@ -26,7 +26,7 @@ const mockButterflies: butterflyGlossaryType[] = [
 export default function Glossary() {
 	return (
 		<SafeView>
-			<View className="w-full p-5">
+			<View className="w-full p-5 pt-2">
 				{/* Top Bar */}
 				<View className="h-10 flex flex-row mb-3" style={{gap: 8}}>
 					<Image source={require("../../assets/images/filter-icon.png")} className="w-10 h-10" />
