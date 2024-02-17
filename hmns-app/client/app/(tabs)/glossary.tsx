@@ -12,6 +12,15 @@ const mockButterflies: butterflyGlossaryType[] = [
 	{name: "White Peacock", img: "../../assets/images/hmns-logo.png"},
 	{name: "Great Southern White", img: "../../assets/images/hmns-logo.png"},
 	{name: "Mexican Bluewing", img: "../../assets/images/hmns-logo.png"},
+	{name: "White Peacock", img: "../../assets/images/hmns-logo.png"},
+	{name: "Great Southern White", img: "../../assets/images/hmns-logo.png"},
+	{name: "Mexican Bluewing", img: "../../assets/images/hmns-logo.png"},
+	{name: "White Peacock", img: "../../assets/images/hmns-logo.png"},
+	{name: "Great Southern White", img: "../../assets/images/hmns-logo.png"},
+	{name: "Mexican Bluewing", img: "../../assets/images/hmns-logo.png"},
+	{name: "White Peacock", img: "../../assets/images/hmns-logo.png"},
+	{name: "Great Southern White", img: "../../assets/images/hmns-logo.png"},
+	{name: "Mexican Bluewing", img: "../../assets/images/hmns-logo.png"},
 ];
 
 export default function Glossary() {
@@ -37,6 +46,7 @@ export default function Glossary() {
 					renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} />}
 					contentContainerStyle={{gap: 20}}
 					columnWrapperStyle={{justifyContent: "space-around"}}
+					style={{height: "93%"}}
 				/>
 			</View>
 		</SafeView>
