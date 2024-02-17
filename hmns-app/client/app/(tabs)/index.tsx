@@ -1,7 +1,5 @@
 import {Dimensions, Image, Platform, Pressable, SafeAreaView, ScrollView, StatusBar, StyleSheet, Button} from "react-native";
-import EditScreenInfo from '../../components/EditScreenInfo';
 import { View, Text } from '../../components/Themed';
-import CardPopup from '../../components/CardPopup/CardPopup'; 
 import React, { useState } from 'react';
 import {colors} from "../../constants/appColors";
 
@@ -44,11 +42,7 @@ export default function TabOneScreen() {
 	const [challenges] = useState<Challenge[]>(mockChallenges);
 	const [resources] = useState<Resource[]>(mockResources);
 	const windowHeight = Dimensions.get("window").height;
-  const [isModalVisible, setModalVisible] = useState(false);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
     
 	return (
 		<SafeAreaView style={styles.mainContainer}>
@@ -161,21 +155,21 @@ const ResourceItem = ({resource}: {resource: Resource}) => {
 	);
 };
 
-  /*return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <Button title="Show Popup" onPress={toggleModal} />
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+  // return (
+  //   <View style={styles.container}>
+  //     <Text style={styles.title}>Tab One</Text>
+  //     <Button title="Show Popup" onPress={toggleModal} />
+  //     <View
+  //       style={styles.separator}
+  //       lightColor="#eee"
+  //       darkColor="rgba(255,255,255,0.1)"
+  //     />
+  //     <EditScreenInfo path="app/(tabs)/index.tsx" />
 
-      <CardPopup visible={isModalVisible} onClose={toggleModal} />
-    </View>
-  );
-}*/
+  //     <CardPopup visible={isModalVisible} onClose={toggleModal} />
+  //   </View>
+  // );
+
   
 const styles = StyleSheet.create({
 	mainContainer: {
