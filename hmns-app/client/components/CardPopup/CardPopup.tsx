@@ -124,10 +124,10 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
 const InfoItem = ({ iconName, title, value }) => {
   return (
     <View style={styles.attributeItem}>
-      <Image source={iconName} style={styles.infoIcon} />
-        <Text style={styles.infoTitle}>{title}</Text>
-        <Text style={styles.infoValue}>{value}</Text>
-    </View>
+    <Image source={iconName} style={styles.infoIcon} />
+    <Text style={styles.infoTitle} numberOfLines={1} ellipsizeMode="tail">{title}</Text>
+    <Text style={styles.infoValue} numberOfLines={1} ellipsizeMode="tail">{value}</Text>
+  </View>
   );
 };
 
