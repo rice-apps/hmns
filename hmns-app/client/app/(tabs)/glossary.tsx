@@ -1,5 +1,7 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { FlatList, Image, Text, TextInput, View } from "react-native";
+import { useState } from "react";
+import { FlatList, Image, Pressable, Text, TextInput, View } from "react-native";
+import { FilterSlideUp } from "../../components/FilterSlideUp";
 import SafeView from "../../components/SafeView";
 import { colors } from "../../constants/appColors";
 
@@ -24,12 +26,17 @@ const mockButterflies: butterflyGlossaryType[] = [
 ];
 
 export default function Glossary() {
+	const [filterVisible, setFilterVisible] = useState<boolean>(false);
 	return (
 		<SafeView>
+			{/* Viewable Page */}
 			<View className="w-full p-5 pt-2">
 				{/* Top Bar */}
 				<View className="h-10 flex flex-row mb-3" style={{gap: 8}}>
-					<Image source={require("../../assets/images/filter-icon.png")} className="w-10 h-10" />
+					<Pressable onPress={()=>setFilterVisible(true)}>
+						<Image source={require("../../assets/images/filter-icon.png")} className="w-10 h-10"/>
+					</Pressable>
+					
 					<View
 						className="grow border rounded-2xl flex flex-row items-center px-3 bg-white"
 						style={{borderColor: colors.mossyOak}}
@@ -50,6 +57,13 @@ export default function Glossary() {
 					style={{height: "95%"}}
 				/>
 			</View>
+
+			{/* Filter component */}
+			<FilterSlideUp
+				filterVisible={filterVisible}
+				onFilter={(size, color, detect) => /* do whatever on filter here */ 0}
+				onClose={() => setFilterVisible(false)}
+			/>
 		</SafeView>
 	);
 }
