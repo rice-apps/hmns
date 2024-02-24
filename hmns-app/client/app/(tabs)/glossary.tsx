@@ -6,8 +6,14 @@ import SafeView from "../../components/SafeView";
 import { colors } from "../../constants/appColors";
 
 interface butterflyGlossaryType {
-  name: string;
-  img: string;
+  name: string,
+  genus: string,
+  species: string,
+  detectability: string,
+  wingspanSize: string,
+	color: string,
+  img: string,
+
 }
 
 const mockButterflies: butterflyGlossaryType[] = [
