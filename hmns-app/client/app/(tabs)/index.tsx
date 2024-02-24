@@ -4,6 +4,7 @@ import { View, Text } from '../../components/Themed';
 import CardPopup from '../../components/CardPopup/CardPopup'; 
 import React, { useState } from 'react';
 import {colors} from "../../constants/appColors";
+import { FontAwesome } from "@expo/vector-icons";
 
 interface Challenge {
   title: string;
@@ -41,13 +42,23 @@ const mockResources: Resource[] = [
 ];
 
 export default function TabOneScreen() {
-	const [challenges] = useState<Challenge[]>(mockChallenges);
+	const [challenges, setChallenges] = useState<Challenge[]>(mockChallenges);
 	const [resources] = useState<Resource[]>(mockResources);
 	const windowHeight = Dimensions.get("window").height;
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+  };
+
+  const toggleChallengeStatus = (title) => {
+    const updatedChallenges = challenges.map(challenge => {
+      if (challenge.title === title) {
+        return {...challenge, status: !challenge.status};
+      }
+      return challenge;
+    });
+    setChallenges(updatedChallenges);
   };
     
 	return (
@@ -104,7 +115,7 @@ export default function TabOneScreen() {
 					</View>
 
 					{challenges.map(challenge => (
-						<ChallengeItem key={challenge.title} challenge={challenge} />
+						<ChallengeItem key={challenge.title} challenge={challenge} toggleChallengeStatus={toggleChallengeStatus} />
 					))}
 				</View>
 
@@ -127,26 +138,33 @@ export default function TabOneScreen() {
 	);
 }
 
-const ChallengeItem = ({challenge}: {challenge: Challenge}) => {
+const ChallengeItem = ({challenge, toggleChallengeStatus}) => {
 	return (
-		<View className="flex flex-row rounded-2xl p-4 border items-center justify-between bg-transparent">
-			<View
-				style={{
-					backgroundColor: "transparent",
-					borderRadius: 9999,
-					width: 30,
-					height: 30,
-					borderColor: "black",
-					borderWidth: 2,
-				}}
-			/>
-			<View className="bg-transparent ml-2">
-				<Text className="text-black flex-wrap font-bold text-base">{challenge.title}</Text>
-				<Text className="text-black flex-wrap">{challenge.content}</Text>
-			</View>
+	  <Pressable 
+		onPress={() => toggleChallengeStatus(challenge.title)} // Assuming toggleChallengeStatus is a function passed from the parent component to update the challenge's status
+		className="flex flex-row rounded-2xl p-4 border items-center justify-between bg-transparent">
+		<View
+		  style={{
+			backgroundColor: challenge.status ? "transparent" : "transparent",
+			borderRadius: 9999,
+			width: 30,
+			height: 30,
+			borderColor: challenge.status ? "#0EAD00" : "black",
+			borderWidth: 2,
+			justifyContent: 'center',
+			alignItems: 'center',
+		  }}
+		>
+		  {challenge.status && <FontAwesome name="check" size={20} color="#0EAD00" solid />}
 		</View>
+		<View className="bg-transparent ml-2">
+		  <Text className="text-black flex-wrap font-bold text-base">{challenge.title}</Text>
+		  <Text className="text-black flex-wrap">{challenge.content}</Text>
+		</View>
+	  </Pressable>
 	);
-};
+  };
+  
 const ResourceItem = ({resource}: {resource: Resource}) => {
 	return (
 		<View className="flex flex-row rounded-2xl p-4 border items-start justify-between bg-transparent">
