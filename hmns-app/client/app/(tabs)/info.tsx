@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
     paddingHorizontal: 10, // Use paddingHorizontal to apply left and right padding
-    alignItems: 'flex-start', // Align children to the start of the cross-axis
+    //alignItems: 'flex-start', // Align children to the start of the cross-axis
   },
   headerImage: {
     width: '100%',
@@ -63,7 +62,7 @@ const styles = StyleSheet.create({
     color: '#5D5544',
   },
   toggleButton: {
-    marginLeft: 10, // Space between the question and the button
+    marginRight: 10, // Space between the question and the button
   },
 });
 
@@ -94,25 +93,36 @@ const InfoPage = () => {
  // Example FAQ data
  const faqs = [
   {
-    question: "FAQ Question 1",
-    answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    question: "Can I take my stroller in to the butterfly center?",
+    answer: "Unfortunately strollers and wagons are not allowed in the butterfly center, as they pose an escape risk for butterflies. There is a designated stroller parking area at the entrance to the butterfly center.",
   },
   {
-    question: "FAQ Question 2",
-    answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    question: "Is the butterfly center accessible?",
+    answer: "Yes, the butterfly center is fully accessible.",
   },
   {
-    question: "FAQ Question 3",
-    answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    question: "Can I touch the butterflies?",
+    answer: "We kindly ask that guests refrain from touching the butterflies, plants, and other wildlife in the butterfly center.",
   },
   {
-    question: "FAQ Question 4",
-    answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+    question: "Can I take pictures in the butterfly center?",
+    answer: "Photography and videography are allowed inside the butterfly center. However, tripods and selfie sticks are prohibited.",
+  },
+  {
+    question: "Can I go in to the butterfly center at any time?",
+    answer: "Due to capacity and popularity, we ask that all guests adhere to their ticketed times for entry. However, once you are inside the rainforest, please feel welcome to explore as long as you would like.",
+  },
+  {
+    question: "Can I release a butterfly, or adopt one to take home with me?",
+    answer: "Because the butterfly center is a USDA-APHIS facility, federal regulation prohibit bringing in or removing any plant or animal material. However, with our Butterfly Flight School, you can release one of our newly-emerged butterflies for its maiden voyage in the rainforest conservatory! Available for on-site purchase only.",
   },
 ];
 
 return (
-  <View style={styles.container}>
+  <ScrollView 
+        style={styles.container}
+        contentContainerStyle={{ paddingBottom: 70 }} // Adjust the paddingBottom as needed
+      >
     <Image
       source={require('./image8.png')}
       style={styles.headerImage}
@@ -128,7 +138,7 @@ return (
           <FaqItem key={index} question={faq.question} answer={faq.answer} />
         ))}
       </View>
-  </View>
+  </ScrollView>
 );
 };
 
