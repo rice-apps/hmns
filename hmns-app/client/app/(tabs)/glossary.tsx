@@ -10,26 +10,27 @@ interface butterflyGlossaryType {
   genus: string,
   species: string,
   detectability: string,
-  wingspanSize: string,
+  wingspanSize: number,
 	color: string,
   img: string,
 
 }
 
 const mockButterflies: butterflyGlossaryType[] = [
-	{name: "White Peacock", img: "../../assets/images/hmns-logo.png"},
-	{name: "Great Southern White", img: "../../assets/images/hmns-logo.png"},
-	{name: "Mexican Bluewing", img: "../../assets/images/hmns-logo.png"},
-	{name: "White Peacock", img: "../../assets/images/hmns-logo.png"},
-	{name: "Great Southern White", img: "../../assets/images/hmns-logo.png"},
-	{name: "Mexican Bluewing", img: "../../assets/images/hmns-logo.png"},
-	{name: "White Peacock", img: "../../assets/images/hmns-logo.png"},
-	{name: "Great Southern White", img: "../../assets/images/hmns-logo.png"},
-	{name: "Mexican Bluewing", img: "../../assets/images/hmns-logo.png"},
-	{name: "White Peacock", img: "../../assets/images/hmns-logo.png"},
-	{name: "Great Southern White", img: "../../assets/images/hmns-logo.png"},
-	{name: "Mexican Bluewing", img: "../../assets/images/hmns-logo.png"},
+	{name: "Green 2 Low", genus: "something", species: "something", detectability: "Low", wingspanSize: 2, color: "Green", img: "../../assets/images/hmns-logo.png"},
+	{name: "White 3 Medium", genus: "something", species: "something", detectability: "Medium", wingspanSize: 3, color: "White", img: "../../assets/images/hmns-logo.png"},
+	{name: "Yellow 4 Medium", genus: "something", species: "something", detectability: "Medium", wingspanSize: 4, color: "Yellow", img: "../../assets/images/hmns-logo.png"},
+	{name: "Green 5 Medium", genus: "something", species: "something", detectability: "Medium", wingspanSize: 5, color: "Green", img: "../../assets/images/hmns-logo.png"},
+	{name: "Green 6 Medium", genus: "something", species: "something", detectability: "Medium", wingspanSize: 6, color: "Green", img: "../../assets/images/hmns-logo.png"},
+	{name: "Grey 8 High", genus: "something", species: "something", detectability: "High", wingspanSize: 8, color: "Grey", img: "../../assets/images/hmns-logo.png"},
+	{name: "Blue 3 High", genus: "something", species: "something", detectability: "High", wingspanSize: 3, color: "Blue", img: "../../assets/images/hmns-logo.png"},
+	{name: "Pink 4 High", genus: "something", species: "something", detectability: "High", wingspanSize: 4, color: "Pink", img: "../../assets/images/hmns-logo.png"},
+	{name: "Black 5 High", genus: "something", species: "something", detectability: "High", wingspanSize: 5, color: "Black", img: "../../assets/images/hmns-logo.png"},
+	{name: "Brown 7 Low", genus: "something", species: "something", detectability: "Low", wingspanSize: 7, color: "Brown", img: "../../assets/images/hmns-logo.png"},
+	{name: "Brown 7 Low", genus: "something", species: "something", detectability: "Low", wingspanSize: 7, color: "Brown", img: "../../assets/images/hmns-logo.png"},
+	{name: "Green 1 Low", genus: "something", species: "something", detectability: "Low", wingspanSize: 1, color: "Green", img: "../../assets/images/hmns-logo.png"}
 ];
+
 
 export default function Glossary() {
 	const [filterVisible, setFilterVisible] = useState<boolean>(false);
