@@ -1,11 +1,11 @@
 import { useThemeColor } from "./Themed";
 import { Image, Modal, StyleSheet, View, Text, Platform, Pressable, DimensionValue, FlatList } from "react-native";
-import { EvilIcons } from '@expo/vector-icons';
+import { EvilIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
-type ButterflyWingspan = 'small' | 'medium' | 'large';
-type ButterflyColor = 'white' | 'yellow' | 'grey' | 'green' | 'blue' | 'black' | 'pink' | 'brown';
-type ButterflyDetectability = 'low' | 'medium' | 'high';
+type ButterflyWingspan = "small" | "medium" | "large";
+type ButterflyColor = "white" | "yellow" | "grey" | "green" | "blue" | "black" | "pink" | "brown";
+type ButterflyDetectability = "low" | "medium" | "high";
 
 type ButterflyWingspanDisplay = {
     displaySize: DimensionValue,
@@ -26,79 +26,79 @@ type ButterflyDetectabilityDisplay = {
     value: ButterflyDetectability,
 }
 
-const fontFamily = (Platform.OS === 'ios' ? 'Helvetica Neue' : 'sans-serif');
-const nonModalBackgroundColor = '#53535380';
+const fontFamily = (Platform.OS === "ios" ? "Helvetica Neue" : "sans-serif");
+const nonModalBackgroundColor = "#53535380";
 const filterTopRadius = 15;
 const filterCategoryFontSize = 18;
 const filterTitleFontSize = filterCategoryFontSize * 1.2;
 const filterCategoryHeaderFontSize = 14;
-const filterCategoryLeftMargin = '7%';
-const filterButtonColor = '#9D9B64';
+const filterCategoryLeftMargin = "7%";
+const filterButtonColor = "#9D9B64";
 const filterButtonFontSize = filterCategoryFontSize;
 const filterColorDiameter = 15;
 const filterDetectabilityButtonHeight = 30;
-const filterDetectabilityButtonWidth = '25%';
+const filterDetectabilityButtonWidth = "25%";
 
 const wingspans: ButterflyWingspanDisplay[] = [{
 	displaySize: 25,
-	value: 'small',
-	sizeTitle: 'Small',
-	sizeSubtitle: '2-4cm',
+	value: "small",
+	sizeTitle: "Small",
+	sizeSubtitle: "2-4cm",
 }, {
 	displaySize: 40,
-	value: 'medium',
-	sizeTitle: 'Medium',
-	sizeSubtitle: '4-6cm',
+	value: "medium",
+	sizeTitle: "Medium",
+	sizeSubtitle: "4-6cm",
 }, {
 	displaySize: 55,
-	value: 'large',
-	sizeTitle: 'Large',
-	sizeSubtitle: '6-8cm',
+	value: "large",
+	sizeTitle: "Large",
+	sizeSubtitle: "6-8cm",
 }];
 const colors: ButterflyColorDisplay[] = [{
-	displayColor: '#FFFFFF',
-	colorName: 'White',
-	value: 'white',
-	borderColor: 'black',
+	displayColor: "#FFFFFF",
+	colorName: "White",
+	value: "white",
+	borderColor: "black",
 }, {
-	displayColor: '#D9AE4B',
-	colorName: 'Yellow',
-	value: 'yellow',
+	displayColor: "#D9AE4B",
+	colorName: "Yellow",
+	value: "yellow",
 }, {
-	displayColor: '#6A6763',
-	colorName: 'Grey',
-	value: 'grey'
+	displayColor: "#6A6763",
+	colorName: "Grey",
+	value: "grey"
 }, {
-	displayColor: '#9D9B64',
-	colorName: 'Green',
-	value: 'green'
+	displayColor: "#9D9B64",
+	colorName: "Green",
+	value: "green"
 }, {
-	displayColor: '#BCD3E0',
-	colorName: 'Blue',
-	value: 'blue'
+	displayColor: "#BCD3E0",
+	colorName: "Blue",
+	value: "blue"
 }, {
-	displayColor: '#000000',
-	colorName: 'Black',
-	value: 'black',
-	borderColor: 'white',
+	displayColor: "#000000",
+	colorName: "Black",
+	value: "black",
+	borderColor: "white",
 }, {
-	displayColor: '#C07474',
-	colorName: 'Pink',
-	value: 'pink'
+	displayColor: "#C07474",
+	colorName: "Pink",
+	value: "pink"
 }, {
-	displayColor: '#C57E2B',
-	colorName: 'Brown',
-	value: 'brown'
+	displayColor: "#C57E2B",
+	colorName: "Brown",
+	value: "brown"
 }];
 const detectabilities: ButterflyDetectabilityDisplay[] = [{
-	detectabilityName: 'Low',
-	value: 'low',
+	detectabilityName: "Low",
+	value: "low",
 }, {
-	detectabilityName: 'Medium',
-	value: 'medium',
+	detectabilityName: "Medium",
+	value: "medium",
 }, {
-	detectabilityName: 'High',
-	value: 'high',
+	detectabilityName: "High",
+	value: "high",
 
 }];
 
@@ -119,11 +119,10 @@ export const FilterSlideUp = (props: FilterProps) => {
 	const [currSize, setSize] = useState<ButterflyWingspan | null>(props.initialSize ?? null);
 	const [currColor, setColor] = useState<ButterflyColor | null>(props.initialColor ?? null);
 	const [currDetectability, setDetectability] = useState<ButterflyDetectability | null>(props.initialDetectability ?? null);
-	const filterBackground = useThemeColor({ light: props.lightColorBackground, dark: props.darkColorBackground }, 'background');
-	const filterForeground = useThemeColor({ light: props.lightColorForeground, dark: props.darkColorForeground }, 'text');
+	const filterBackground = useThemeColor({ light: props.lightColorBackground, dark: props.darkColorBackground }, "background");
+	const filterForeground = useThemeColor({ light: props.lightColorForeground, dark: props.darkColorForeground }, "text");
 	const backgroundStyle = { backgroundColor: filterBackground };
 	const foregroundStyle = { color: filterForeground };
-	const foregroundBgStyle = { backgroundColor: filterForeground };
 
 	return (
 		<Modal animationType="slide"
@@ -148,9 +147,9 @@ export const FilterSlideUp = (props: FilterProps) => {
 					<View style={styles.sizes}>
 						{wingspans.map(size =>
 							<Pressable key={size.value}
-								onPress={() => setSize(size.value)}
+								onPress={() => setSize(currSize===size.value?null:size.value)}
 								style={[styles.sizeContainer, (currSize === size.value && styles.selectedBorder)]}>
-								<Image source={require('../assets/images/butterfly_wingspan.png')}
+								<Image source={require("../assets/images/butterfly_wingspan.png")}
 									style={[{
 										width: size.displaySize,
 										height: size.displaySize
@@ -168,7 +167,7 @@ export const FilterSlideUp = (props: FilterProps) => {
 							renderItem={color => (
 								<Pressable key={color.item.value}
 									style={[styles.colorRow, (currColor === color.item.value && styles.selectedBorder)]}
-									onPress={() => setColor(color.item.value)}>
+									onPress={() => setColor(currColor===color.item.value?null:color.item.value)}>
 									<View style={[
 										styles.colorCircle,
 										{ backgroundColor: color.item.displayColor },
@@ -185,7 +184,7 @@ export const FilterSlideUp = (props: FilterProps) => {
 					<View style={styles.detectability}>
 						{detectabilities.map(detect => (
 							<Pressable key={detect.value}
-								onPress={() => setDetectability(detect.value)}
+								onPress={() => setDetectability(currDetectability===detect.value?null:detect.value)}
 								style={[styles.detectabilityButton, (currDetectability === detect.value && styles.selectedFill)]}>
 								<Text style={[styles.detectabilityText, foregroundStyle]}>{detect.detectabilityName}</Text>
 							</Pressable>
@@ -201,22 +200,22 @@ export const FilterSlideUp = (props: FilterProps) => {
 			</Pressable>
 		</Modal>
 	);
-}
+};
 
 const styles = StyleSheet.create({
 	slideUp: {
 		flex: 1,
-		flexDirection: 'column',
-		justifyContent: 'flex-end',
+		flexDirection: "column",
+		justifyContent: "flex-end",
 		backgroundColor: nonModalBackgroundColor,
 	},
 	topRow: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
+		flexDirection: "row",
+		justifyContent: "space-between",
 		marginLeft: filterCategoryLeftMargin,
 	},
 	filterContainer: {
-		flexDirection: 'column',
+		flexDirection: "column",
 		paddingTop: 10,
 		paddingBottom: 10,
 		borderTopLeftRadius: filterTopRadius,
@@ -224,7 +223,7 @@ const styles = StyleSheet.create({
 		gap: 15,
 	},
 	closeButton: {
-		alignSelf: 'flex-end',
+		alignSelf: "flex-end",
 		marginTop: 5,
 		marginRight: 5,
 	},
@@ -233,22 +232,22 @@ const styles = StyleSheet.create({
 		fontFamily: fontFamily,
 	},
 	sizes: {
-		flexDirection: 'row',
-		alignItems: 'flex-end',
-		alignSelf: 'center',
+		flexDirection: "row",
+		alignItems: "flex-end",
+		alignSelf: "center",
 		gap: 50,
 		height: 125,
 	},
 	sizeContainer: {
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-		alignItems: 'center',
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
 		padding: 10,
 	},
 	sizeTitle: {
 		fontFamily: fontFamily,
-		fontWeight: 'bold',
+		fontWeight: "bold",
 		fontSize: filterCategoryHeaderFontSize,
 	},
 	sizeSubtitle: {
@@ -260,30 +259,30 @@ const styles = StyleSheet.create({
 		fontFamily: fontFamily,
 	},
 	filterButton: {
-		width: '30%',
+		width: "30%",
 		borderRadius: 20,
 		paddingVertical: 10,
 		marginBottom: 25,
 		backgroundColor: filterButtonColor,
-		alignSelf: 'center',
+		alignSelf: "center",
 	},
 	filterButtonLabel: {
 		fontFamily: fontFamily,
 		fontSize: filterButtonFontSize,
-		textAlign: 'center',
+		textAlign: "center",
 	},
 	colors: {
 		marginLeft: filterCategoryLeftMargin,
-		flexDirection: 'row',
-		alignItems: 'flex-start',
+		flexDirection: "row",
+		alignItems: "flex-start",
 		gap: 30,
 	},
 	colorRow: {
-		display: 'flex',
-		flexDirection: 'row',
-		alignItems: 'center',
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
 		gap: filterColorDiameter / 2,
-		width: '24%',
+		width: "24%",
 		padding: 10,
 	},
 	colorCircle: {
@@ -293,17 +292,17 @@ const styles = StyleSheet.create({
 	},
 	colorTitle: {
 		fontFamily: fontFamily,
-		fontWeight: 'bold',
+		fontWeight: "bold",
 		fontSize: filterCategoryHeaderFontSize,
 	},
 	detectability: {
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'space-evenly',
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-evenly",
 	},
 	detectabilityText: {
 		fontFamily: fontFamily,
-		fontWeight: 'bold',
+		fontWeight: "bold",
 		fontSize: filterCategoryHeaderFontSize,
 	},
 	detectabilityButton: {
@@ -312,9 +311,9 @@ const styles = StyleSheet.create({
 		height: filterDetectabilityButtonHeight,
 		width: filterDetectabilityButtonWidth,
 		borderRadius: filterDetectabilityButtonHeight / 2,
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
 	},
 	selectedBorder: {
 		borderWidth: 1,
