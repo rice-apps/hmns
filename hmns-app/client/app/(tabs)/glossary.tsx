@@ -10,30 +10,41 @@ interface butterflyGlossaryType {
   genus: string,
   species: string,
   detectability: string,
-  wingspanSize: number,
+  wingspanSize: string,
 	color: string,
   img: string,
 
 }
 
-const mockButterflies: butterflyGlossaryType[] = [
-	{name: "Green 2 Low", genus: "something", species: "something", detectability: "Low", wingspanSize: 2, color: "Green", img: "../../assets/images/hmns-logo.png"},
-	{name: "White 3 Medium", genus: "something", species: "something", detectability: "Medium", wingspanSize: 3, color: "White", img: "../../assets/images/hmns-logo.png"},
-	{name: "Yellow 4 Medium", genus: "something", species: "something", detectability: "Medium", wingspanSize: 4, color: "Yellow", img: "../../assets/images/hmns-logo.png"},
-	{name: "Green 5 Medium", genus: "something", species: "something", detectability: "Medium", wingspanSize: 5, color: "Green", img: "../../assets/images/hmns-logo.png"},
-	{name: "Green 6 Medium", genus: "something", species: "something", detectability: "Medium", wingspanSize: 6, color: "Green", img: "../../assets/images/hmns-logo.png"},
-	{name: "Grey 8 High", genus: "something", species: "something", detectability: "High", wingspanSize: 8, color: "Grey", img: "../../assets/images/hmns-logo.png"},
-	{name: "Blue 3 High", genus: "something", species: "something", detectability: "High", wingspanSize: 3, color: "Blue", img: "../../assets/images/hmns-logo.png"},
-	{name: "Pink 4 High", genus: "something", species: "something", detectability: "High", wingspanSize: 4, color: "Pink", img: "../../assets/images/hmns-logo.png"},
-	{name: "Black 5 High", genus: "something", species: "something", detectability: "High", wingspanSize: 5, color: "Black", img: "../../assets/images/hmns-logo.png"},
-	{name: "Brown 7 Low", genus: "something", species: "something", detectability: "Low", wingspanSize: 7, color: "Brown", img: "../../assets/images/hmns-logo.png"},
-	{name: "Brown 7 Low", genus: "something", species: "something", detectability: "Low", wingspanSize: 7, color: "Brown", img: "../../assets/images/hmns-logo.png"},
-	{name: "Green 1 Low", genus: "something", species: "something", detectability: "Low", wingspanSize: 1, color: "Green", img: "../../assets/images/hmns-logo.png"}
+const mockButterflyData: butterflyGlossaryType[] = [
+	{name: "Green 2 Low", genus: "something", species: "something", detectability: "low", wingspanSize: "small", color: "green", img: "../../assets/images/hmns-logo.png"},
+	{name: "White 3 Medium", genus: "something", species: "something", detectability: "medium", wingspanSize: "small", color: "white", img: "../../assets/images/hmns-logo.png"},
+	{name: "Yellow 4 Medium", genus: "something", species: "something", detectability: "medium", wingspanSize: "small", color: "yellow", img: "../../assets/images/hmns-logo.png"},
+	{name: "Green 5 Medium", genus: "something", species: "something", detectability: "medium", wingspanSize: "medium", color: "green", img: "../../assets/images/hmns-logo.png"},
+	{name: "Green 6 Medium", genus: "something", species: "something", detectability: "medium", wingspanSize: "large", color: "green", img: "../../assets/images/hmns-logo.png"},
+	{name: "Grey 8 High", genus: "something", species: "something", detectability: "high", wingspanSize: "large", color: "grey", img: "../../assets/images/hmns-logo.png"},
+	{name: "Blue 3 High", genus: "something", species: "something", detectability: "high", wingspanSize: "small", color: "blue", img: "../../assets/images/hmns-logo.png"},
+	{name: "Pink 4 High", genus: "something", species: "something", detectability: "high", wingspanSize: "small", color: "pink", img: "../../assets/images/hmns-logo.png"},
+	{name: "Black 5 High", genus: "something", species: "something", detectability: "high", wingspanSize: "medium", color: "black", img: "../../assets/images/hmns-logo.png"},
+	{name: "Brown 7 Low", genus: "something", species: "something", detectability: "low", wingspanSize: "large", color: "brown", img: "../../assets/images/hmns-logo.png"},
+	{name: "Brown 7 Low", genus: "something", species: "something", detectability: "low", wingspanSize: "large", color: "brown", img: "../../assets/images/hmns-logo.png"},
+	{name: "Green 1 Low", genus: "something", species: "something", detectability: "low", wingspanSize: "small", color: "green", img: "../../assets/images/hmns-logo.png"}
 ];
 
 
 export default function Glossary() {
 	const [filterVisible, setFilterVisible] = useState<boolean>(false);
+	const [butterflyData, setButterflyData]  =useState(mockButterflyData);
+
+	const handleButterflyFilter = (filterSize, filterColor, filterDetectability) => {
+		setButterflyData(mockButterflyData.filter(({wingspanSize, color, detectability})=> {
+			if(filterSize && wingspanSize!==filterSize)return false;
+			if(filterColor && color!==filterColor)return false;
+			if(filterDetectability && detectability!==filterDetectability)return false;
+			return true;
+		}));
+	};
+
 	return (
 		<SafeView>
 			{/* Viewable Page */}
@@ -57,7 +68,7 @@ export default function Glossary() {
 				{/* Grid */}
 				<FlatList
 					numColumns={2}
-					data={mockButterflies}
+					data={butterflyData}
 					renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} />}
 					contentContainerStyle={{gap: 20, paddingTop: 10, paddingBottom: 5}}
 					columnWrapperStyle={{justifyContent: "space-around"}}
@@ -68,7 +79,7 @@ export default function Glossary() {
 			{/* Filter component */}
 			<FilterSlideUp
 				filterVisible={filterVisible}
-				onFilter={(size, color, detect) => /* do whatever on filter here */ 0}
+				onFilter={handleButterflyFilter}
 				onClose={() => setFilterVisible(false)}
 			/>
 		</SafeView>
