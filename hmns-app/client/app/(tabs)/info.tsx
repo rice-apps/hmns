@@ -133,7 +133,7 @@ return (
     />
     <Text style={styles.headerTitle}>About HMNS</Text>
     <Text style={styles.intro}>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+    Walk through a living butterfly habitat, marvel at spectacular live and preserved specimens of some of the world’s largest and weirdest arthropods, and enjoy interactive games and quizzes. The Cockrell Butterfly Center is well known for its immersive walk-through butterfly habitat, but there is much more to explore in the world of bugs! Visit the exhibits surrounding the rainforest conservatory for an in-depth look at arthropods.
     </Text>
     
     <View style={styles.faqContainer}>
