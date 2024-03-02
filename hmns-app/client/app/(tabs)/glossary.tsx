@@ -74,7 +74,7 @@ export default function Glossary() {
 				<View className="w-screen h-[1] bg-[#DEDDCB] -ml-5" />
 
 				{/* Grid */}
-				<GlossaryGrid searchQuery={searchQuery} getSearchFilteredData={getSearchFilteredData} />
+				<GlossaryGrid searchQuery={searchQuery} getSearchFilteredData={getSearchFilteredData} butterflyData={butterflyData} />
 			</View>
 
 			{/* Filter component */}
@@ -103,7 +103,8 @@ const ButterflyCard = ({name, img}: {name: string; img: string}) => {
 
 interface GlossaryGridProps{
 	getSearchFilteredData: () => butterflyGlossaryType[],
-	searchQuery: string
+	searchQuery: string,
+	butterflyData: butterflyGlossaryType[]
 }
 
 const GlossaryGrid = memo(function GlossaryGrid(props: GlossaryGridProps){
@@ -117,4 +118,4 @@ const GlossaryGrid = memo(function GlossaryGrid(props: GlossaryGridProps){
 			style={{height: "95%"}}
 		/>
 	);
-});
+}, (oldProps, newProps)=> oldProps.searchQuery===newProps.searchQuery && oldProps.butterflyData===newProps.butterflyData);
