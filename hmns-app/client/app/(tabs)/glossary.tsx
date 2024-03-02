@@ -1,21 +1,10 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useState } from "react";
-import { FlatList, Image, Pressable, Text, TextInput, View } from "react-native";
+import { Text, Image,  FlatList, Pressable, TextInput, View  } from "react-native";
 import { FilterSlideUp } from "../../components/FilterSlideUp";
 import SafeView from "../../components/SafeView";
-import { colors } from "../../constants/appColors";
 import CardPopup from '../../components/CardPopup/CardPopup'; 
-
-interface butterflyGlossaryType {
-  name: string,
-  genus: string,
-  species: string,
-  detectability: string,
-  wingspanSize: string,
-	color: string,
-  img: string,
-
-}
+import { colors } from "../../constants/appColors";
 
 const mockButterflyData: butterflyGlossaryType[] = [
 	{name: "Green 2 Low", genus: "something", species: "something", detectability: "low", wingspanSize: "small", color: "green", img: "../../assets/images/hmns-logo.png"},
@@ -31,6 +20,18 @@ const mockButterflyData: butterflyGlossaryType[] = [
 	{name: "Brown 7 Low", genus: "something", species: "something", detectability: "low", wingspanSize: "large", color: "brown", img: "../../assets/images/hmns-logo.png"},
 	{name: "Green 1 Low", genus: "something", species: "something", detectability: "low", wingspanSize: "small", color: "green", img: "../../assets/images/hmns-logo.png"}
 ];
+
+
+interface butterflyGlossaryType {
+  name: string,
+  genus: string,
+  species: string,
+  detectability: string,
+  wingspanSize: string,
+	color: string,
+  img: string,
+
+}
 
 
 export default function Glossary() {
