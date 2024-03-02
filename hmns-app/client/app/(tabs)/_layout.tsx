@@ -42,7 +42,17 @@ export default function TabLayout () {
 			screenOptions={{
 				tabBarActiveTintColor: tabBarIconColor,
 				tabBarInactiveTintColor: tabBarIconColor,
-				tabBarStyle: {backgroundColor: "white",},
+				tabBarStyle: {
+                    backgroundColor: "white",
+                    height: 80,
+                },
+                tabBarItemStyle: {
+                    marginTop: 10,
+                },
+                tabBarLabelStyle: {
+                    fontSize: 12,
+                    marginBottom: 10,
+                },
 				headerShown: false
 			}}>
 			<Tabs.Screen
