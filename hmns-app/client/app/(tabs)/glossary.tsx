@@ -1,6 +1,6 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useState } from "react";
-import { FlatList, Image, NativeSyntheticEvent, Pressable, Text, TextInput, View } from "react-native";
+import { memo, useState } from "react";
+import { FlatList, Image, Pressable, Text, TextInput, View } from "react-native";
 import { FilterSlideUp } from "../../components/FilterSlideUp";
 import SafeView from "../../components/SafeView";
 import { colors } from "../../constants/appColors";
@@ -74,14 +74,7 @@ export default function Glossary() {
 				<View className="w-screen h-[1] bg-[#DEDDCB] -ml-5" />
 
 				{/* Grid */}
-				<FlatList
-					numColumns={2}
-					data={getSearchFilteredData()}
-					renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} />}
-					contentContainerStyle={{gap: 20, paddingTop: 10, paddingBottom: 5}}
-					columnWrapperStyle={{justifyContent: "space-around"}}
-					style={{height: "95%"}}
-				/>
+				<GlossaryGrid searchQuery={searchQuery} getSearchFilteredData={getSearchFilteredData} />
 			</View>
 
 			{/* Filter component */}
@@ -107,3 +100,21 @@ const ButterflyCard = ({name, img}: {name: string; img: string}) => {
 		</View>
 	);
 };
+
+interface GlossaryGridProps{
+	getSearchFilteredData: () => butterflyGlossaryType[],
+	searchQuery: string
+}
+
+const GlossaryGrid = memo(function GlossaryGrid(props: GlossaryGridProps){
+	return (
+		<FlatList
+			numColumns={2}
+			data={props.getSearchFilteredData()}
+			renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} />}
+			contentContainerStyle={{gap: 20, paddingTop: 10, paddingBottom: 5}}
+			columnWrapperStyle={{justifyContent: "space-around"}}
+			style={{height: "95%"}}
+		/>
+	);
+});
