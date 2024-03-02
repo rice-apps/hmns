@@ -42,31 +42,31 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
   const renderItem = ({ item, index }) => {
     return (
       <View >
-      <Image source={item} style={styles.carouselImage} resizeMode="stretch" />
+        <Image source={item} style={styles.carouselImage} resizeMode="stretch" />
       </View>
     );
   };
+
   return (
     <Modal
       animationType="slide"
       transparent={true}
       visible={visible}
       onRequestClose={onClose}
-    
       {...props}
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <ScrollView style={styles.details} showsVerticalScrollIndicator={false}>
-            <View style={styles.header}>
-              <Text style={styles.commonName}>Mexican Sister</Text>
-              <TouchableOpacity onPress={onClose}>
+          <View style={styles.header}>
+            <Text style={styles.commonName}>Mexican Sister</Text>
+            <TouchableOpacity onPress={onClose}>
               <Image source={require('./closeIcon.png')} style={styles.closeIcon} />
-              </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.separatorLine}></View>
+          <ScrollView style={styles.details} showsVerticalScrollIndicator={false}>
             <Text style={styles.scientificName}>Adelpha fessonia</Text>
             <Text style={styles.familyName}>Family: Papilionidae Swallowtail</Text>  
-           
             <Carousel
               data={images}
               renderItem={renderItem}
@@ -74,39 +74,30 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
               itemWidth={320}
               loop={true}
               onSnapToItem={(index) => setActiveSlide(index)}
-              />
-      <Pagination
-          dotsLength={images.length}
-          activeDotIndex={activeSlide}
-          containerStyle={styles.paginationContainer}
-          dotStyle={styles.paginationDot}
-          inactiveDotOpacity={0.4}
-          inactiveDotScale={0.6}
-        />
-
-          <View style={styles.attributesContainer}>
-          {infoData.map((item, index) => (
-            <InfoItem
-              key={index}
-              iconName={item.icon}
-              title={item.title}
-              value={item.value}
             />
-          ))}
-          </View>
-
+            <Pagination
+              dotsLength={images.length}
+              activeDotIndex={activeSlide}
+              containerStyle={styles.paginationContainer}
+              dotStyle={styles.paginationDot}
+              inactiveDotOpacity={0.4}
+              inactiveDotScale={0.6}
+            />
+            <View style={styles.attributesContainer}>
+              {infoData.map((item, index) => (
+                <InfoItem
+                  key={index}
+                  iconName={item.icon}
+                  title={item.title}
+                  value={item.value}
+                />
+              ))}
+            </View>
             <Text style={styles.funFactTitle}>Fun Fact</Text>
             <Text style={styles.funFactText}>
               They are often known as sisters, due to the white markings on their wings, which resemble a nun's habit.
             </Text>
-
-            <View
-              style={{
-                borderBottomColor: 'black',
-                borderBottomWidth: StyleSheet.hairlineWidth,
-                marginVertical: 19,
-              }}
-            />
+            <View style={styles.separatorLine}></View>
             <Text style={styles.similarButterfliesTitle}>Similar Butterflies</Text>
             <View style={styles.similarButterfliesContainer}>
               <Image source={require('./butterfly.png')} style={styles.similarButterflyImage} />
@@ -119,7 +110,7 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
     </Modal>
   );
 };
-  
+
 
 const InfoItem = ({ iconName, title, value }) => {
   return (
@@ -308,6 +299,14 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Center the content horizontally
     width: '100%', // Ensure the container takes up the full width of its parent
   },
+
+  separatorLine: {
+    height: .3, // Making the line thicker for visibility
+    width: '100%', // Ensuring it spans across the modal
+    backgroundColor: 'black', // Change this color to ensure visibility against the modal background
+    marginVertical: 5
+  },
+  
   
 
 });
