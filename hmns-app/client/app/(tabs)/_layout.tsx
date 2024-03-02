@@ -1,8 +1,6 @@
-import { Feather, FontAwesome } from '@expo/vector-icons';
-import { Link, Tabs } from "expo-router";
-import { Pressable, StyleSheet, View, useColorScheme } from "react-native";
-
-import Colors from "../../constants/Colors";
+import { Feather } from '@expo/vector-icons';
+import { Tabs } from "expo-router";
+import { StyleSheet, View, useColorScheme } from "react-native";
 
 const tabBarIconSize = 28;
 const tabBarIconSelectedSize = tabBarIconSize + 15;
@@ -51,21 +49,7 @@ export default function TabLayout () {
 					title: "Home",
 					tabBarIcon: ({ color, focused }) => (
 						<TabBarIcon name='home' color={color} focused={focused} />
-					),
-					headerRight: () => (
-						<Link href='/modal' asChild>
-							<Pressable>
-								{({ pressed }) => (
-									<FontAwesome
-										name='info-circle'
-										size={25}
-										color={Colors[colorScheme ?? "light"].text}
-										style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-									/>
-								)}
-							</Pressable>
-						</Link>
-					),
+					)
 				}}
 			/>
 			<Tabs.Screen
