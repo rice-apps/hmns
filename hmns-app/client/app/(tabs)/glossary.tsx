@@ -76,17 +76,14 @@ export default function Glossary() {
         </View>
 
         {/* Grid */}
-        <FlatList
-          numColumns={2}
-          data={butterflyData}
-          renderItem={({ item }) => (
-            <Pressable onPress={toggleModal}>
-              <ButterflyCard name={item.name} img={item.img} />
-            </Pressable>
-          )}
-          contentContainerStyle={{gap: 20, paddingTop: 10, paddingBottom: 5}}
-          columnWrapperStyle={{justifyContent: "space-around"}}
-        />
+		<FlatList
+					numColumns={2}
+					data={butterflyData}
+					renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} />}
+					contentContainerStyle={{gap: 20, paddingTop: 10, paddingBottom: 5}}
+					columnWrapperStyle={{justifyContent: "space-around"}}
+					style={{height: "95%"}}
+				/>
       </View>
 
       {/* Filter component */}
@@ -108,8 +105,6 @@ const ButterflyCard = ({ name, img }: { name: string; img: string }) => {
       alignItems: 'center',
       borderWidth: 1,
       borderRadius: 20,
-      height: 160,
-      padding: 12,
       borderColor: colors.mossyOak,
       backgroundColor: 'white',
 
