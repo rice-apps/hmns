@@ -1,5 +1,5 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { FlatList, Image, Pressable, Text, TextInput, View } from "react-native";
 import { FilterSlideUp } from "../../components/FilterSlideUp";
 import SafeView from "../../components/SafeView";
@@ -34,7 +34,8 @@ const mockButterflyData: butterflyGlossaryType[] = [
 
 export default function Glossary() {
 	const [filterVisible, setFilterVisible] = useState<boolean>(false);
-	const [butterflyData, setButterflyData]  =useState(mockButterflyData);
+	const [butterflyData, setButterflyData] = useState(mockButterflyData);
+	const [searchQuery, setSearchQuery] = useState("");
 
 	const handleButterflyFilter = (filterSize, filterColor, filterDetectability) => {
 		setButterflyData(mockButterflyData.filter(({wingspanSize, color, detectability})=> {
@@ -43,6 +44,13 @@ export default function Glossary() {
 			if(filterDetectability && detectability!==filterDetectability)return false;
 			return true;
 		}));
+		
+	};
+
+	const getSearchFilteredData = () => {
+		return butterflyData.filter(({name}) => {
+			return name.toLowerCase().includes(searchQuery.toLowerCase());
+		});
 	};
 
 	return (
@@ -59,21 +67,14 @@ export default function Glossary() {
 						className="grow border rounded-2xl flex flex-row items-center px-3 bg-white"
 						style={{borderColor: colors.mossyOak}}
 					>
-						<TextInput className="grow" />
+						<TextInput value={searchQuery} onChangeText={searchText => setSearchQuery(searchText)} className="grow" />
 						<FontAwesome name="search" />
 					</View>
 				</View>
 				<View className="w-screen h-[1] bg-[#DEDDCB] -ml-5" />
 
 				{/* Grid */}
-				<FlatList
-					numColumns={2}
-					data={butterflyData}
-					renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} />}
-					contentContainerStyle={{gap: 20, paddingTop: 10, paddingBottom: 5}}
-					columnWrapperStyle={{justifyContent: "space-around"}}
-					style={{height: "95%"}}
-				/>
+				<GlossaryGrid searchQuery={searchQuery} getSearchFilteredData={getSearchFilteredData} butterflyData={butterflyData} />
 			</View>
 
 			{/* Filter component */}
@@ -99,3 +100,22 @@ const ButterflyCard = ({name, img}: {name: string; img: string}) => {
 		</View>
 	);
 };
+
+interface GlossaryGridProps{
+	getSearchFilteredData: () => butterflyGlossaryType[],
+	searchQuery: string,
+	butterflyData: butterflyGlossaryType[]
+}
+
+const GlossaryGrid = memo(function GlossaryGrid(props: GlossaryGridProps){
+	return (
+		<FlatList
+			numColumns={2}
+			data={props.getSearchFilteredData()}
+			renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} />}
+			contentContainerStyle={{gap: 20, paddingTop: 10, paddingBottom: 5}}
+			columnWrapperStyle={{justifyContent: "space-around"}}
+			style={{height: "95%"}}
+		/>
+	);
+}, (oldProps, newProps)=> oldProps.searchQuery===newProps.searchQuery && oldProps.butterflyData===newProps.butterflyData);
