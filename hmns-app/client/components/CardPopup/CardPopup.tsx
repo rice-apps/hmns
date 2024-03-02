@@ -1,5 +1,5 @@
 // CardPopup.tsx
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Modal,
   StyleSheet,
@@ -9,12 +9,25 @@ import {
   ModalProps,
   Image,
   ScrollView,
+  Dimensions,
 } from 'react-native';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 
+const { width: screenWidth } = Dimensions.get('window');
 
 interface CardPopupProps extends ModalProps {
   onClose: () => void;
 }
+
+const images = [
+  require('./butterfly.png'),
+  require('./butterfly.png'),
+  require('./test.png'),
+  require('./closeIcon.png'),
+  require('./closeIcon.png'),
+  require('./closeIcon.png'),
+  require('./closeIcon.png'),
+];
 
 const infoData = [
   { icon: require('./detectability_icon.png'), title: 'Detectability', value: 'Low' },
@@ -24,6 +37,16 @@ const infoData = [
 ];
 
 const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const renderItem = ({ item, index }) => {
+    return (
+      <View >
+        <Image source={item} style={styles.carouselImage} resizeMode="stretch" />
+      </View>
+    );
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -34,40 +57,47 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
+          <View style={styles.header}>
+            <Text style={styles.commonName}>Mexican Sister</Text>
+            <TouchableOpacity onPress={onClose}>
+              <Image source={require('./closeIcon.png')} style={styles.closeIcon} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.separatorLine}></View>
           <ScrollView style={styles.details} showsVerticalScrollIndicator={false}>
-            <View style={styles.header}>
-              <Text style={styles.commonName}>Mexican Sister</Text>
-              <TouchableOpacity onPress={onClose}>
-                <Image source={require('./closeIcon.png')} style={styles.closeIcon} />
-              </TouchableOpacity>
-            </View>
             <Text style={styles.scientificName}>Adelpha fessonia</Text>
             <Text style={styles.familyName}>Family: Papilionidae Swallowtail</Text>  
-            <Image source={require('./butterfly.png')} style={styles.image} />
-
-          <View style={styles.attributesContainer}>
-          {infoData.map((item, index) => (
-            <InfoItem
-              key={index}
-              iconName={item.icon}
-              title={item.title}
-              value={item.value}
+            <Carousel
+              data={images}
+              renderItem={renderItem}
+              sliderWidth={320}
+              itemWidth={320}
+              loop={true}
+              onSnapToItem={(index) => setActiveSlide(index)}
             />
-          ))}
-          </View>
-
+            <Pagination
+              dotsLength={images.length}
+              activeDotIndex={activeSlide}
+              containerStyle={styles.paginationContainer}
+              dotStyle={styles.paginationDot}
+              inactiveDotOpacity={0.4}
+              inactiveDotScale={0.6}
+            />
+            <View style={styles.attributesContainer}>
+              {infoData.map((item, index) => (
+                <InfoItem
+                  key={index}
+                  iconName={item.icon}
+                  title={item.title}
+                  value={item.value}
+                />
+              ))}
+            </View>
             <Text style={styles.funFactTitle}>Fun Fact</Text>
             <Text style={styles.funFactText}>
               They are often known as sisters, due to the white markings on their wings, which resemble a nun's habit.
             </Text>
-
-            <View
-              style={{
-                borderBottomColor: 'black',
-                borderBottomWidth: StyleSheet.hairlineWidth,
-                marginVertical: 19,
-              }}
-            />
+            <View style={styles.separatorLine}></View>
             <Text style={styles.similarButterfliesTitle}>Similar Butterflies</Text>
             <View style={styles.similarButterfliesContainer}>
               <Image source={require('./butterfly.png')} style={styles.similarButterflyImage} />
@@ -80,17 +110,23 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
     </Modal>
   );
 };
-  
+
 
 const InfoItem = ({ iconName, title, value }) => {
   return (
     <View style={styles.attributeItem}>
-      <Image source={iconName} style={styles.infoIcon} />
+      <View style={styles.iconTitleContainer}>
+        <Image source={iconName} style={styles.infoIcon} />
         <Text style={styles.infoTitle}>{title}</Text>
+      </View>
+      <View style={styles.infoValueContainer}> 
         <Text style={styles.infoValue}>{value}</Text>
+      </View>
     </View>
   );
 };
+
+
 
 
 const styles = StyleSheet.create({
@@ -107,11 +143,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderRadius: 20,
     paddingTop: 18,
-    paddingHorizontal: 22,
+    paddingHorizontal: 13,
     alignItems: 'center',
     elevation: 5,
     borderColor: "#9D9B64",
-    borderWidth: 1
+    borderWidth: 1,
   },
   title: {
     fontSize: 24,
@@ -175,6 +211,7 @@ const styles = StyleSheet.create({
     width: "30%", 
     height: 100,   
     borderRadius: 8,
+    resizeMode: "cover"
   },
   header: {
     flexDirection: 'row',
@@ -185,6 +222,7 @@ const styles = StyleSheet.create({
   closeIcon: {
     width: 30,
     height: 30,
+    padding:10 
   },
   attributeItem: {
     flex: 1, 
@@ -194,7 +232,9 @@ const styles = StyleSheet.create({
     padding: 2,
     marginHorizontal: 4,
     borderRadius: 16,
-    borderColor: "black"
+    borderColor: "black",
+    flexGrow: 1, 
+    margin: 4,
   },
   infoIcon: {
     width: 24,
@@ -203,19 +243,17 @@ const styles = StyleSheet.create({
   
   },
   infoTitle: {
-    fontSize: 8,
+    fontSize: 10,
     color: '#7F7F7F',
     alignContent:"center"
   },
   infoValue: {
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: '500',
     color: '#333',
-    marginTop: 4
-    
+    textAlign: 'center',
   },
   attributesContainer: {
-    height: 80, 
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%', 
@@ -224,6 +262,49 @@ const styles = StyleSheet.create({
     borderColor: '#D6D5B9', 
     borderWidth: 2,   
     padding: 1
+  },
+  carouselImage: {
+    height: 200,
+    width: "100%",
+    borderRadius: 15,
+    marginTop: 18,
+  },
+  paginationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+  paginationDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#B8B691',
+    marginHorizontal: 2,
+  },
+  activeDotStyle: {
+    backgroundColor: '#5D5544',
+  },
+
+  iconTitleContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginBottom: 4,
+    minHeight: 30, // Adjust this value as needed to fit your design
+  },
+  
+  infoValueContainer: {
+    flex: 1, // This will make the container grow to fill available space, pushing the title up
+    justifyContent: 'center', // Center the content vertically within the container
+    alignItems: 'center', // Center the content horizontally
+    width: '100%', // Ensure the container takes up the full width of its parent
+  },
+
+  separatorLine: {
+    height: .3, // Making the line thicker for visibility
+    width: '100%', // Ensuring it spans across the modal
+    backgroundColor: 'white', // Change this color to ensure visibility against the modal background
+    marginTop: 5
   },
 
 });

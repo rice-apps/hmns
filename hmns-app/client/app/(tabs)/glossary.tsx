@@ -1,20 +1,10 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useState } from "react";
-import { FlatList, Image, Pressable, Text, TextInput, View } from "react-native";
+import { Text, Image,  FlatList, Pressable, TextInput, View  } from "react-native";
 import { FilterSlideUp } from "../../components/FilterSlideUp";
 import SafeView from "../../components/SafeView";
+import CardPopup from '../../components/CardPopup/CardPopup'; 
 import { colors } from "../../constants/appColors";
-
-interface butterflyGlossaryType {
-  name: string,
-  genus: string,
-  species: string,
-  detectability: string,
-  wingspanSize: string,
-	color: string,
-  img: string,
-
-}
 
 const mockButterflyData: butterflyGlossaryType[] = [
 	{name: "Green 2 Low", genus: "something", species: "something", detectability: "low", wingspanSize: "small", color: "green", img: "../../assets/images/hmns-logo.png"},
@@ -32,9 +22,28 @@ const mockButterflyData: butterflyGlossaryType[] = [
 ];
 
 
+interface butterflyGlossaryType {
+  name: string,
+  genus: string,
+  species: string,
+  detectability: string,
+  wingspanSize: string,
+	color: string,
+  img: string,
+
+}
+
+
 export default function Glossary() {
 	const [filterVisible, setFilterVisible] = useState<boolean>(false);
 	const [butterflyData, setButterflyData]  =useState(mockButterflyData);
+	const [isModalVisible, setModalVisible] = useState(false); // State to manage popup visibility
+
+	const toggleModal = () => {
+		console.log("Before toggle:", isModalVisible);
+		setModalVisible(!isModalVisible);
+		console.log("After toggle:", !isModalVisible);
+	  };
 
 	const handleButterflyFilter = (filterSize, filterColor, filterDetectability) => {
 		setButterflyData(mockButterflyData.filter(({wingspanSize, color, detectability})=> {
@@ -69,12 +78,16 @@ export default function Glossary() {
 				<FlatList
 					numColumns={2}
 					data={butterflyData}
-					renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} />}
+					renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} onButtonPress={toggleModal}  />}
 					contentContainerStyle={{gap: 20, paddingTop: 10, paddingBottom: 5}}
 					columnWrapperStyle={{justifyContent: "space-around"}}
 					style={{height: "95%"}}
 				/>
+
+		<CardPopup visible={isModalVisible} onClose={toggleModal} />
+
 			</View>
+			
 
 			{/* Filter component */}
 			<FilterSlideUp
@@ -84,18 +97,41 @@ export default function Glossary() {
 			/>
 		</SafeView>
 	);
-}
-
-const ButterflyCard = ({name, img}: {name: string; img: string}) => {
+}const ButterflyCard = ({ name, img, onButtonPress }: { name: string; img: string; onButtonPress: () => void }) => {
 	return (
-		<View
-			className="flex items-center border rounded-2xl w-[45%] h-40 px-3 bg-white"
-			style={{borderColor: colors.mossyOak}}
-		>
-			<Image className="h-2/3 w-[90%] rounded-2xl mt-3" source={require("../../assets/images/hmns-logo.png")} />
-			<Text className="text-center font-medium pt-1" style={{color: colors.fossilRim}}>
-				{name}
-			</Text>
-		</View>
+	  <View
+		style={{
+		  flex: 1, // Make sure the card expands to fill available space in its container
+		  alignItems: 'center', // Center children horizontally
+		  justifyContent: 'center', // Center children vertically
+		  borderStyle: 'solid',
+		  borderWidth: 1,
+		  borderRadius: 20,
+		  width: '45%', // Adjust the width as needed
+		  height: 160, // Adjust the height as needed
+		  padding: 12,
+		  borderColor: colors.mossyOak,
+		  backgroundColor: 'white',
+		  margin: 5, // Add some margin to separate cards
+		}}
+	  >
+		<Pressable onPress={onButtonPress} style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+		  <Image
+			source={require("../../assets/images/hmns-logo.png")}
+			style={{ width: '90%', height: '67%', resizeMode: 'contain' }} // Adjust the size as needed
+		  />
+		  <Text
+			style={{
+			  textAlign: 'center',
+			  paddingTop: 5,
+			  color: colors.fossilRim,
+			  fontSize: 16, // Adjust the font size as needed
+			}}
+		  >
+			{name}
+		  </Text>
+		</Pressable>
+	  </View>
 	);
-};
+  };
+  
