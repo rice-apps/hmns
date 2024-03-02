@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { FlatList, Image, Pressable, Text, TextInput, View } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useState } from "react";
+import { FlatList, Image, Pressable, Text, TextInput, View } from "react-native";
 import { FilterSlideUp } from "../../components/FilterSlideUp";
 import SafeView from "../../components/SafeView";
 import { colors } from "../../constants/appColors";
-import CardPopup from '../../components/CardPopup/CardPopup'; // Import CardPopup
+import CardPopup from '../../components/CardPopup/CardPopup'; 
 
-interface ButterflyGlossaryType {
-  name: string;
-  genus: string;
-  species: string;
-  detectability: string;
-  wingspanSize: string;
-  color: string;
-  img: string;
+interface butterflyGlossaryType {
+  name: string,
+  genus: string,
+  species: string,
+  detectability: string,
+  wingspanSize: string,
+	color: string,
+  img: string,
+
 }
 
-
-const mockButterflyData: ButterflyGlossaryType[] = [
+const mockButterflyData: butterflyGlossaryType[] = [
 	{name: "Green 2 Low", genus: "something", species: "something", detectability: "low", wingspanSize: "small", color: "green", img: "../../assets/images/hmns-logo.png"},
 	{name: "White 3 Medium", genus: "something", species: "something", detectability: "medium", wingspanSize: "small", color: "white", img: "../../assets/images/hmns-logo.png"},
 	{name: "Yellow 4 Medium", genus: "something", species: "something", detectability: "medium", wingspanSize: "small", color: "yellow", img: "../../assets/images/hmns-logo.png"},
@@ -32,85 +32,95 @@ const mockButterflyData: ButterflyGlossaryType[] = [
 	{name: "Green 1 Low", genus: "something", species: "something", detectability: "low", wingspanSize: "small", color: "green", img: "../../assets/images/hmns-logo.png"}
 ];
 
+
 export default function Glossary() {
-  const [filterVisible, setFilterVisible] = useState<boolean>(false);
-  const [butterflyData, setButterflyData] = useState(mockButterflyData);
-  const [isModalVisible, setModalVisible] = useState(false); // State to manage popup visibility
+	const [filterVisible, setFilterVisible] = useState<boolean>(false);
+	const [butterflyData, setButterflyData]  =useState(mockButterflyData);
+	const [isModalVisible, setModalVisible] = useState(false); // State to manage popup visibility
 
-  const handleButterflyFilter = (filterSize, filterColor, filterDetectability) => {
-    setButterflyData(mockButterflyData.filter(({ wingspanSize, color, detectability }) => {
-      if (filterSize && wingspanSize !== filterSize) return false;
-      if (filterColor && color !== filterColor) return false;
-      if (filterDetectability && detectability !== filterDetectability) return false;
-      return true;
-    }));
-  };
+	const toggleModal = () => {
+		console.log("Before toggle:", isModalVisible);
+		setModalVisible(!isModalVisible);
+		console.log("After toggle:", !isModalVisible);
+	  };
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
+	const handleButterflyFilter = (filterSize, filterColor, filterDetectability) => {
+		setButterflyData(mockButterflyData.filter(({wingspanSize, color, detectability})=> {
+			if(filterSize && wingspanSize!==filterSize)return false;
+			if(filterColor && color!==filterColor)return false;
+			if(filterDetectability && detectability!==filterDetectability)return false;
+			return true;
+		}));
+	};
 
-  return (
-    <SafeView>
-      {/* Viewable Page */}
-      <View style={{width: '100%', padding: 20, paddingTop: 8}}>
-        {/* Top Bar */}
-        <View style={{flexDirection: 'row', height: 40, marginBottom: 12, gap: 8}}>
-          <Pressable onPress={() => setFilterVisible(true)}>
-            <Image source={require("../../assets/images/filter-icon.png")} style={{width: 40, height: 40}}/>
-          </Pressable>
-          
-          <View style={{
-            flex: 1,
-            borderWidth: 1,
-            borderRadius: 20,
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingHorizontal: 12,
-            borderColor: colors.mossyOak,
-            backgroundColor: 'white',
-          }}>
-            <TextInput style={{flex: 1}} />
-            <FontAwesome name="search" size={20} color="#000" />
-          </View>
-        </View>
+	return (
+		<SafeView>
+			{/* Viewable Page */}
+			<View className="w-full p-5 pt-2">
+				{/* Top Bar */}
+				<View className="h-10 flex flex-row mb-3" style={{gap: 8}}>
+					<Pressable onPress={()=>setFilterVisible(true)}>
+						<Image source={require("../../assets/images/filter-icon.png")} className="w-10 h-10"/>
+					</Pressable>
+					
+					<View
+						className="grow border rounded-2xl flex flex-row items-center px-3 bg-white"
+						style={{borderColor: colors.mossyOak}}
+					>
+						<TextInput className="grow" />
+						<FontAwesome name="search" />
+					</View>
+				</View>
+				<View className="w-screen h-[1] bg-[#DEDDCB] -ml-5" />
 
-        {/* Grid */}
-		<FlatList
+				{/* Grid */}
+				<FlatList
 					numColumns={2}
 					data={butterflyData}
-					renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} />}
+					renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} onButtonPress={toggleModal}  />}
 					contentContainerStyle={{gap: 20, paddingTop: 10, paddingBottom: 5}}
 					columnWrapperStyle={{justifyContent: "space-around"}}
 					style={{height: "95%"}}
 				/>
-      </View>
 
-      {/* Filter component */}
-      <FilterSlideUp
-        filterVisible={filterVisible}
-        onFilter={handleButterflyFilter}
-        onClose={() => setFilterVisible(false)}
-      />
+		<CardPopup visible={isModalVisible} onClose={toggleModal} />
 
-      {/* Popup for displaying the default butterfly */}
-      <CardPopup visible={isModalVisible} onClose={toggleModal} />
-    </SafeView>
-  );
+			</View>
+			
+
+			{/* Filter component */}
+			<FilterSlideUp
+				filterVisible={filterVisible}
+				onFilter={handleButterflyFilter}
+				onClose={() => setFilterVisible(false)}
+			/>
+		</SafeView>
+	);
 }
 
-const ButterflyCard = ({ name, img }: { name: string; img: string }) => {
-  return (
-    <View style={{
-      alignItems: 'center',
-      borderWidth: 1,
-      borderRadius: 20,
-      borderColor: colors.mossyOak,
-      backgroundColor: 'white',
+const ButterflyCard = ({ name, img, onButtonPress }: { name: string; img: string; onButtonPress: () => void }) => {
+	return (
+	  <View
+		className="flex items-center border rounded-2xl w-[45%] h-40 px-3 bg-white"
+		style={{ borderColor: colors.mossyOak }}
+	  >
+		<Pressable onPress={onButtonPress}>
 
-    }}>
-      <Image source={require("../../assets/images/hmns-logo.png")} style={{height: '70%', width: '90%', borderRadius: 20, marginTop: 3}} />
-      <Text style={{textAlign: 'center', paddingTop: 5, color: colors.fossilRim}}>{name}</Text>
-    </View>
-  );
-};
+		<Image
+		  className="h-2/3 w-[90%] rounded-2xl mt-3"
+		  source={require("../../assets/images/hmns-logo.png")}
+		  style={{ resizeMode: 'contain' }} // Assuming you want to keep the image within bounds
+		/>
+
+		<Text
+		  className="text-center font-medium pt-1"
+		  style={{ color: colors.fossilRim }}
+		>
+		  {name}
+		</Text>
+
+		</Pressable>
+	  </View>
+	);
+  };
+  
