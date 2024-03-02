@@ -22,27 +22,27 @@ const tabBarIconStyles = StyleSheet.create({
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
-function TabBarIcon (props: {
-  name: React.ComponentProps<typeof Feather>["name"]
-  color: string,
-  focused: boolean,
+function TabBarIcon(props: {
+    name: React.ComponentProps<typeof Feather>["name"]
+    color: string,
+    focused: boolean,
 }) {
-	return (
-		<View style={[tabBarIconStyles.default, (props.focused && tabBarIconStyles.focused)]}>
-			<Feather size={tabBarIconSize} {...props} />
-		</View>
-	);
+    return (
+        <View style={[tabBarIconStyles.default, (props.focused && tabBarIconStyles.focused)]}>
+            <Feather size={tabBarIconSize} {...props} />
+        </View>
+    );
 }
 
-export default function TabLayout () {
-	const colorScheme = useColorScheme();
+export default function TabLayout() {
+    const colorScheme = useColorScheme();
 
-	return (
-		<Tabs
-			screenOptions={{
-				tabBarActiveTintColor: tabBarIconColor,
-				tabBarInactiveTintColor: tabBarIconColor,
-				tabBarStyle: {
+    return (
+        <Tabs
+            screenOptions={{
+                tabBarActiveTintColor: tabBarIconColor,
+                tabBarInactiveTintColor: tabBarIconColor,
+                tabBarStyle: {
                     backgroundColor: "white",
                     height: 80,
                 },
@@ -53,44 +53,44 @@ export default function TabLayout () {
                     fontSize: 12,
                     marginBottom: 10,
                 },
-				headerShown: false
-			}}>
-			<Tabs.Screen
-				name='index'
-				options={{
-					title: "Home",
-					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon name='home' color={color} focused={focused} />
-					)
-				}}
-			/>
-			<Tabs.Screen
-				name='glossary'
-				options={{
-					title: "Glossary",
-					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon name='list' color={color} focused={focused} />
-					)
-				}}
-			/>
-			<Tabs.Screen
-				name='two'
-				options={{
-					title: "Camera",
-					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon name='camera' color={color} focused={focused} />
-					)
-				}}
-			/>
-			<Tabs.Screen
-				name='info'
-				options={{
-					title: "Info",
-					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon name='info' color={color} focused={focused} />
-					)
-				}}
-			/>
-		</Tabs>
-	);
+                headerShown: false
+            }}>
+            <Tabs.Screen
+                name='index'
+                options={{
+                    title: "Home",
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon name='home' color={color} focused={focused} />
+                    )
+                }}
+            />
+            <Tabs.Screen
+                name='glossary'
+                options={{
+                    title: "Glossary",
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon name='list' color={color} focused={focused} />
+                    )
+                }}
+            />
+            <Tabs.Screen
+                name='two'
+                options={{
+                    title: "Camera",
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon name='camera' color={color} focused={focused} />
+                    )
+                }}
+            />
+            <Tabs.Screen
+                name='info'
+                options={{
+                    title: "Info",
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon name='info' color={color} focused={focused} />
+                    )
+                }}
+            />
+        </Tabs>
+    );
 }
