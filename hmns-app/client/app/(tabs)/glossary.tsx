@@ -1,6 +1,6 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useState } from "react";
-import { FlatList, Image, Pressable, Text, TextInput, View } from "react-native";
+import { FlatList, Image, NativeSyntheticEvent, Pressable, Text, TextInput, View } from "react-native";
 import { FilterSlideUp } from "../../components/FilterSlideUp";
 import SafeView from "../../components/SafeView";
 import { colors } from "../../constants/appColors";
@@ -34,7 +34,8 @@ const mockButterflyData: butterflyGlossaryType[] = [
 
 export default function Glossary() {
 	const [filterVisible, setFilterVisible] = useState<boolean>(false);
-	const [butterflyData, setButterflyData]  =useState(mockButterflyData);
+	const [butterflyData, setButterflyData] = useState(mockButterflyData);
+	const [searchQuery, setSearchQuery] = useState("");
 
 	const handleButterflyFilter = (filterSize, filterColor, filterDetectability) => {
 		setButterflyData(mockButterflyData.filter(({wingspanSize, color, detectability})=> {
@@ -43,6 +44,13 @@ export default function Glossary() {
 			if(filterDetectability && detectability!==filterDetectability)return false;
 			return true;
 		}));
+		
+	};
+
+	const getSearchFilteredData = () => {
+		return butterflyData.filter(({name}) => {
+			return name.toLowerCase().includes(searchQuery.toLowerCase());
+		});
 	};
 
 	return (
@@ -59,7 +67,7 @@ export default function Glossary() {
 						className="grow border rounded-2xl flex flex-row items-center px-3 bg-white"
 						style={{borderColor: colors.mossyOak}}
 					>
-						<TextInput className="grow" />
+						<TextInput value={searchQuery} onChangeText={searchText => setSearchQuery(searchText)} className="grow" />
 						<FontAwesome name="search" />
 					</View>
 				</View>
@@ -68,7 +76,7 @@ export default function Glossary() {
 				{/* Grid */}
 				<FlatList
 					numColumns={2}
-					data={butterflyData}
+					data={getSearchFilteredData()}
 					renderItem={({item}) => <ButterflyCard name={item.name} img={item.img} />}
 					contentContainerStyle={{gap: 20, paddingTop: 10, paddingBottom: 5}}
 					columnWrapperStyle={{justifyContent: "space-around"}}
