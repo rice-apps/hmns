@@ -2,8 +2,8 @@ import { Feather } from '@expo/vector-icons';
 import { Tabs } from "expo-router";
 import { StyleSheet, View, useColorScheme } from "react-native";
 
-const tabBarIconSize = 28;
-const tabBarIconSelectedSize = tabBarIconSize + 15;
+const tabBarIconSize = 26;
+const tabBarIconSelectedSize = tabBarIconSize + 17;
 const tabBarIconColor = '#5F5541';
 const tabBarIconSelectedColor = '#E6E5D4';
 const tabBarIconStyles = StyleSheet.create({
