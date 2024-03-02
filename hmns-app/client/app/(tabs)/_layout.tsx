@@ -9,12 +9,14 @@ const tabBarIconSelectedColor = '#E6E5D4';
 const tabBarIconStyles = StyleSheet.create({
     focused: {
         backgroundColor: tabBarIconSelectedColor,
+        borderRadius: tabBarIconSelectedSize / 2,
+    },
+    default: {
         width: tabBarIconSelectedSize,
         height: tabBarIconSelectedSize,
-        borderRadius: tabBarIconSelectedSize / 2,
         alignItems: 'center',
         justifyContent: 'center',
-    },
+    }
 });
 
 /**
@@ -26,7 +28,7 @@ function TabBarIcon (props: {
   focused: boolean,
 }) {
 	return (
-		<View style={(props.focused ? tabBarIconStyles.focused : {})}>
+		<View style={[tabBarIconStyles.default, (props.focused && tabBarIconStyles.focused)]}>
 			<Feather size={tabBarIconSize} {...props} />
 		</View>
 	);
