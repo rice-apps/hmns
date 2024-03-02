@@ -303,11 +303,9 @@ const styles = StyleSheet.create({
   separatorLine: {
     height: .3, // Making the line thicker for visibility
     width: '100%', // Ensuring it spans across the modal
-    backgroundColor: 'black', // Change this color to ensure visibility against the modal background
-    marginVertical: 5
+    backgroundColor: 'white', // Change this color to ensure visibility against the modal background
+    marginTop: 5
   },
-  
-  
 
 });
 
