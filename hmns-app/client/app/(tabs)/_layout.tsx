@@ -1,19 +1,27 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Feather, FontAwesome } from '@expo/vector-icons';
 import { Link, Tabs } from "expo-router";
-import { Pressable, View, useColorScheme } from "react-native";
+import { Pressable, StyleSheet, View, useColorScheme } from "react-native";
 
 import Colors from "../../constants/Colors";
+
+const tabBarIconColor = '#5F5541';
+const tabBarIconStyles = StyleSheet.create({
+    focused: {
+        backgroundColor: 'red',
+    },
+});
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon (props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"]
-  color: string
+  name: React.ComponentProps<typeof Feather>["name"]
+  color: string,
+  focused: boolean,
 }) {
 	return (
-		<View style={{}}>
-			<FontAwesome size={28} style={{ marginBottom: -16 }} {...props} />
+		<View style={(props.focused ? tabBarIconStyles.focused : {})}>
+			<Feather size={28} style={{ marginBottom: -16 }} {...props} />
 		</View>
 	);
 }
@@ -24,7 +32,8 @@ export default function TabLayout () {
 	return (
 		<Tabs
 			screenOptions={{
-				tabBarActiveTintColor:"grey",
+				tabBarActiveTintColor: tabBarIconColor,
+				tabBarInactiveTintColor: tabBarIconColor,
 				tabBarStyle: {backgroundColor: "white",},
 				headerShown: false
 			}}>
@@ -32,8 +41,8 @@ export default function TabLayout () {
 				name='index'
 				options={{
 					title: "Home",
-					tabBarIcon: ({ color }) => (
-						<TabBarIcon name='home' color={color} />
+					tabBarIcon: ({ color, focused }) => (
+						<TabBarIcon name='home' color={color} focused={focused} />
 					),
 					headerRight: () => (
 						<Link href='/modal' asChild>
@@ -55,8 +64,8 @@ export default function TabLayout () {
 				name='glossary'
 				options={{
 					title: "Glossary",
-					tabBarIcon: ({ color }) => (
-						<TabBarIcon name='list' color={color} />
+					tabBarIcon: ({ color, focused }) => (
+						<TabBarIcon name='list' color={color} focused={focused} />
 					)
 				}}
 			/>
@@ -64,8 +73,8 @@ export default function TabLayout () {
 				name='two'
 				options={{
 					title: "Camera",
-					tabBarIcon: ({ color }) => (
-						<TabBarIcon name='camera' color={color} />
+					tabBarIcon: ({ color, focused }) => (
+						<TabBarIcon name='camera' color={color} focused={focused} />
 					)
 				}}
 			/>
@@ -73,8 +82,8 @@ export default function TabLayout () {
 				name='info'
 				options={{
 					title: "Info",
-					tabBarIcon: ({ color }) => (
-						<TabBarIcon name='info' color={color} />
+					tabBarIcon: ({ color, focused }) => (
+						<TabBarIcon name='info' color={color} focused={focused} />
 					)
 				}}
 			/>
