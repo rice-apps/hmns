@@ -4,10 +4,18 @@ import { Pressable, StyleSheet, View, useColorScheme } from "react-native";
 
 import Colors from "../../constants/Colors";
 
+const tabBarIconSize = 28;
+const tabBarIconSelectedSize = tabBarIconSize + 15;
 const tabBarIconColor = '#5F5541';
+const tabBarIconSelectedColor = '#E6E5D4';
 const tabBarIconStyles = StyleSheet.create({
     focused: {
-        backgroundColor: 'red',
+        backgroundColor: tabBarIconSelectedColor,
+        width: tabBarIconSelectedSize,
+        height: tabBarIconSelectedSize,
+        borderRadius: tabBarIconSelectedSize / 2,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });
 
@@ -21,7 +29,7 @@ function TabBarIcon (props: {
 }) {
 	return (
 		<View style={(props.focused ? tabBarIconStyles.focused : {})}>
-			<Feather size={28} style={{ marginBottom: -16 }} {...props} />
+			<Feather size={tabBarIconSize} {...props} />
 		</View>
 	);
 }
