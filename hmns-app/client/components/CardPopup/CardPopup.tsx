@@ -31,7 +31,7 @@ const images = [
 
 const infoData = [
   { icon: require('./detectability_icon.png'), title: 'Detectability', value: 'Low' },
-  { icon: require('./origin_icon.png'), title: 'Origin', value: 'Neotropicalsadfadsasdfadsfsadfdsfds' },
+  { icon: require('./origin_icon.png'), title: 'Origin', value: 'Neotropical' },
   { icon: require('./wingspan_icon.png'), title: 'Wingspan', value: '5-7cm' },
   { icon: require('./food_icon.png'), title: 'Food', value: 'Flowers' },
 ];
@@ -121,15 +121,6 @@ const CardPopup: React.FC<CardPopupProps> = ({ visible, onClose, ...props }) => 
 };
   
 
-// const InfoItem = ({ iconName, title, value }) => {
-//   return (
-//     <View style={styles.attributeItem}>
-//       <Image source={iconName} style={styles.infoIcon} />
-//       <Text style={styles.infoTitle}>{title}</Text>
-//       <Text style={styles.infoValue}>{value}</Text>
-//     </View>
-//   );
-// };
 const InfoItem = ({ iconName, title, value }) => {
   return (
     <View style={styles.attributeItem}>
@@ -137,7 +128,9 @@ const InfoItem = ({ iconName, title, value }) => {
         <Image source={iconName} style={styles.infoIcon} />
         <Text style={styles.infoTitle}>{title}</Text>
       </View>
-      <Text style={styles.infoValue}>{value}</Text>
+      <View style={styles.infoValueContainer}> 
+        <Text style={styles.infoValue}>{value}</Text>
+      </View>
     </View>
   );
 };
@@ -259,7 +252,6 @@ const styles = StyleSheet.create({
   
   },
   infoTitle: {
-    backgroundColor: "black", //need to fix this 
     fontSize: 10,
     color: '#7F7F7F',
     alignContent:"center"
@@ -268,7 +260,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '500',
     color: '#333',
-    marginTop: 4,
+    textAlign: 'center',
   },
   attributesContainer: {
     justifyContent: 'space-between',
@@ -304,10 +296,19 @@ const styles = StyleSheet.create({
   },
 
   iconTitleContainer: {
-    flexDirection: 'column', // Layout icon and title horizontally
-    alignItems: 'center', // Align items in the middle vertically
-    marginBottom: 4, // Space between icon-title pair and value
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginBottom: 4,
+    minHeight: 30, // Adjust this value as needed to fit your design
   },
+  
+  infoValueContainer: {
+    flex: 1, // This will make the container grow to fill available space, pushing the title up
+    justifyContent: 'center', // Center the content vertically within the container
+    alignItems: 'center', // Center the content horizontally
+    width: '100%', // Ensure the container takes up the full width of its parent
+  },
+  
 
 });
 
