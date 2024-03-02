@@ -40,16 +40,67 @@ const mockResources: Resource[] = [
 	},
 ];
 
+
+
 export default function TabOneScreen() {
 	const [challenges] = useState<Challenge[]>(mockChallenges);
 	const [resources] = useState<Resource[]>(mockResources);
 	const windowHeight = Dimensions.get("window").height;
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isPopupVisibleC, setPopupVisibleC] = useState(false);
+  const togglePopupC = () => setPopupVisibleC(!isPopupVisibleC); // this function change state of isPopupVisible 
+
+  const [isPopupVisibleR, setPopupVisibleR] = useState(false);
+  const togglePopupR = () => setPopupVisibleR(!isPopupVisibleR); // this function change state of isPopupVisible 
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
     
+  const Popup = ({ onClose }) => (
+
+	<View className="flex bg-white border rounded-2xl p-4 " style={{gap: 20}}> 
+		
+		<View className="flex flex-row justify-between bg-transparent">
+						<Text className="text-xl font-bold" style={{color: colors.fossilRim}}>Challenges</Text>
+						
+		</View>
+
+		
+
+		{/* change this to all challenges later */}
+		{challenges.map(challenge => (
+			<ChallengeItemPop key={challenge.title} challenge={challenge} />
+		))}
+
+		<Pressable className="close" onPress={togglePopupC}>
+				<Text> Close </Text>
+		</Pressable>
+
+	</View>
+  );
+
+  const Popup2 = ({ onClose }) => (
+
+	<View className="flex bg-white border rounded-2xl p-4 " style={{gap: 20}}> 
+		
+		<View className="flex flex-row justify-between bg-transparent">
+			<Text className="text-xl font-bold" style={{color: colors.fossilRim}}>Resources</Text>			
+		</View>
+
+		
+
+		{resources.map(resource => (
+			<ResourceItemPop key={resource.title} resource={resource} />
+		))}
+
+		<Pressable className="close" onPress={togglePopupR}>
+				<Text> Close </Text>
+		</Pressable>
+
+	</View>
+  );
+
 	return (
 		<SafeAreaView style={styles.mainContainer}>
 			<StatusBar barStyle="dark-content" />
@@ -94,39 +145,56 @@ export default function TabOneScreen() {
 				</View>
 
 				{/* Challenges */}
-				<View className="flex bg-transparent" style={{gap: 20}}>
+				{!isPopupVisibleC && <View className="flex bg-transparent" style={{gap: 20}}>
 					{/* Challenges Header */}
 					<View className="flex flex-row justify-between bg-transparent">
 						<Text className="text-xl font-bold" style={{color: colors.fossilRim}}>Challenges</Text>
-						<Pressable className="flex justify-around items-center">
-							<Text className="text-black">View all</Text>
+						<Pressable className="flex justify-around items-center" onPress = {togglePopupC}>
+							<Text className="text-black">View all</Text> 
 						</Pressable>
 					</View>
 
 					{challenges.map(challenge => (
 						<ChallengeItem key={challenge.title} challenge={challenge} />
 					))}
-				</View>
+
+				</View>}
+
+				{ isPopupVisibleC && (
+       				<Popup onClose={togglePopupC}> </Popup>
+      			)}
 
 				{/* Resources */}
-				<View className="flex bg-transparent" style={{gap: 20}}>
+				
+				{!isPopupVisibleR && <View className="flex bg-transparent" style={{gap: 20}}>
 					{/* Resources Header */}
 					<View className="flex flex-row justify-between bg-transparent">
 						<Text className="text-xl font-bold" style={{color: colors.fossilRim}}>Resources</Text>
-						<Pressable className="flex justify-around items-center">
+						{/* once click all is pressed (onPress),  call 'toggle Popup' function */}
+						<Pressable className="flex justify-around items-center" onPress = {togglePopupR}> 
 							<Text className="text-black">View all</Text>
 						</Pressable>
+						
+
 					</View>
+
+					
 
 					{resources.map(resource => (
 						<ResourceItem key={resource.title} resource={resource} />
 					))}
-				</View>
+
+				</View>}
+
+				{ isPopupVisibleR && (
+       					<Popup2 onClose={togglePopupR}></Popup2>
+      			)}
+
 			</ScrollView>
 		</SafeAreaView>
 	);
 }
-
+// 
 const ChallengeItem = ({challenge}: {challenge: Challenge}) => {
 	return (
 		<View className="flex flex-row rounded-2xl p-4 border items-center justify-between bg-transparent">
@@ -147,9 +215,46 @@ const ChallengeItem = ({challenge}: {challenge: Challenge}) => {
 		</View>
 	);
 };
+
+const ChallengeItemPop = ({challenge}: {challenge: Challenge}) => {
+	return (
+		<View className="flex flex-row rounded-2xl p-4 items-center justify-between bg-transparent">
+			<View
+				style={{
+					backgroundColor: "transparent",
+					borderRadius: 9999,
+					width: 30,
+					height: 30,
+					borderColor: "black",
+					borderWidth: 2,
+				}}
+			/>
+			<View className="bg-transparent ml-2">
+				<Text className="text-black flex-wrap font-bold text-base">{challenge.title}</Text>
+				<Text className="text-black flex-wrap">{challenge.content}</Text>
+			</View>
+		</View>
+	);
+};
+
+
 const ResourceItem = ({resource}: {resource: Resource}) => {
 	return (
 		<View className="flex flex-row rounded-2xl p-4 border items-start justify-between bg-transparent">
+			<View className="bg-black w-1/3 h-28 rounded-lg flex justify-around items-center">
+				<Text className="text-white">Photo</Text>
+			</View>
+			<View className="bg-transparent ml-2" style={{maxWidth: "64%"}}>
+				<Text className="text-black flex-wrap font-bold text-base">{resource.title}</Text>
+				<Text className="text-black flex-wrap">{resource.content}</Text>
+			</View>
+		</View>
+	);
+};
+
+const ResourceItemPop = ({resource}: {resource: Resource}) => {
+	return (
+		<View className="flex flex-row rounded-2xl p-4 items-start justify-between bg-transparent">
 			<View className="bg-black w-1/3 h-28 rounded-lg flex justify-around items-center">
 				<Text className="text-white">Photo</Text>
 			</View>
